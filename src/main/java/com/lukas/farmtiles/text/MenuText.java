@@ -15,7 +15,6 @@ public class MenuText implements LanguageObserver {
 
     @Override
     public void update(Language language) {
-        System.out.println("Updating...");
         switch (language) {
             case ENGLISH -> {
                 setPlay("Play");

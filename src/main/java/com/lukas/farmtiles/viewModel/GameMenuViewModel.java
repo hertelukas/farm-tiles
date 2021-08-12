@@ -1,8 +1,7 @@
 package com.lukas.farmtiles.viewModel;
 
-import com.lukas.farmtiles.Config;
-import com.lukas.farmtiles.Language;
 import com.lukas.farmtiles.text.MenuText;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import org.springframework.stereotype.Service;
@@ -10,7 +9,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class GameMenuViewModel {
 
-    private final Config config;
     private final MenuText menuText;
 
     public Button btPlay;
@@ -18,8 +16,7 @@ public class GameMenuViewModel {
     public Button btSettings;
     public Button btExit;
 
-    public GameMenuViewModel(Config config, MenuText menuText) {
-        this.config = config;
+    public GameMenuViewModel(MenuText menuText) {
         this.menuText = menuText;
     }
 
@@ -33,7 +30,7 @@ public class GameMenuViewModel {
 
     @FXML
     private void play() {
-        config.setLanguage(Language.GERMAN);
+
     }
 
     @FXML
@@ -48,6 +45,6 @@ public class GameMenuViewModel {
 
     @FXML
     private void exit() {
-
+        Platform.exit();
     }
 }
