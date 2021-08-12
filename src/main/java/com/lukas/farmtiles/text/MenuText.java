@@ -1,22 +1,16 @@
-package tiles.text;
+package com.lukas.farmtiles.text;
 
+import com.lukas.farmtiles.Config;
+import com.lukas.farmtiles.Language;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import tiles.Config;
-import tiles.Language;
+import org.springframework.stereotype.Service;
 
+@Service
 public class MenuText implements LanguageObserver {
 
-    public MenuText() {
-        Config.getInstance().subscribe(this);
-    }
-
-    private static class MenuTextHolder {
-        private static final MenuText INSTANCE = new MenuText();
-    }
-
-    public static MenuText getInstance() {
-        return MenuTextHolder.INSTANCE;
+    public MenuText(Config config) {
+        config.subscribe(this);
     }
 
     @Override

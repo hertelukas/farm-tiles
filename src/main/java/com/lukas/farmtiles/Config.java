@@ -1,23 +1,14 @@
-package tiles;
+package com.lukas.farmtiles;
 
-import tiles.text.LanguageObserver;
+
+import com.lukas.farmtiles.text.LanguageObserver;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class Config {
-    private Config() {
-
-    }
-
-    private static class ConfigHolder {
-        private static final Config INSTANCE = new Config();
-    }
-
-    public static Config getInstance() {
-        return ConfigHolder.INSTANCE;
-    }
-
     //Observer
     private final List<LanguageObserver> languageObservers = new ArrayList<>();
 

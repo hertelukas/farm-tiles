@@ -7,13 +7,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<?import tiles.text.MenuText?>
 <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
       prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="tiles.viewModel.GameMenuViewModel">
-    <fx:define>
-        <MenuText fx:factory="getInstance" fx:id="menuText"/>
-    </fx:define>
+      fx:controller="com.lukas.farmtiles.viewModel.GameMenuViewModel">
 
     <padding>
         <Insets bottom="20.0" top="50.0"/>
@@ -24,10 +20,10 @@
         </font>
     </Label>
     <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" VBox.vgrow="ALWAYS">
-        <Button mnemonicParsing="false" text="${menuText.play}" onAction="#play"/>
-        <Button mnemonicParsing="false" text="${menuText.load}" onAction="#load"/>
-        <Button mnemonicParsing="false" text="${menuText.settings}" onAction="#openSettings"/>
-        <Button mnemonicParsing="false" text="${menuText.exit}" onAction="#exit"/>
+        <Button fx:id="btPlay" mnemonicParsing="false" onAction="#play"/>
+        <Button fx:id="btLoad" mnemonicParsing="false" onAction="#load"/>
+        <Button fx:id="btSettings" mnemonicParsing="false" onAction="#openSettings"/>
+        <Button fx:id="btExit" mnemonicParsing="false" onAction="#exit"/>
     </VBox>
     <VBox alignment="CENTER" spacing="10.0">
         <ProgressBar prefWidth="200.0" progress="0.0"/>
