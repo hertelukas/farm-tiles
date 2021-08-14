@@ -32,6 +32,10 @@ public class GameMenuViewModel {
 
     @FXML
     public void initialize() {
+        setupBindings();
+    }
+
+    private void setupBindings() {
         btPlay.textProperty().bind(menuText.playProperty());
         btLoad.textProperty().bind(menuText.loadProperty());
         btSettings.textProperty().bind(menuText.settingsProperty());

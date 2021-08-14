@@ -40,20 +40,12 @@ public class MenuText implements LanguageObserver {
         return play;
     }
 
-    public String getPlay() {
-        return play.get();
-    }
-
     private void setPlay(String play) {
         this.play.set(play);
     }
 
     public StringProperty loadProperty() {
         return load;
-    }
-
-    public String getLoad() {
-        return load.get();
     }
 
     private void setLoad(String load) {
@@ -64,20 +56,12 @@ public class MenuText implements LanguageObserver {
         return settings;
     }
 
-    public String getSettings() {
-        return settings.get();
-    }
-
     private void setSettings(String settings) {
         this.settings.set(settings);
     }
 
     public StringProperty exitProperty() {
         return exit;
-    }
-
-    public String getExit() {
-        return exit.get();
     }
 
     private void setExit(String exit) {
