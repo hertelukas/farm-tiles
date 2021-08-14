@@ -1,7 +1,7 @@
-package com.lukas.farmtiles;
+package com.lukas.tiles;
 
 
-import com.lukas.farmtiles.text.LanguageObserver;
+import com.lukas.tiles.text.LanguageObserver;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

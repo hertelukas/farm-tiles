@@ -1,6 +1,6 @@
-package com.lukas.farmtiles.text;
+package tiles.text;
 
-import com.lukas.farmtiles.Language;
+import tiles.config.Language;
 
 public interface LanguageObserver {
     void update(Language language);

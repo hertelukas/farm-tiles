@@ -1,4 +1,4 @@
-package com.lukas.farmtiles;
+package com.lukas.tiles;
 
 import static org.junit.jupiter.api.Assertions.*;
 

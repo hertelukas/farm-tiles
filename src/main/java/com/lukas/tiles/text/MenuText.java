@@ -1,7 +1,7 @@
-package com.lukas.farmtiles.text;
+package com.lukas.tiles.text;
 
-import com.lukas.farmtiles.Config;
-import com.lukas.farmtiles.Language;
+import com.lukas.tiles.Config;
+import com.lukas.tiles.Language;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import org.springframework.stereotype.Service;

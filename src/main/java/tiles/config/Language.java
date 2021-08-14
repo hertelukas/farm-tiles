@@ -1,4 +1,4 @@
-package com.lukas.farmtiles;
+package tiles.config;
 
 public enum Language {
     ENGLISH,
