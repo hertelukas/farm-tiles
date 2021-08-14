@@ -33,4 +33,7 @@ public class FarmTilesApplication extends Application {
         springContext.stop();
     }
 
+    public static String getStartPage() {
+        return START_PAGE;
+    }
 }

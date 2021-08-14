@@ -1,8 +1,6 @@
 package com.lukas.tiles.viewModel;
 
-import com.lukas.tiles.Config;
-import com.lukas.tiles.ConfigAction;
-import com.lukas.tiles.Language;
+import com.lukas.tiles.*;
 import com.lukas.tiles.text.SettingsText;
 import com.sun.javafx.collections.ImmutableObservableList;
 import javafx.collections.ObservableListBase;
@@ -13,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.util.StringConverter;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,10 +55,12 @@ public class SettingsViewModel {
     }
 
     @FXML
-    private void save() {
+    private void save() throws IOException {
         for (ConfigAction configAction : configActions) {
             configAction.apply();
         }
+
+        SceneLoader.getInstance().loadScene(FarmTilesApplication.getStartPage());
     }
 
 }
