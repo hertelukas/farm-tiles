@@ -26,7 +26,7 @@
         <Button fx:id="btExit" mnemonicParsing="false" onAction="#exit"/>
     </VBox>
     <VBox alignment="CENTER" spacing="10.0">
-        <ProgressBar fx:id="pb" prefWidth="200.0" progress="0.0" disable="true"/>
-        <Label fx:id="lbFeedback" text="Label" disable="true"/>
+        <ProgressBar fx:id="pb" prefWidth="200.0" progress="0.0" visible="false"/>
+        <Label fx:id="lbFeedback" text="Label" visible="false"/>
     </VBox>
 </VBox>

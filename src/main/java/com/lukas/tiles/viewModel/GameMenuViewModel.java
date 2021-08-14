@@ -52,7 +52,7 @@ public class GameMenuViewModel {
         try {
             SceneLoader.getInstance().loadScene(SETTINGS_PAGE);
         } catch (IOException e) {
-            lbFeedback.setDisable(false);
+            lbFeedback.setVisible(true);
             lbFeedback.setText("Failed to load Settings");
         }
     }
