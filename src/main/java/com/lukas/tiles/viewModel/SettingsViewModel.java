@@ -21,9 +21,9 @@ public class SettingsViewModel {
     @FXML
     private HBox root;
 
-    List<ConfigAction> configActions;
+    private final List<ConfigAction> configActions;
 
-    List<AbstractSettingsView> settings;
+    private final List<AbstractSettingsView> settings;
 
 
     private final SettingsText settingsText;
