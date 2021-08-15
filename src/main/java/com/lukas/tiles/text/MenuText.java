@@ -16,13 +16,13 @@ public class MenuText implements LanguageObserver {
     @Override
     public void update(Language language) {
         switch (language) {
-            case ENGLISH -> {
+            case English -> {
                 setPlay("Play");
                 setLoad("Load");
                 setSettings("Settings");
                 setExit("Exit");
             }
-            case GERMAN -> {
+            case Deutsch -> {
                 setPlay("Spielen");
                 setLoad("Laden");
                 setSettings("Einstellungen");

@@ -11,7 +11,7 @@ public class ConfigurationTests {
     @Test
     public void changeToGerman() {
         Config config = new Config();
-        config.setLanguage(Language.GERMAN);
-        assertEquals(config.getLanguage(), Language.GERMAN);
+        config.setLanguage(Language.Deutsch);
+        assertEquals(config.getLanguage(), Language.Deutsch);
     }
 }

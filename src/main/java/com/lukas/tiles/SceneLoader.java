@@ -3,14 +3,16 @@ package com.lukas.tiles;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 
-@Service
 public class SceneLoader {
+
+    Scene mainScene;
+    BorderPane root;
 
     private SceneLoader() {
 
@@ -34,6 +36,14 @@ public class SceneLoader {
         }
         this.stage = stage;
         this.context = context;
+
+        root = new BorderPane();
+        mainScene = new Scene(root);
+
+        stage.setScene(mainScene);
+        stage.setFullScreen(true);
+        stage.setFullScreenExitHint("");
+        stage.show();
     }
 
     public void loadScene(String fxmlFile) throws IOException {
@@ -43,12 +53,9 @@ public class SceneLoader {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
         loader.setControllerFactory(context::getBean);
-        Parent root = loader.load();
+        Parent item = loader.load();
 
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.setFullScreen(true);
-        stage.setFullScreenExitHint("");
-        stage.show();
+        root.getChildren().removeIf(node -> true);
+        root.setCenter(item);
     }
 }

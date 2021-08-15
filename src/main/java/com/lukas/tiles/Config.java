@@ -32,5 +32,5 @@ public class Config {
         updateLanguage();
     }
 
-    private Language language = Language.ENGLISH;
+    private Language language = Language.English;
 }

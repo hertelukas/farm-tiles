@@ -1,0 +1,12 @@
+* {
+    -fx-main-color: #3E505B;
+    -fx-secondary-color: #26413C;
+    -fx-light-color: #8AB0AB;
+}
+
+
+.title {
+    -fx-font-size: 40px;
+    -fx-fill: white;
+    -fx-font-family: "Raleway Bold";
+}

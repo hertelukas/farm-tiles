@@ -54,6 +54,7 @@ public class GameMenuViewModel {
         } catch (IOException e) {
             lbFeedback.setVisible(true);
             lbFeedback.setText("Failed to load Settings");
+            e.printStackTrace();
         }
     }
 
