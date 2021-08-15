@@ -21,7 +21,7 @@ public abstract class AbstractSettingsView extends VBox {
         //Add a titles
         Label label = new Label();
         label.textProperty().bind(title);
-        label.getStyleClass().add("title");
+        label.getStyleClass().add("h1");
         this.getChildren().add(label);
 
         //Setup margins etc

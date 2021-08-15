@@ -1,6 +1,5 @@
 package com.lukas.tiles;
 
-import com.lukas.tiles.io.ConfigHandler;
 import javafx.application.Application;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
@@ -24,6 +23,7 @@ public class FarmTilesApplication extends Application {
     public void init() {
         springContext = SpringApplication.run(FarmTilesApplication.class);
         Font.loadFont(getClass().getResourceAsStream("/fxml/fonts/static/Raleway-Regular.ttf"), 16);
+        Font.loadFont(getClass().getResourceAsStream("/fxml/fonts/static/Raleway-Medium.ttf"), 16);
         Font.loadFont(getClass().getResourceAsStream("/fxml/fonts/static/Raleway-Bold.ttf"), 16);
     }
 

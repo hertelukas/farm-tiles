@@ -18,7 +18,7 @@ public class SideMenu extends VBox {
     public SideMenu(StringProperty name) {
         Label title = new Label();
         title.textProperty().bind(name);
-        title.getStyleClass().add("title");
+        title.getStyleClass().add("h3");
         Separator separator = new Separator();
         this.getChildren().addAll(title, separator);
         this.getStylesheets().add(FarmTilesApplication.getMainStyle());

@@ -4,15 +4,25 @@
     -fx-light-color: #8AB0AB;
 }
 
-
-.title {
+.h1 {
     -fx-font-size: 40px;
-    -fx-fill: white;
     -fx-font-family: "Raleway Bold";
+}
+
+.h2 {
+    -fx-font-family: "Raleway Bold";
+    -fx-font-size: 35px;
+}
+
+.h3 {
+    -fx-font-size: 30px;
+    -fx-text-background-color: #333333;
+    -fx-font-family: 'Raleway Medium', sans-serif;
 }
 
 .button {
     -fx-background-color: white;
+    -fx-font-family: 'Raleway Medium', sans-serif;
 }
 
 .button:hover {
@@ -22,4 +32,5 @@
 
 .choice-box {
     -fx-background-color: white;
+    -fx-font-family: 'Raleway Medium', sans-serif;
 }
