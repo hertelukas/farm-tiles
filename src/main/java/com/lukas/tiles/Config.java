@@ -1,7 +1,6 @@
 package com.lukas.tiles;
 
 
-import com.google.gson.annotations.Expose;
 import com.lukas.tiles.text.LanguageObserver;
 import org.springframework.stereotype.Service;
 

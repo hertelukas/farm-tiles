@@ -1,13 +1,10 @@
 package com.lukas.tiles.viewModel;
 
 import com.lukas.tiles.Config;
-import com.lukas.tiles.Language;
 import com.lukas.tiles.SceneLoader;
 import com.lukas.tiles.io.ConfigHandler;
 import com.lukas.tiles.text.MenuText;
 import javafx.application.Platform;
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.SimpleDoubleProperty;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
