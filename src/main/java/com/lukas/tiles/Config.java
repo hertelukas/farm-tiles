@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class Config {
@@ -33,4 +34,17 @@ public class Config {
     }
 
     private Language language = Language.English;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Config config = (Config) o;
+        return language == config.language;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(language);
+    }
 }
