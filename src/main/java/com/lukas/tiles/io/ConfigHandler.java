@@ -1,6 +1,7 @@
 package com.lukas.tiles.io;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.lukas.tiles.Config;
 import org.springframework.stereotype.Service;
 
@@ -11,16 +12,16 @@ import java.nio.file.Path;
 @Service
 public class ConfigHandler {
 
-    private final static String LOCATION = "config.tiles";
+    private ConfigHandler() {
 
-    private final Gson gson;
-
-    public ConfigHandler() {
-        this.gson = new Gson();
     }
 
+    private final static String LOCATION = "config.tiles";
 
-    public boolean save(Config config) {
+    private final static Gson gson = new Gson();
+
+
+    public static boolean save(Config config) {
         try {
             Files.writeString(Path.of(LOCATION), gson.toJson(config));
             return true;
@@ -30,13 +31,8 @@ public class ConfigHandler {
         }
     }
 
-    public Config load() {
-        try {
-            return gson.fromJson(Files.newBufferedReader(Path.of(LOCATION)), Config.class);
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
+    public static Config load() throws IOException {
+        return gson.fromJson(Files.newBufferedReader(Path.of(LOCATION)), Config.class);
     }
 
     public static String getLOCATION() {

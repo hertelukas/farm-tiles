@@ -1,6 +1,7 @@
 package com.lukas.tiles;
 
 
+import com.google.gson.annotations.Expose;
 import com.lukas.tiles.text.LanguageObserver;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +12,7 @@ import java.util.Objects;
 @Service
 public class Config {
     //Observer
-    private final List<LanguageObserver> languageObservers = new ArrayList<>();
+    private final transient List<LanguageObserver> languageObservers = new ArrayList<>();
 
     public void subscribe(LanguageObserver observer) {
         languageObservers.add(observer);
@@ -23,6 +24,9 @@ public class Config {
         }
     }
 
+    //Fields
+    private Language language = Language.English;
+
     //Getters and Setters
     public Language getLanguage() {
         return language;
@@ -33,7 +37,9 @@ public class Config {
         updateLanguage();
     }
 
-    private Language language = Language.English;
+    public void setConfig(Config loadedConfig) {
+        setLanguage(loadedConfig.getLanguage());
+    }
 
     @Override
     public boolean equals(Object o) {

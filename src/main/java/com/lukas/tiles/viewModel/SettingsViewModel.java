@@ -1,6 +1,7 @@
 package com.lukas.tiles.viewModel;
 
 import com.lukas.tiles.*;
+import com.lukas.tiles.io.ConfigHandler;
 import com.lukas.tiles.text.SettingsText;
 import com.lukas.tiles.view.MenuEntry;
 import com.lukas.tiles.view.SideMenu;
@@ -73,9 +74,12 @@ public class SettingsViewModel {
 
     @FXML
     private void save() {
+        //TODO show progress here
+        
         for (ConfigAction configAction : configActions) {
             configAction.apply();
         }
+        ConfigHandler.save(config);
     }
 
     private void loadSettings(int index) {

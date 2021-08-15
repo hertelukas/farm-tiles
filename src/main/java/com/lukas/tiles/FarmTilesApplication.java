@@ -1,5 +1,6 @@
 package com.lukas.tiles;
 
+import com.lukas.tiles.io.ConfigHandler;
 import javafx.application.Application;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;

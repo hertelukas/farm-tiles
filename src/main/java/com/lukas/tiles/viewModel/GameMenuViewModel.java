@@ -1,8 +1,14 @@
 package com.lukas.tiles.viewModel;
 
+import com.lukas.tiles.Config;
+import com.lukas.tiles.Language;
 import com.lukas.tiles.SceneLoader;
+import com.lukas.tiles.io.ConfigHandler;
 import com.lukas.tiles.text.MenuText;
 import javafx.application.Platform;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -18,6 +24,7 @@ public class GameMenuViewModel {
 
 
     private final MenuText menuText;
+    private final Config config;
 
     public Button btPlay;
     public Button btLoad;
@@ -26,13 +33,49 @@ public class GameMenuViewModel {
     public Label lbFeedback;
     public ProgressBar pb;
 
-    public GameMenuViewModel(MenuText menuText) {
+    public GameMenuViewModel(Config config, MenuText menuText) {
         this.menuText = menuText;
+        this.config = config;
     }
 
     @FXML
     public void initialize() {
         setupBindings();
+        loadConfig();
+    }
+
+    private void loadConfig() {
+        lbFeedback.setVisible(true);
+        pb.setVisible(true);
+
+        lbFeedback.setText("Loading config...");
+
+        Task<Config> task = new Task<>() {
+            @Override
+            protected Config call() throws Exception {
+                updateProgress(0.4d, 1.0d);
+                Config temp = ConfigHandler.load();
+                updateProgress(1, 1);
+                config.setConfig(temp);
+                return temp;
+            }
+
+            @Override
+            protected void succeeded() {
+                updateProgress(1, 1);
+                lbFeedback.setVisible(false);
+                pb.setVisible(false);
+            }
+
+            @Override
+            protected void failed() {
+                pb.setVisible(false);
+                lbFeedback.setText("Failed to load game files!");
+            }
+        };
+
+        pb.progressProperty().bind(task.progressProperty());
+        new Thread(task).start();
     }
 
     private void setupBindings() {

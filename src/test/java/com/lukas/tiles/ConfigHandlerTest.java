@@ -20,9 +20,8 @@ public class ConfigHandlerTest {
     @Test
     public void saveEmptyConfig() {
         Config config = new Config();
-        ConfigHandler configHandler = new ConfigHandler();
 
-        assertTrue(configHandler.save(config));
+        assertTrue(ConfigHandler.save(config));
     }
 
     @Test
@@ -30,20 +29,17 @@ public class ConfigHandlerTest {
         Config config = new Config();
         config.setLanguage(Language.Deutsch);
 
-        ConfigHandler configHandler = new ConfigHandler();
-
-        assertTrue(configHandler.save(config));
+        assertTrue(ConfigHandler.save(config));
     }
 
     @Test
-    public void saveAndLoadConfig() {
+    public void saveAndLoadConfig() throws IOException {
         Config config = new Config();
         config.setLanguage(Language.Deutsch);
 
-        ConfigHandler configHandler = new ConfigHandler();
 
-        assertTrue(configHandler.save(config));
-        assertEquals(config, configHandler.load());
+        assertTrue(ConfigHandler.save(config));
+        assertEquals(config, ConfigHandler.load());
     }
 
     @AfterEach
