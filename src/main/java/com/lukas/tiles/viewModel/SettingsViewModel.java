@@ -35,13 +35,12 @@ public class SettingsViewModel {
         this.config = config;
         configActions = new ArrayList<>();
         settings = new ArrayList<>();
-
-        settings.add(new GeneralSettingsView(this, settingsText.generalProperty()));
-        settings.add(new AudioSettingsView(this, settingsText.audioProperty()));
     }
 
     @FXML
     private void initialize() {
+        settings.add(new GeneralSettingsView(this, settingsText.generalProperty()));
+        settings.add(new AudioSettingsView(this, settingsText.audioProperty()));
         initSideMenu();
     }
 
