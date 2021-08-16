@@ -58,4 +58,9 @@ public class SceneLoader {
         root.getChildren().removeIf(node -> true);
         root.setCenter(item);
     }
+
+    public void loadScene(Parent item) {
+        root.getChildren().removeIf(node -> true);
+        root.setCenter(item);
+    }
 }
