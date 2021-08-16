@@ -14,7 +14,12 @@ public class Game {
         this.player = player;
     }
 
-    public static Game generate() {
-        return new Game(new ArrayList<>(), new Map(), new Player());
+    public static Game generate(Difficulty difficulty, int farmers) {
+        List<Farmer> tempFarmers = new ArrayList<>();
+        for (int i = 0; i < farmers; i++) {
+            tempFarmers.add(Farmer.generate(difficulty.getFarmerStart()));
+        }
+
+        return new Game(tempFarmers, new Map(), new Player(difficulty.getPlayerStart()));
     }
 }

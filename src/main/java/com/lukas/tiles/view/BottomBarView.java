@@ -10,7 +10,12 @@ public class BottomBarView extends HBox {
 
     public BottomBarView() {
         bottomBarViewModel = new BottomBarViewModel();
-        Label label = new Label("Bottom Bar");
-        this.getChildren().add(label);
+        setupBindings();
+    }
+
+    private void setupBindings() {
+        Label cashLabel = new Label();
+        cashLabel.textProperty().bind(bottomBarViewModel.moneyPropertyProperty());
+        this.getChildren().add(cashLabel);
     }
 }

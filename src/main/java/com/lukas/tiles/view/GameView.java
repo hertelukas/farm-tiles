@@ -1,14 +1,14 @@
 package com.lukas.tiles.view;
 
 import com.lukas.tiles.viewModel.GameViewModel;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.BorderPane;
 
-public class GameView extends VBox {
+public class GameView extends BorderPane {
 
     private final GameViewModel gameViewModel;
 
     public GameView() {
         gameViewModel = new GameViewModel();
-        this.getChildren().add(new BottomBarView());
+        this.setBottom(new BottomBarView());
     }
 }
