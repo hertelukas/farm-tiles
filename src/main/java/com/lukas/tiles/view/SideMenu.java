@@ -2,11 +2,9 @@ package com.lukas.tiles.view;
 
 import com.lukas.tiles.FarmTilesApplication;
 import javafx.beans.property.StringProperty;
-import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Separator;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
@@ -29,8 +27,8 @@ public class SideMenu extends VBox {
         VBox.setVgrow(space, Priority.ALWAYS);
         this.getChildren().add(space);
 
-        this.setSpacing(20);
-        HBox.setMargin(this, new Insets(50));
+        this.setSpacing(Style.getVSpacing());
+        this.setPadding(Style.getMARGIN());
     }
 
 

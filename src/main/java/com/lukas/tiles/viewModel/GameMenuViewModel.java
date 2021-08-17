@@ -5,6 +5,7 @@ import com.lukas.tiles.SceneLoader;
 import com.lukas.tiles.io.ConfigHandler;
 import com.lukas.tiles.text.MenuText;
 import com.lukas.tiles.view.GameView;
+import com.lukas.tiles.view.SetupView;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
@@ -85,7 +86,7 @@ public class GameMenuViewModel {
 
     @FXML
     private void play() {
-        SceneLoader.getInstance().loadScene(new GameView());
+        SceneLoader.getInstance().loadScene(new SetupView(config));
     }
 
     @FXML

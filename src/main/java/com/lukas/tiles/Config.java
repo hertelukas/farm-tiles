@@ -15,6 +15,7 @@ public class Config {
 
     public void subscribe(LanguageObserver observer) {
         languageObservers.add(observer);
+        observer.update(getLanguage());
     }
 
     private void updateLanguage() {

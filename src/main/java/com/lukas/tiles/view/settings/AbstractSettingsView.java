@@ -1,9 +1,9 @@
 package com.lukas.tiles.view.settings;
 
 import com.lukas.tiles.FarmTilesApplication;
+import com.lukas.tiles.view.Style;
 import com.lukas.tiles.viewModel.SettingsViewModel;
 import javafx.beans.property.StringProperty;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
@@ -25,10 +25,10 @@ public abstract class AbstractSettingsView extends VBox {
         this.getChildren().add(label);
 
         //Setup margins etc
-        this.setSpacing(20);
+        this.setSpacing(Style.getVSpacing());
         this.setAlignment(Pos.TOP_CENTER);
+        this.setPadding(Style.getMARGIN());
         HBox.setHgrow(this, Priority.ALWAYS);
-        HBox.setMargin(this, new Insets(50));
 
         initialize();
     }
