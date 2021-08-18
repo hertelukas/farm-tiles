@@ -10,6 +10,7 @@ public class GameView extends BorderPane {
 
     public GameView(Setup setup) {
         gameViewModel = new GameViewModel(setup);
-        this.setBottom(new BottomBarView());
+        this.setBottom(new BottomBarView(gameViewModel.getGame().getPlayer()));
+        this.setCenter(new MapView(gameViewModel.getGame().getMap()));
     }
 }

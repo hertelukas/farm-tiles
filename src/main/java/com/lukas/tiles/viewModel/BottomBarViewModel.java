@@ -7,9 +7,10 @@ import javafx.beans.property.StringProperty;
 public class BottomBarViewModel implements PlayerObserver {
     private final StringProperty moneyProperty;
 
-    //TODO this needs to subscribe to the player
-    public BottomBarViewModel() {
+    public BottomBarViewModel(Player player) {
         moneyProperty = new SimpleStringProperty("$0.00");
+
+        player.subscribe(this);
     }
 
     public String getMoneyProperty() {
@@ -22,6 +23,6 @@ public class BottomBarViewModel implements PlayerObserver {
 
     @Override
     public void update(Player player) {
-        moneyProperty.set(player.getMoney().getAmountAsString());
+        moneyProperty.set(player.getMoney().toString());
     }
 }

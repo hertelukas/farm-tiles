@@ -18,11 +18,6 @@ public class Money {
         return amount;
     }
 
-    public String getAmountAsString() {
-        long full = amount / 100;
-        return "$" + full + "." + (amount - full * 100);
-    }
-
     public void setAmount(long amount) {
         this.amount = amount;
     }
@@ -53,6 +48,17 @@ public class Money {
      */
     public void subAmount(long amount) {
         this.amount -= amount;
+    }
+
+    @Override
+    public String toString() {
+        long full = amount / 100;
+        long cents = (amount - full * 100);
+        String centsString = "" + cents;
+        if (cents == 0) {
+            centsString = "00";
+        }
+        return "$" + full + "." + centsString;
     }
 
 

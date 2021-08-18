@@ -1,5 +1,6 @@
 package com.lukas.tiles.view;
 
+import com.lukas.tiles.model.Player;
 import com.lukas.tiles.viewModel.BottomBarViewModel;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
@@ -8,8 +9,8 @@ public class BottomBarView extends HBox {
 
     private final BottomBarViewModel bottomBarViewModel;
 
-    public BottomBarView() {
-        bottomBarViewModel = new BottomBarViewModel();
+    public BottomBarView(Player player) {
+        bottomBarViewModel = new BottomBarViewModel(player);
         setupBindings();
     }
 

@@ -16,6 +16,7 @@ public class Player extends Farmer {
 
     public void subscribe(PlayerObserver playerObserver) {
         this.playerObservers.add(playerObserver);
+        playerObserver.update(this);
     }
 
     private void updatePlayerObservers() {

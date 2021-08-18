@@ -13,7 +13,14 @@ public class MoneyTest {
     public void testMoneyToString() {
         Money money = new Money(28234);
         String expected = "$282.34";
-        assertEquals(expected, money.getAmountAsString());
+        assertEquals(expected, money.toString());
+    }
+
+    @Test
+    public void testMoneyToString2() {
+        Money money = new Money(50000);
+        String expected = "$500.00";
+        assertEquals(expected, money.toString());
     }
 
     @Test

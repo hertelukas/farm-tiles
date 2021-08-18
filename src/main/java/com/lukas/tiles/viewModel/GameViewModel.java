@@ -1,6 +1,5 @@
 package com.lukas.tiles.viewModel;
 
-import com.lukas.tiles.model.Difficulty;
 import com.lukas.tiles.model.Game;
 import com.lukas.tiles.model.Setup;
 
@@ -9,5 +8,9 @@ public class GameViewModel {
 
     public GameViewModel(Setup setup) {
         this.game = Game.generate(setup);
+    }
+
+    public Game getGame() {
+        return game;
     }
 }
