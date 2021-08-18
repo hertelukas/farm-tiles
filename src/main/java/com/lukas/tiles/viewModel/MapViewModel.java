@@ -1,8 +1,7 @@
 package com.lukas.tiles.viewModel;
 
-import com.lukas.tiles.model.GameMap;
+import com.lukas.tiles.model.WorldMap;
 import com.lukas.tiles.model.Tile;
-import com.lukas.tiles.model.TileType;
 import com.lukas.tiles.view.MapViewModelObserver;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.ScrollEvent;
@@ -13,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 public class MapViewModel implements MapObserver {
-    private final GameMap map;
+    private final WorldMap map;
     private final List<MapViewModelObserver> mapViewModelObservers;
 
     private double zoom = 1;
@@ -23,7 +22,7 @@ public class MapViewModel implements MapObserver {
 
     private final Map<Tile, Hexagon> tilePolygonMap;
 
-    public MapViewModel(GameMap map) {
+    public MapViewModel(WorldMap map) {
         this.map = map;
         map.subscribe(this);
         mapViewModelObservers = new ArrayList<>();

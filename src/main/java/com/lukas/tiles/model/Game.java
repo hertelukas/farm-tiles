@@ -6,9 +6,9 @@ import java.util.List;
 public class Game {
     private final List<Farmer> farmers;
     private final Player player;
-    private final GameMap map;
+    private final WorldMap map;
 
-    public Game(List<Farmer> farmers, GameMap map, Player player) {
+    public Game(List<Farmer> farmers, WorldMap map, Player player) {
         this.farmers = farmers;
         this.map = map;
         this.player = player;
@@ -20,7 +20,7 @@ public class Game {
             tempFarmers.add(Farmer.generate(setup.getDifficulty().getFarmerStart()));
         }
 
-        return new Game(tempFarmers, new GameMap(), new Player(setup.getDifficulty().getPlayerStart()));
+        return new Game(tempFarmers, new WorldMap(10, 10), new Player(setup.getDifficulty().getPlayerStart()));
     }
 
     public List<Farmer> getFarmers() {
@@ -31,7 +31,7 @@ public class Game {
         return player;
     }
 
-    public GameMap getMap() {
+    public WorldMap getMap() {
         return map;
     }
 }

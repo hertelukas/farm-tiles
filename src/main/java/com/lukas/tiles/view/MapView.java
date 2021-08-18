@@ -1,6 +1,6 @@
 package com.lukas.tiles.view;
 
-import com.lukas.tiles.model.GameMap;
+import com.lukas.tiles.model.WorldMap;
 import com.lukas.tiles.model.Tile;
 import com.lukas.tiles.viewModel.MapViewModel;
 import com.lukas.tiles.viewModel.Hexagon;
@@ -16,7 +16,7 @@ public class MapView extends Pane implements MapViewModelObserver {
     private final Canvas canvas;
 
 
-    public MapView(GameMap map) {
+    public MapView(WorldMap map) {
         mapViewModel = new MapViewModel(map);
         mapViewModel.subscribe(this);
         canvas = new Canvas();
