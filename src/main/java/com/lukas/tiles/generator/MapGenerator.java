@@ -7,14 +7,13 @@ import java.util.Random;
 
 public class MapGenerator {
     public static Tile[][] generate(int width, int height) {
-        Tile[][] result = new Tile[width][height];
+        Tile[][] result = new Tile[height][width];
 
-        for (int i = 0; i < width; i++) {
-            for (int j = 0; j < height; j++) {
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
                 result[i][j] = new Tile(new Random().nextBoolean() ? TileType.Gras : TileType.Water);
             }
         }
-
         return result;
     }
 }

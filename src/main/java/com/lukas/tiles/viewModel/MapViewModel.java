@@ -6,36 +6,55 @@ import com.lukas.tiles.view.MapViewModelObserver;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.ScrollEvent;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class MapViewModel implements MapObserver {
     private final WorldMap map;
     private final List<MapViewModelObserver> mapViewModelObservers;
 
     private double zoom = 1;
-    private final static double MAX_ZOOM = 3;
+    private final static double MAX_ZOOM = 40;
     private final static double MIN_ZOOM = 0.5;
     private final static double SENSITIVITY = 360; //Higher is slower
 
-    private final Map<Tile, Hexagon> tilePolygonMap;
+    private final Tile[][] tiles;
+    private final int width;
+    private final int height;
+    private final Hexagon[] hexagons;
 
     public MapViewModel(WorldMap map) {
         this.map = map;
         map.subscribe(this);
+
+
         mapViewModelObservers = new ArrayList<>();
-        tilePolygonMap = new HashMap<>();
+        hexagons = new Hexagon[map.getSize()];
+
+        width = map.getWidth();
+        height = map.getHeight();
+        tiles = map.getTiles();
         update();
+    }
+
+
+    public Hexagon[] getHexagons() {
+        return hexagons;
+    }
+
+    public Tile[][] getTiles() {
+        return tiles;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
     }
 
     public void subscribe(MapViewModelObserver observer) {
         mapViewModelObservers.add(observer);
-    }
-
-    public java.util.Map<Tile, Hexagon> getTilePolygonMap() {
-        return tilePolygonMap;
     }
 
     public void handleScroll(ScrollEvent scrollEvent) {
@@ -55,6 +74,7 @@ public class MapViewModel implements MapObserver {
         }
     }
 
+
     @Override
     public void update() {
         recalculate();
@@ -62,8 +82,8 @@ public class MapViewModel implements MapObserver {
     }
 
     private void recalculate() {
-        for (Hexagon value : tilePolygonMap.values()) {
-            System.out.println("Recalculating polygon...");
+        for (int i = 0; i < hexagons.length; i++) {
+            hexagons[i] = new Hexagon(i / width, i % width, zoom);
         }
     }
 }

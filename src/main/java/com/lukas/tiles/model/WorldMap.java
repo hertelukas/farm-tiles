@@ -16,8 +16,8 @@ public class WorldMap {
 
     public WorldMap(int width, int height) {
         mapObservers = new ArrayList<>();
-        this.width = 10;
-        this.height = 10;
+        this.width = width;
+        this.height = height;
         tiles = MapGenerator.generate(width, height);
     }
 
@@ -31,6 +31,22 @@ public class WorldMap {
 
     public void subscribe(MapObserver mapObserver) {
         mapObservers.add(mapObserver);
+    }
+
+    public int getSize() {
+        return width * height;
+    }
+
+    public Tile[][] getTiles() {
+        return tiles;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public int getWidth() {
+        return width;
     }
 
     private void updateMap() {

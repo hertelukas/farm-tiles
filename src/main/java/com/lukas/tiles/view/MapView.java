@@ -1,14 +1,11 @@
 package com.lukas.tiles.view;
 
 import com.lukas.tiles.model.WorldMap;
-import com.lukas.tiles.model.Tile;
 import com.lukas.tiles.viewModel.MapViewModel;
-import com.lukas.tiles.viewModel.Hexagon;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.*;
-
-import java.util.Map;
+import javafx.scene.paint.Color;
 
 public class MapView extends Pane implements MapViewModelObserver {
 
@@ -35,9 +32,11 @@ public class MapView extends Pane implements MapViewModelObserver {
     }
 
     private void draw() {
-        for (Map.Entry<Tile, Hexagon> entry : mapViewModel.getTilePolygonMap().entrySet()) {
-            canvas.getGraphicsContext2D().setFill(entry.getKey().getTileType().getColor());
-            canvas.getGraphicsContext2D().fillPolygon(entry.getValue().getX(), entry.getValue().getY(), 6);
+        canvas.getGraphicsContext2D().setFill(Color.WHITE);
+        canvas.getGraphicsContext2D().fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
+        for (int i = 0; i < mapViewModel.getHexagons().length; i++) {
+            canvas.getGraphicsContext2D().setFill(mapViewModel.getTiles()[i / mapViewModel.getWidth()][i % mapViewModel.getWidth()].getTileType().getColor());
+            canvas.getGraphicsContext2D().fillPolygon(mapViewModel.getHexagons()[i].getY(), mapViewModel.getHexagons()[i].getX(), 6);
         }
     }
 }
