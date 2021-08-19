@@ -4,6 +4,7 @@ import com.lukas.tiles.model.Tile;
 import com.lukas.tiles.model.WorldMap;
 import com.lukas.tiles.view.MapViewModelObserver;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 
@@ -100,8 +101,14 @@ public class MapViewModel implements MapObserver {
             return; //Was a drag
         }
 
-        for (int i = 0; i < hexagons.length; i++) {
-            tiles[i / map.getWidth()][i % map.getWidth()].setSelected(hexagons[i].isInside(mouseEvent.getSceneY(), mouseEvent.getSceneX()));
+        if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
+            for (int i = 0; i < hexagons.length; i++) {
+                tiles[i / map.getWidth()][i % map.getWidth()].setSelected(hexagons[i].isInside(mouseEvent.getSceneY(), mouseEvent.getSceneX()));
+            }
+        } else if (mouseEvent.getButton().equals(MouseButton.SECONDARY)) {
+            for (int i = 0; i < hexagons.length; i++) {
+                tiles[i / map.getWidth()][i % map.getWidth()].setSelected(false);
+            }
         }
 
         updateMapView();
