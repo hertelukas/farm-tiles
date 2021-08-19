@@ -24,7 +24,6 @@ public class MapViewModel implements MapObserver {
     private final int height;
     private final Hexagon[] hexagons;
 
-    private boolean isPressed = false;
     private double lastX;
     private double lastY;
 
@@ -79,9 +78,10 @@ public class MapViewModel implements MapObserver {
 
     public void handleDragged(MouseEvent mouseEvent, double width, double height) {
 
-        // FIXME: 8/19/21 -150 in the end doesn't seem right... very different on different scene sizes
-        yOffset = Math.max(-1 * map.getWidth() * Math.sqrt(3) * zoom * Hexagon.getRelativeScale() + width - 150, Math.min(50, yOffset + mouseEvent.getSceneX() - lastY));
-        xOffset = Math.max(-1 * map.getHeight() * 1.5 * zoom * Hexagon.getRelativeScale() + height - 150, Math.min(50, xOffset + mouseEvent.getSceneY() - lastX));
+        double horizontalFactor = Math.sqrt(3) * zoom * Hexagon.getRelativeScale();
+        double verticalFactor = 1.5 * zoom * Hexagon.getRelativeScale();
+        yOffset = Math.max(-1 * (map.getWidth() + 1) * horizontalFactor + width, Math.min(0.5 * horizontalFactor, yOffset + mouseEvent.getSceneX() - lastY));
+        xOffset = Math.max(-1 * (map.getHeight() + 1) * verticalFactor + height, Math.min(0.5 * verticalFactor, xOffset + mouseEvent.getSceneY() - lastX));
 
         lastY = mouseEvent.getSceneX();
         lastX = mouseEvent.getSceneY();
