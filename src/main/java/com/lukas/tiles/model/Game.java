@@ -1,37 +1,37 @@
 package com.lukas.tiles.model;
 
+import com.lukas.tiles.io.GameHandler;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class Game {
     private final List<Farmer> farmers;
-    private final Player player;
     private final WorldMap map;
     private String name;
 
-    public Game(List<Farmer> farmers, WorldMap map, Player player) {
+    public Game(List<Farmer> farmers, WorldMap map) {
         this.farmers = farmers;
         this.map = map;
-        this.player = player;
+        this.name = "test";
+        GameHandler.save(this);
     }
 
     public static Game generate(Setup setup) {
         List<Farmer> tempFarmers = new ArrayList<>();
-        for (int i = 0; i < setup.getFarmers(); i++) {
+        //The first farmer is always the player
+        for (int i = 1; i < setup.getFarmers(); i++) {
             tempFarmers.add(Farmer.generate(setup.getDifficulty().getFarmerStart()));
         }
 
-        return new Game(tempFarmers, new WorldMap(setup.getMapSize().getWidth(), setup.getMapSize().getHeight()), new Player(setup.getDifficulty().getPlayerStart()));
+        return new Game(tempFarmers, new WorldMap(setup.getMapSize().getWidth(), setup.getMapSize().getHeight()));
     }
 
     public List<Farmer> getFarmers() {
         return farmers;
     }
 
-    public Player getPlayer() {
-        return player;
-    }
 
     public WorldMap getMap() {
         return map;
@@ -45,17 +45,19 @@ public class Game {
         this.name = name;
     }
 
-    // TODO: 8/19/21 Player is missing in comparison
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Game game = (Game) o;
+        System.out.println("Farmers: " + Objects.equals(farmers, game.farmers));
+        System.out.println("Map: " + Objects.equals(map, game.map));
+        System.out.println("Name: " + Objects.equals(name, game.name));
         return Objects.equals(farmers, game.farmers) && Objects.equals(map, game.map) && Objects.equals(name, game.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(farmers, player, map, name);
+        return Objects.hash(farmers, map, name);
     }
 }

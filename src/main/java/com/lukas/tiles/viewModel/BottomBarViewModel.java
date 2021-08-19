@@ -1,13 +1,13 @@
 package com.lukas.tiles.viewModel;
 
-import com.lukas.tiles.model.Player;
+import com.lukas.tiles.model.Farmer;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-public class BottomBarViewModel implements PlayerObserver {
+public class BottomBarViewModel implements FarmerObserver {
     private final StringProperty moneyProperty;
 
-    public BottomBarViewModel(Player player) {
+    public BottomBarViewModel(Farmer player) {
         moneyProperty = new SimpleStringProperty("$0.00");
 
         player.subscribe(this);
@@ -22,7 +22,7 @@ public class BottomBarViewModel implements PlayerObserver {
     }
 
     @Override
-    public void update(Player player) {
+    public void update(Farmer player) {
         moneyProperty.set(player.getMoney().toString());
     }
 }

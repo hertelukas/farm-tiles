@@ -10,6 +10,10 @@ public class GameViewModel {
         this.game = Game.generate(setup);
     }
 
+    public GameViewModel(Game game) {
+        this.game = game;
+    }
+
     public Game getGame() {
         return game;
     }

@@ -8,7 +8,7 @@ import org.jetbrains.annotations.Unmodifiable;
 import java.util.*;
 
 public class WorldMap {
-    private final transient List<MapObserver> mapObservers;
+    private final List<MapObserver> mapObservers;
 
     private final Tile[][] tiles;
     private final int width;

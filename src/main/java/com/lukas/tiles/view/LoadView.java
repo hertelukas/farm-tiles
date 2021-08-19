@@ -2,10 +2,15 @@ package com.lukas.tiles.view;
 
 import com.lukas.tiles.Config;
 import com.lukas.tiles.FarmTilesApplication;
+import com.lukas.tiles.SceneLoader;
+import com.lukas.tiles.io.GameHandler;
+import com.lukas.tiles.model.Game;
 import com.lukas.tiles.viewModel.LoadViewModel;
 import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
+
 
 public class LoadView extends VBox {
     private final LoadViewModel loadViewModel;
@@ -27,5 +32,13 @@ public class LoadView extends VBox {
         label.textProperty().bind(loadViewModel.titlePropertyProperty());
         label.getStyleClass().add("h1");
         this.getChildren().add(label);
+
+        this.getChildren().addAll(loadViewModel.generateButtons());
+
+        Button button = new Button();
+        button.textProperty().bind(loadViewModel.backProperty());
+        button.setOnAction(loadViewModel::goBack);
+        this.getChildren().add(button);
     }
 }
+

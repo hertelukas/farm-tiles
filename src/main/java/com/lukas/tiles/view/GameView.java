@@ -1,5 +1,6 @@
 package com.lukas.tiles.view;
 
+import com.lukas.tiles.model.Game;
 import com.lukas.tiles.model.Setup;
 import com.lukas.tiles.viewModel.GameViewModel;
 import javafx.scene.layout.BorderPane;
@@ -10,7 +11,16 @@ public class GameView extends BorderPane {
 
     public GameView(Setup setup) {
         gameViewModel = new GameViewModel(setup);
-        this.setBottom(new BottomBarView(gameViewModel.getGame().getPlayer()));
+        initialize();
+    }
+
+    public GameView(Game game) {
+        gameViewModel = new GameViewModel(game);
+        initialize();
+    }
+
+    private void initialize() {
+        this.setBottom(new BottomBarView(gameViewModel.getGame().getFarmers().get(0)));
         this.setCenter(new MapView(gameViewModel.getGame().getMap()));
     }
 }

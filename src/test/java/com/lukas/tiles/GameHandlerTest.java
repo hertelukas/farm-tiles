@@ -71,7 +71,7 @@ public class GameHandlerTest {
 
         assertEquals(saved, GameHandler.getGames());
 
-        GameHandler.delete(game2);
+        assertTrue(GameHandler.delete(game2));
     }
 
     @AfterEach

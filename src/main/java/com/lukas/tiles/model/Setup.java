@@ -5,7 +5,7 @@ import com.lukas.tiles.model.setup.MapSize;
 import com.lukas.tiles.model.setup.MapType;
 
 public class Setup {
-    private int farmers;
+    private int farmers = 5;
     private Difficulty difficulty;
     private MapSize mapSize = MapSize.Medium;
     private MapType mapType;
@@ -15,6 +15,9 @@ public class Setup {
     }
 
     public void setFarmers(int farmers) {
+        if (farmers < 1) {
+            throw new IllegalArgumentException("#Farmers has to be positive");
+        }
         this.farmers = farmers;
     }
 
