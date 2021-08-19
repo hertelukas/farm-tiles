@@ -1,10 +1,10 @@
 package com.lukas.tiles.model.setup;
 
 public enum MapSize {
-    Small(16, 9),
-    Medium(32, 18),
-    Large(48, 27),
-    Huge(64, 36);
+    Small(32, 18),
+    Medium(48, 27),
+    Large(64, 36),
+    Huge(96, 54);
 
     private final int width;
     private final int height;

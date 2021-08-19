@@ -5,7 +5,7 @@ import javafx.scene.paint.Color;
 import java.util.Objects;
 
 public class Tile {
-    private final TileType tileType;
+    private TileType tileType;
     private boolean selected;
     private final int id;
 
@@ -17,6 +17,10 @@ public class Tile {
 
     public TileType getTileType() {
         return tileType;
+    }
+
+    public void setTileType(TileType tileType) {
+        this.tileType = tileType;
     }
 
     public void setSelected(boolean selected) {
