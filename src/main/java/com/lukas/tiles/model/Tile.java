@@ -7,9 +7,11 @@ import java.util.Objects;
 public class Tile {
     private final TileType tileType;
     private boolean selected;
+    private final int id;
 
-    public Tile(TileType tileType) {
+    public Tile(TileType tileType, int id) {
         this.tileType = tileType;
+        this.id = id;
         this.selected = false;
     }
 
@@ -37,11 +39,11 @@ public class Tile {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Tile tile = (Tile) o;
-        return selected == tile.selected && tileType == tile.tileType;
+        return id == tile.id && selected == tile.selected && tileType == tile.tileType;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(tileType, selected);
+        return Objects.hash(tileType, selected, id);
     }
 }

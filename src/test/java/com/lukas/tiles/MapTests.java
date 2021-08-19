@@ -18,13 +18,13 @@ public class MapTests {
     public void testAdjacencyEven() {
         Tile[][] tiles = new Tile[5][5];
 
-        Tile oneOne = new Tile(TileType.Water);
-        Tile oneTwo = new Tile(TileType.Water);
-        Tile twoOne = new Tile(TileType.Water);
-        Tile twoTwo = new Tile(TileType.Water);
-        Tile twoThree = new Tile(TileType.Water);
-        Tile threeOne = new Tile(TileType.Water);
-        Tile threeTwo = new Tile(TileType.Water);
+        Tile oneOne = new Tile(TileType.Water, 1);
+        Tile oneTwo = new Tile(TileType.Water, 2);
+        Tile twoOne = new Tile(TileType.Water, 3);
+        Tile twoTwo = new Tile(TileType.Water, 4);
+        Tile twoThree = new Tile(TileType.Water, 5);
+        Tile threeOne = new Tile(TileType.Water, 6);
+        Tile threeTwo = new Tile(TileType.Water, 7);
 
         tiles[1][1] = oneOne;
         tiles[1][2] = oneTwo;
@@ -46,13 +46,13 @@ public class MapTests {
     public void testAdjacencyUneven() {
         Tile[][] tiles = new Tile[5][5];
 
-        Tile zeroOne = new Tile(TileType.Water);
-        Tile zeroTwo = new Tile(TileType.Water);
-        Tile oneZero = new Tile(TileType.Water);
-        Tile oneOne = new Tile(TileType.Water);
-        Tile oneTwo = new Tile(TileType.Water);
-        Tile twoOne = new Tile(TileType.Water);
-        Tile twoTwo = new Tile(TileType.Water);
+        Tile zeroOne = new Tile(TileType.Water, 1);
+        Tile zeroTwo = new Tile(TileType.Water, 2);
+        Tile oneZero = new Tile(TileType.Water, 3);
+        Tile oneOne = new Tile(TileType.Water, 4);
+        Tile oneTwo = new Tile(TileType.Water, 5);
+        Tile twoOne = new Tile(TileType.Water, 6);
+        Tile twoTwo = new Tile(TileType.Water, 7);
 
         tiles[0][1] = zeroOne;
         tiles[0][2] = zeroTwo;
@@ -74,8 +74,8 @@ public class MapTests {
     public void testLeftSuccessful() {
         Tile[][] tiles = new Tile[2][2];
 
-        Tile left = new Tile(TileType.Water);
-        Tile from = new Tile(TileType.Water);
+        Tile left = new Tile(TileType.Water, 1);
+        Tile from = new Tile(TileType.Water, 2);
 
         tiles[0][0] = left;
         tiles[0][1] = from;
@@ -88,7 +88,7 @@ public class MapTests {
     public void testLeftUnsuccessful() {
         Tile[][] tiles = new Tile[2][2];
 
-        Tile from = new Tile(TileType.Water);
+        Tile from = new Tile(TileType.Water, 1);
 
         tiles[0][0] = from;
         WorldMap worldMap = new WorldMap(tiles);
@@ -100,8 +100,8 @@ public class MapTests {
     public void testRightSuccessful() {
         Tile[][] tiles = new Tile[2][2];
 
-        Tile from = new Tile(TileType.Water);
-        Tile right = new Tile(TileType.Water);
+        Tile from = new Tile(TileType.Water, 1);
+        Tile right = new Tile(TileType.Water, 2);
 
         tiles[0][0] = from;
         tiles[0][1] = right;
@@ -114,7 +114,7 @@ public class MapTests {
     public void testRightUnsuccessful() {
         Tile[][] tiles = new Tile[2][2];
 
-        Tile from = new Tile(TileType.Water);
+        Tile from = new Tile(TileType.Water, 1);
 
         tiles[1][1] = from;
         WorldMap worldMap = new WorldMap(tiles);
@@ -126,8 +126,8 @@ public class MapTests {
     public void testTopRightSuccessful() {
         Tile[][] tiles = new Tile[2][2];
 
-        Tile from = new Tile(TileType.Water);
-        Tile right = new Tile(TileType.Water);
+        Tile from = new Tile(TileType.Water, 1);
+        Tile right = new Tile(TileType.Water, 2);
 
         tiles[1][0] = from;
         tiles[0][1] = right;
@@ -140,9 +140,9 @@ public class MapTests {
     public void testTopRightUnsuccessful() {
         Tile[][] tiles = new Tile[2][2];
 
-        Tile from = new Tile(TileType.Water);
-        Tile from2 = new Tile(TileType.Water);
-        Tile from3 = new Tile(TileType.Water);
+        Tile from = new Tile(TileType.Water, 1);
+        Tile from2 = new Tile(TileType.Water, 2);
+        Tile from3 = new Tile(TileType.Water, 3);
 
         tiles[0][1] = from;
         tiles[0][0] = from2;
