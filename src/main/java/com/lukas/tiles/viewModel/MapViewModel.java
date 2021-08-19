@@ -13,9 +13,9 @@ public class MapViewModel implements MapObserver {
     private final List<MapViewModelObserver> mapViewModelObservers;
 
     private double zoom = 1;
-    private final static double MAX_ZOOM = 40;
+    private final static double MAX_ZOOM = 2;
     private final static double MIN_ZOOM = 0.5;
-    private final static double SENSITIVITY = 360; //Higher is slower
+    private final static double SENSITIVITY = 240; //Higher is slower
 
     private final Tile[][] tiles;
     private final int width;
