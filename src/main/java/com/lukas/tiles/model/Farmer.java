@@ -8,7 +8,7 @@ import java.util.Objects;
 public class Farmer {
     private final Money money;
     private final String name;
-    private final ArrayList<FarmerObserver> observers;
+    private transient ArrayList<FarmerObserver> observers;
 
     public Farmer(Money money, String name) {
         observers = new ArrayList<>();
@@ -17,6 +17,9 @@ public class Farmer {
     }
 
     public void subscribe(FarmerObserver observer) {
+        if (observers == null) {
+            observers = new ArrayList<>();
+        }
         this.observers.add(observer);
     }
 
