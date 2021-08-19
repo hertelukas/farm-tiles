@@ -33,4 +33,4 @@ build/
 .vscode/
 
 ### Tiles ###
-/config.tiles
+/.tiles
