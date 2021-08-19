@@ -1,6 +1,8 @@
 package com.lukas.tiles.model;
 
 import com.lukas.tiles.generator.MapGenerator;
+import com.lukas.tiles.model.setup.MapSize;
+import com.lukas.tiles.model.setup.MapType;
 import com.lukas.tiles.viewModel.MapObserver;
 import org.jetbrains.annotations.TestOnly;
 import org.jetbrains.annotations.Unmodifiable;
@@ -14,11 +16,11 @@ public class WorldMap {
     private final int width;
     private final int height;
 
-    public WorldMap(int width, int height) {
+    public WorldMap(MapSize mapSize, MapType mapType) {
         mapObservers = new ArrayList<>();
-        this.width = width;
-        this.height = height;
-        tiles = MapGenerator.generate(width, height);
+        this.width = mapSize.getWidth();
+        this.height = mapSize.getHeight();
+        tiles = MapGenerator.generate(mapSize, mapType);
     }
 
     @TestOnly

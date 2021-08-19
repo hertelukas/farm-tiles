@@ -3,6 +3,7 @@ package com.lukas.tiles.view;
 import com.lukas.tiles.Config;
 import com.lukas.tiles.FarmTilesApplication;
 import com.lukas.tiles.model.setup.MapSize;
+import com.lukas.tiles.model.setup.MapType;
 import com.lukas.tiles.viewModel.SetupViewModel;
 import com.sun.javafx.collections.ImmutableObservableList;
 import javafx.geometry.Orientation;
@@ -79,10 +80,15 @@ public class SetupView extends VBox {
         //Size choice Box
         ChoiceBox<MapSize> mapSizeChoiceBox = new ChoiceBox<>();
         mapSizeChoiceBox.setItems(new ImmutableObservableList<>(MapSize.values()));
-        mapSizeChoiceBox.getSelectionModel().select(MapSize.Medium);
+        mapSizeChoiceBox.getSelectionModel().select(MapSize.getDefault());
         mapSizeChoiceBox.setOnAction(e -> setupViewModel.setMapSize(mapSizeChoiceBox.getSelectionModel().getSelectedItem()));
 
-        result.getChildren().addAll(label, mapSizeChoiceBox);
+        ChoiceBox<MapType> mapTypeChoiceBox = new ChoiceBox<>();
+        mapTypeChoiceBox.setItems(new ImmutableObservableList<>(MapType.values()));
+        mapTypeChoiceBox.getSelectionModel().select(MapType.getDefault());
+        mapTypeChoiceBox.setOnAction(e -> setupViewModel.setMapType(mapTypeChoiceBox.getSelectionModel().getSelectedItem()));
+
+        result.getChildren().addAll(label, mapSizeChoiceBox, mapTypeChoiceBox);
         return result;
     }
 

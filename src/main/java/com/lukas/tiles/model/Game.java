@@ -25,7 +25,7 @@ public class Game {
             tempFarmers.add(Farmer.generate(setup.getDifficulty().getFarmerStart()));
         }
 
-        return new Game(tempFarmers, new WorldMap(setup.getMapSize().getWidth(), setup.getMapSize().getHeight()));
+        return new Game(tempFarmers, new WorldMap(setup.getMapSize(), setup.getMapType()));
     }
 
     public List<Farmer> getFarmers() {

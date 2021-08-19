@@ -6,6 +6,7 @@ import com.lukas.tiles.SceneLoader;
 import com.lukas.tiles.model.Setup;
 import com.lukas.tiles.model.setup.Difficulty;
 import com.lukas.tiles.model.setup.MapSize;
+import com.lukas.tiles.model.setup.MapType;
 import com.lukas.tiles.text.LanguageObserver;
 import com.lukas.tiles.view.GameView;
 import javafx.beans.property.SimpleStringProperty;
@@ -83,5 +84,9 @@ public class SetupViewModel implements LanguageObserver {
     //Actions
     public void setMapSize(MapSize selectedItem) {
         setup.setMapSize(selectedItem);
+    }
+
+    public void setMapType(MapType selectedItem) {
+        setup.setMapType(selectedItem);
     }
 }

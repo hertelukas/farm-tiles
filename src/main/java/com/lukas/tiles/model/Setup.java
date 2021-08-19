@@ -7,8 +7,8 @@ import com.lukas.tiles.model.setup.MapType;
 public class Setup {
     private int farmers = 5;
     private Difficulty difficulty;
-    private MapSize mapSize = MapSize.Medium;
-    private MapType mapType;
+    private MapSize mapSize = MapSize.getDefault();
+    private MapType mapType = MapType.getDefault();
 
     public int getFarmers() {
         return farmers;
