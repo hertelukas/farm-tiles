@@ -1,4 +1,6 @@
-package com.lukas.tiles.model;
+package com.lukas.tiles.model.setup;
+
+import com.lukas.tiles.model.Money;
 
 public enum Difficulty {
     Easy(new Money(50000), new Money(50000)),

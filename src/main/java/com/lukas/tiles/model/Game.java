@@ -20,7 +20,7 @@ public class Game {
             tempFarmers.add(Farmer.generate(setup.getDifficulty().getFarmerStart()));
         }
 
-        return new Game(tempFarmers, new WorldMap(200, 100), new Player(setup.getDifficulty().getPlayerStart()));
+        return new Game(tempFarmers, new WorldMap(setup.getMapSize().getWidth(), setup.getMapSize().getHeight()), new Player(setup.getDifficulty().getPlayerStart()));
     }
 
     public List<Farmer> getFarmers() {
