@@ -42,7 +42,35 @@ public class MapView extends Pane implements MapViewModelObserver {
     private void draw() {
         canvas.getGraphicsContext2D().setFill(TileType.Water.getColor());
         canvas.getGraphicsContext2D().fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
-        for (int i = 0; i < mapViewModel.getHexagons().length; i++) {
+
+        int firstVisible = -1;
+        int jump = -1;
+        int i = 0;
+
+        while (mapViewModel.getHexagons()[i].getX()[4] < 0) {
+            i += mapViewModel.getWidth();
+        }
+        for (; i < mapViewModel.getHexagons().length; i++) {
+            //All future tiles are below
+            if (mapViewModel.getHexagons()[i].getX()[1] > this.getHeight()) {
+                return;
+            }
+            //Horizontal optimisation (not working)
+//            //Not drawing everything
+//            if (firstVisible == -1 && mapViewModel.getHexagons()[i].getY()[2] > 0) {
+//                firstVisible = i;
+//            }
+//            //current one no more visible
+//            if (mapViewModel.getHexagons()[i].getY()[0] > this.getWidth()) {
+//                if (jump == -1) {
+//                    jump = mapViewModel.getWidth() - i % mapViewModel.getWidth() + firstVisible - 2;
+//                }
+//                i += jump;
+//                if (i >= mapViewModel.getHexagons().length) {
+//                    break;
+//                }
+//            }
+
             Tile temp = mapViewModel.getTiles()[i / mapViewModel.getWidth()][i % mapViewModel.getWidth()];
             canvas.getGraphicsContext2D().setFill(temp.getColor());
             canvas.getGraphicsContext2D().fillPolygon(mapViewModel.getHexagons()[i].getY(), mapViewModel.getHexagons()[i].getX(), 6);
