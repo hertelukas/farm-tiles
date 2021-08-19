@@ -95,6 +95,18 @@ public class MapViewModel implements MapObserver {
         lastX = mouseEvent.getSceneY();
     }
 
+    public void mouseUp(MouseEvent mouseEvent) {
+        if (lastY != mouseEvent.getSceneX() || lastX != mouseEvent.getSceneY()) {
+            return; //Was a drag
+        }
+
+        for (int i = 0; i < hexagons.length; i++) {
+            tiles[i / map.getWidth()][i % map.getWidth()].setSelected(hexagons[i].isInside(mouseEvent.getSceneY(), mouseEvent.getSceneX()));
+        }
+
+        updateMapView();
+    }
+
     private void updateMapView() {
         for (MapViewModelObserver mapViewModelObserver : mapViewModelObservers) {
             mapViewModelObserver.update();

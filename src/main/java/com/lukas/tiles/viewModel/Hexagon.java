@@ -38,6 +38,15 @@ public class Hexagon {
         return width.doubleValue() * SCALE;
     }
 
+    // TODO: 8/19/21 not accurate, clicks in the top corner are getting ignored
+    public boolean isInside(double x, double y) {
+        if (this.y[0] > y) return false;
+        if (this.y[2] < y) return false;
+        if (this.x[0] > x) return false;
+        if (this.x[3] < x) return false;
+        return true;
+    }
+
     public double[] getX() {
         return x;
     }

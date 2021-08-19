@@ -1,5 +1,6 @@
 package com.lukas.tiles.view;
 
+import com.lukas.tiles.model.Tile;
 import com.lukas.tiles.model.TileType;
 import com.lukas.tiles.model.WorldMap;
 import com.lukas.tiles.viewModel.Hexagon;
@@ -8,6 +9,8 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 
 public class MapView extends Pane implements MapViewModelObserver {
 
@@ -28,6 +31,7 @@ public class MapView extends Pane implements MapViewModelObserver {
         this.addEventHandler(ScrollEvent.SCROLL, mapViewModel::handleScroll);
         this.addEventHandler(MouseEvent.MOUSE_DRAGGED, e -> mapViewModel.handleDragged(e, this.getWidth(), this.getHeight()));
         this.addEventHandler(MouseEvent.MOUSE_PRESSED, mapViewModel::mouseDown);
+        this.addEventHandler(MouseEvent.MOUSE_RELEASED, mapViewModel::mouseUp);
         // FIXME: 8/18/21 Can't react to key events in a pane
         //this.addEventHandler(KeyEvent.KEY_PRESSED, mapViewModel::handleKey);
     }
@@ -41,7 +45,8 @@ public class MapView extends Pane implements MapViewModelObserver {
         canvas.getGraphicsContext2D().setFill(TileType.Water.getColor());
         canvas.getGraphicsContext2D().fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
         for (int i = 0; i < mapViewModel.getHexagons().length; i++) {
-            canvas.getGraphicsContext2D().setFill(mapViewModel.getTiles()[i / mapViewModel.getWidth()][i % mapViewModel.getWidth()].getTileType().getColor());
+            Tile temp = mapViewModel.getTiles()[i / mapViewModel.getWidth()][i % mapViewModel.getWidth()];
+            canvas.getGraphicsContext2D().setFill(temp.getColor());
             canvas.getGraphicsContext2D().fillPolygon(mapViewModel.getHexagons()[i].getY(), mapViewModel.getHexagons()[i].getX(), 6);
         }
     }

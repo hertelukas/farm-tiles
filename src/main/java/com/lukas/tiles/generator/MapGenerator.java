@@ -11,7 +11,7 @@ public class MapGenerator {
 
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
-                result[i][j] = new Tile(new Random().nextBoolean() ? TileType.Gras : TileType.Water);
+                result[i][j] = new Tile(new Random().nextBoolean() ? TileType.Grass : TileType.Water);
             }
         }
         return result;

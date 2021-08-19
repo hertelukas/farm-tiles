@@ -4,7 +4,7 @@ import javafx.scene.paint.Color;
 
 public enum TileType {
     Water(Color.BLUE),
-    Gras(Color.GREENYELLOW);
+    Grass(Color.GREENYELLOW);
 
     private final Color color;
 
