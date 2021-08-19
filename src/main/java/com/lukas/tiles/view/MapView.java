@@ -26,7 +26,7 @@ public class MapView extends Pane implements MapViewModelObserver {
         Hexagon.bindWidth(this.widthProperty());
 
         this.addEventHandler(ScrollEvent.SCROLL, mapViewModel::handleScroll);
-        this.addEventHandler(MouseEvent.MOUSE_DRAGGED, mapViewModel::handleDragged);
+        this.addEventHandler(MouseEvent.MOUSE_DRAGGED, e -> mapViewModel.handleDragged(e, this.getWidth(), this.getHeight()));
         this.addEventHandler(MouseEvent.MOUSE_PRESSED, mapViewModel::mouseDown);
         // FIXME: 8/18/21 Can't react to key events in a pane
         //this.addEventHandler(KeyEvent.KEY_PRESSED, mapViewModel::handleKey);

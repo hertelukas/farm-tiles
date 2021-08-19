@@ -77,17 +77,14 @@ public class MapViewModel implements MapObserver {
         System.out.println("Pressed key");
     }
 
-    public void handleDragged(MouseEvent mouseEvent) {
+    public void handleDragged(MouseEvent mouseEvent, double width, double height) {
 
-        yOffset = Math.min(50, yOffset + mouseEvent.getSceneX() - lastY);
-        xOffset = Math.min(50, xOffset + mouseEvent.getSceneY() - lastX);
+        // FIXME: 8/19/21 -150 in the end doesn't seem right... very different on different scene sizes
+        yOffset = Math.max(-1 * map.getWidth() * Math.sqrt(3) * zoom * Hexagon.getRelativeScale() + width - 150, Math.min(50, yOffset + mouseEvent.getSceneX() - lastY));
+        xOffset = Math.max(-1 * map.getHeight() * 1.5 * zoom * Hexagon.getRelativeScale() + height - 150, Math.min(50, xOffset + mouseEvent.getSceneY() - lastX));
 
         lastY = mouseEvent.getSceneX();
         lastX = mouseEvent.getSceneY();
-
-        System.out.println("X: " + xOffset);
-        System.out.println("Y: " + yOffset);
-        System.out.println("-------------------");
 
         recalculate();
         updateMapView();

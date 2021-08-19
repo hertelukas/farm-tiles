@@ -34,7 +34,7 @@ public class Hexagon {
         Hexagon.width.bind(width);
     }
 
-    private static double getRelativeScale() {
+    public static double getRelativeScale() {
         return width.doubleValue() * SCALE;
     }
 
