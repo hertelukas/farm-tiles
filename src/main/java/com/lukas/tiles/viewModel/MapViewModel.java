@@ -1,12 +1,14 @@
 package com.lukas.tiles.viewModel;
 
-import com.lukas.tiles.model.WorldMap;
 import com.lukas.tiles.model.Tile;
+import com.lukas.tiles.model.WorldMap;
 import com.lukas.tiles.view.MapViewModelObserver;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MapViewModel implements MapObserver {
     private final WorldMap map;
@@ -21,6 +23,13 @@ public class MapViewModel implements MapObserver {
     private final int width;
     private final int height;
     private final Hexagon[] hexagons;
+
+    private boolean isPressed = false;
+    private double lastX;
+    private double lastY;
+
+    private double xOffset = 0;
+    private double yOffset = 0;
 
     public MapViewModel(WorldMap map) {
         this.map = map;
@@ -68,6 +77,27 @@ public class MapViewModel implements MapObserver {
         System.out.println("Pressed key");
     }
 
+    public void handleDragged(MouseEvent mouseEvent) {
+
+        yOffset = Math.min(50, yOffset + mouseEvent.getSceneX() - lastY);
+        xOffset = Math.min(50, xOffset + mouseEvent.getSceneY() - lastX);
+
+        lastY = mouseEvent.getSceneX();
+        lastX = mouseEvent.getSceneY();
+
+        System.out.println("X: " + xOffset);
+        System.out.println("Y: " + yOffset);
+        System.out.println("-------------------");
+
+        recalculate();
+        updateMapView();
+    }
+
+    public void mouseDown(MouseEvent mouseEvent) {
+        lastY = mouseEvent.getSceneX();
+        lastX = mouseEvent.getSceneY();
+    }
+
     private void updateMapView() {
         for (MapViewModelObserver mapViewModelObserver : mapViewModelObservers) {
             mapViewModelObserver.update();
@@ -83,7 +113,9 @@ public class MapViewModel implements MapObserver {
 
     private void recalculate() {
         for (int i = 0; i < hexagons.length; i++) {
-            hexagons[i] = new Hexagon(i / width, i % width, zoom);
+            hexagons[i] = new Hexagon(i / width, i % width, zoom, xOffset, yOffset);
         }
     }
+
+
 }
