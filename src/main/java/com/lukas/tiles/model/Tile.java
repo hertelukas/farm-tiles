@@ -2,6 +2,8 @@ package com.lukas.tiles.model;
 
 import javafx.scene.paint.Color;
 
+import java.util.Objects;
+
 public class Tile {
     private final TileType tileType;
     private boolean selected;
@@ -28,5 +30,18 @@ public class Tile {
             return Color.RED;
         }
         return tileType.getColor();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Tile tile = (Tile) o;
+        return selected == tile.selected && tileType == tile.tileType;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(tileType, selected);
     }
 }

@@ -10,7 +10,7 @@ public class Player extends Farmer {
     private final List<PlayerObserver> playerObservers;
 
     public Player(Money startMoney) {
-        super(startMoney);
+        super(startMoney, "Player");
         playerObservers = new ArrayList<>();
     }
 

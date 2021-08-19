@@ -8,7 +8,7 @@ import org.jetbrains.annotations.Unmodifiable;
 import java.util.*;
 
 public class WorldMap {
-    private final List<MapObserver> mapObservers;
+    private final transient List<MapObserver> mapObservers;
 
     private final Tile[][] tiles;
     private final int width;
@@ -187,5 +187,20 @@ public class WorldMap {
             result.add(getBottomRight(coordinate).get());
         }
         return Collections.unmodifiableSet(result);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        WorldMap worldMap = (WorldMap) o;
+        return width == worldMap.width && height == worldMap.height && Arrays.deepEquals(tiles, worldMap.tiles);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = Objects.hash(width, height);
+        result = 31 * result + Arrays.deepHashCode(tiles);
+        return result;
     }
 }
