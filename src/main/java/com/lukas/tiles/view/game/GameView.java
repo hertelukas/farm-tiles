@@ -1,8 +1,8 @@
-package com.lukas.tiles.view;
+package com.lukas.tiles.view.game;
 
 import com.lukas.tiles.model.Game;
 import com.lukas.tiles.model.Setup;
-import com.lukas.tiles.viewModel.GameViewModel;
+import com.lukas.tiles.viewModel.game.GameViewModel;
 import javafx.scene.layout.BorderPane;
 
 public class GameView extends BorderPane {

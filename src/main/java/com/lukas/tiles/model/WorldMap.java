@@ -3,7 +3,7 @@ package com.lukas.tiles.model;
 import com.lukas.tiles.generator.MapGenerator;
 import com.lukas.tiles.model.setup.MapSize;
 import com.lukas.tiles.model.setup.MapType;
-import com.lukas.tiles.viewModel.MapObserver;
+import com.lukas.tiles.viewModel.game.MapObserver;
 import org.jetbrains.annotations.TestOnly;
 import org.jetbrains.annotations.Unmodifiable;
 

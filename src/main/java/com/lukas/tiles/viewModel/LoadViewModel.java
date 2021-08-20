@@ -7,7 +7,7 @@ import com.lukas.tiles.SceneLoader;
 import com.lukas.tiles.io.GameHandler;
 import com.lukas.tiles.model.Game;
 import com.lukas.tiles.text.LanguageObserver;
-import com.lukas.tiles.view.GameView;
+import com.lukas.tiles.view.game.GameView;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.event.Event;

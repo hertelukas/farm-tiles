@@ -1,4 +1,4 @@
-package com.lukas.tiles.viewModel;
+package com.lukas.tiles.viewModel.game;
 
 import com.lukas.tiles.model.Game;
 import com.lukas.tiles.model.Setup;

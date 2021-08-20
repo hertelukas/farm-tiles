@@ -1,7 +1,7 @@
-package com.lukas.tiles.view;
+package com.lukas.tiles.view.game;
 
 import com.lukas.tiles.model.Farmer;
-import com.lukas.tiles.viewModel.BottomBarViewModel;
+import com.lukas.tiles.viewModel.game.BottomBarViewModel;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 

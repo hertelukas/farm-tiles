@@ -1,4 +1,4 @@
-package com.lukas.tiles.viewModel;
+package com.lukas.tiles.viewModel.game;
 
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.ReadOnlyDoubleProperty;

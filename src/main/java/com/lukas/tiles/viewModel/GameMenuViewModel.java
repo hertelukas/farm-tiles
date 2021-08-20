@@ -4,7 +4,6 @@ import com.lukas.tiles.Config;
 import com.lukas.tiles.SceneLoader;
 import com.lukas.tiles.io.ConfigHandler;
 import com.lukas.tiles.text.MenuText;
-import com.lukas.tiles.view.GameView;
 import com.lukas.tiles.view.LoadView;
 import com.lukas.tiles.view.SetupView;
 import javafx.application.Platform;

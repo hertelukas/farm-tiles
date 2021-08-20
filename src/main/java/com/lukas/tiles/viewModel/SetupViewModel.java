@@ -8,7 +8,7 @@ import com.lukas.tiles.model.setup.Difficulty;
 import com.lukas.tiles.model.setup.MapSize;
 import com.lukas.tiles.model.setup.MapType;
 import com.lukas.tiles.text.LanguageObserver;
-import com.lukas.tiles.view.GameView;
+import com.lukas.tiles.view.game.GameView;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 

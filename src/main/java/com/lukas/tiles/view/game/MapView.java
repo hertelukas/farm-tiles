@@ -1,10 +1,10 @@
-package com.lukas.tiles.view;
+package com.lukas.tiles.view.game;
 
 import com.lukas.tiles.model.Tile;
 import com.lukas.tiles.model.TileType;
 import com.lukas.tiles.model.WorldMap;
-import com.lukas.tiles.viewModel.Hexagon;
-import com.lukas.tiles.viewModel.MapViewModel;
+import com.lukas.tiles.viewModel.game.Hexagon;
+import com.lukas.tiles.viewModel.game.MapViewModel;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;

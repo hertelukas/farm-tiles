@@ -1,8 +1,8 @@
-package com.lukas.tiles.viewModel;
+package com.lukas.tiles.viewModel.game;
 
 import com.lukas.tiles.model.Tile;
 import com.lukas.tiles.model.WorldMap;
-import com.lukas.tiles.view.MapViewModelObserver;
+import com.lukas.tiles.view.game.MapViewModelObserver;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;

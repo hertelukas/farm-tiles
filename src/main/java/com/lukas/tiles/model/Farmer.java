@@ -1,6 +1,6 @@
 package com.lukas.tiles.model;
 
-import com.lukas.tiles.viewModel.FarmerObserver;
+import com.lukas.tiles.viewModel.game.FarmerObserver;
 
 import java.util.ArrayList;
 import java.util.Objects;

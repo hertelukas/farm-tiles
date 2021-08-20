@@ -1,4 +1,4 @@
-package com.lukas.tiles.view;
+package com.lukas.tiles.view.game;
 
 public interface MapViewModelObserver {
     void update();

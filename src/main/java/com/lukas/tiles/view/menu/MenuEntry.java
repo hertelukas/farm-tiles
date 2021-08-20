@@ -1,4 +1,4 @@
-package com.lukas.tiles.view;
+package com.lukas.tiles.view.menu;
 
 import javafx.beans.property.StringProperty;
 
