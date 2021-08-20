@@ -2,6 +2,7 @@ package com.lukas.tiles.view;
 
 import com.lukas.tiles.Config;
 import com.lukas.tiles.FarmTilesApplication;
+import com.lukas.tiles.SceneLoader;
 import com.lukas.tiles.model.setup.MapSize;
 import com.lukas.tiles.model.setup.MapType;
 import com.lukas.tiles.viewModel.SetupViewModel;
@@ -11,6 +12,8 @@ import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+
+import java.io.IOException;
 
 public class SetupView extends VBox {
 
@@ -48,27 +51,18 @@ public class SetupView extends VBox {
         hBox.getChildren().addAll(mapSettingsVBox, new Separator(Orientation.VERTICAL), gameSettingsVBox);
         this.getChildren().add(hBox);
 
+        Button backButton = new Button("Back");
+        backButton.setOnAction(e -> {
+            try {
+                SceneLoader.getInstance().loadScene(FarmTilesApplication.getStartPage());
+            } catch (IOException ioException) {
+                // TODO: 8/20/21 handle
+                ioException.printStackTrace();
+            }
+        });
 
-        this.getChildren().add(playButton);
-    }
 
-    private VBox generateGameSettingsVBox() {
-        VBox result = new VBox();
-        result.setAlignment(Pos.TOP_CENTER);
-        result.setSpacing(Style.getVSpacing());
-
-        //Title
-        Label label = new Label();
-        label.textProperty().bind(setupViewModel.gameSettingsProperty());
-        label.getStyleClass().add("h2");
-        result.getChildren().add(label);
-
-        TextField nameInput = new TextField();
-        nameInput.textProperty().bindBidirectional(setupViewModel.gameNameProperty());
-        nameInput.accessibleHelpProperty().bind(setupViewModel.nameHelperProperty());
-        result.getChildren().add(nameInput);
-        playButton.disableProperty().bind(setupViewModel.gameNameProperty().isEmpty());
-        return result;
+        this.getChildren().addAll(playButton, backButton);
     }
 
     private VBox generateMapSettingsVBox() {
@@ -96,5 +90,23 @@ public class SetupView extends VBox {
         return result;
     }
 
+    private VBox generateGameSettingsVBox() {
+        VBox result = new VBox();
+        result.setAlignment(Pos.TOP_CENTER);
+        result.setSpacing(Style.getVSpacing());
+
+        //Title
+        Label label = new Label();
+        label.textProperty().bind(setupViewModel.gameSettingsProperty());
+        label.getStyleClass().add("h2");
+        result.getChildren().add(label);
+
+        TextField nameInput = new TextField();
+        nameInput.promptTextProperty().bind(setupViewModel.nameHelperProperty());
+        nameInput.textProperty().bindBidirectional(setupViewModel.gameNameProperty());
+        result.getChildren().add(nameInput);
+        playButton.disableProperty().bind(setupViewModel.gameNameProperty().isEmpty());
+        return result;
+    }
 
 }
