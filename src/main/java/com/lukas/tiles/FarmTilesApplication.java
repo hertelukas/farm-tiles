@@ -29,6 +29,7 @@ public class FarmTilesApplication extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        primaryStage.setTitle("Farm Tiles");
         SceneLoader.getInstance().init(primaryStage, springContext);
         SceneLoader.getInstance().loadScene(START_PAGE);
     }
