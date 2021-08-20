@@ -14,7 +14,6 @@ import javafx.event.Event;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 import java.util.HashSet;
@@ -76,7 +75,6 @@ public class LoadViewModel implements LanguageObserver {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-
             });
 
             Button delete = new Button("❌");
