@@ -1,13 +1,11 @@
 package com.lukas.tiles.generator;
 
 import com.lukas.tiles.NoiseGenerator;
-import com.lukas.tiles.model.Coordinate;
 import com.lukas.tiles.model.Tile;
 import com.lukas.tiles.model.TileType;
 import com.lukas.tiles.model.WorldMap;
 import com.lukas.tiles.model.setup.MapSize;
 import com.lukas.tiles.model.setup.MapType;
-import org.springframework.boot.web.reactive.context.GenericReactiveWebApplicationContext;
 
 import java.util.*;
 

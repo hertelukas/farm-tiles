@@ -2,9 +2,6 @@ package com.lukas.tiles.view;
 
 import com.lukas.tiles.Config;
 import com.lukas.tiles.FarmTilesApplication;
-import com.lukas.tiles.SceneLoader;
-import com.lukas.tiles.io.GameHandler;
-import com.lukas.tiles.model.Game;
 import com.lukas.tiles.viewModel.LoadViewModel;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
