@@ -9,9 +9,7 @@ import com.lukas.tiles.model.setup.MapSize;
 import com.lukas.tiles.model.setup.MapType;
 import org.springframework.boot.web.reactive.context.GenericReactiveWebApplicationContext;
 
-import java.util.ArrayDeque;
-import java.util.Queue;
-import java.util.Random;
+import java.util.*;
 
 public class MapGenerator {
 
@@ -46,78 +44,74 @@ public class MapGenerator {
 
         Random r = new Random();
 
-        int count = Math.max(2, (int) Math.pow(width * height, 0.2));
-        System.out.println("Generating " + count);
+        //One island per 300 tiles
+        int count = r.nextInt(2) + 2;
+        int maxRadius = (int) Math.sqrt(width * height) / 2;
 
-        for (int i = 0; i < count; i++) {
-            int x = r.nextInt(height);
-            int y = r.nextInt(width);
-            boolean startsWithRock = r.nextBoolean();
-            map.getTiles()[x][y].setTileType(startsWithRock ? TileType.Rock : TileType.Grass);
+        System.out.println("Generating " + count + " continents with a radius of " + maxRadius);
+        genericDistanceGenerator(maxRadius, count, map);
 
-            Queue<Tile> tiles = new ArrayDeque<>();
-            tiles.add(map.getTiles()[x][y]);
-
-            double rockLikelihood = Math.pow(width * height, 0.5);
-
-            while (!tiles.isEmpty()) {
-                for (Tile tile : map.getAdjacent(tiles.remove())) {
-                    if (tile.getTileType() != TileType.Water) {
-                        continue;
-                    }
-                    if (rockLikelihood < 0.1) {
-                        tile.setTileType(TileType.Coastal);
-                    } else {
-                        tile.setTileType(r.nextDouble() < Math.min(0.2, rockLikelihood / 20) ? TileType.Rock : TileType.Grass);
-                    }
-                    if (r.nextDouble() < rockLikelihood) {
-                        tiles.add(tile);
-                    }
-                }
-                rockLikelihood /= 1.05;
-            }
-        }
 
         return map.getTiles();
     }
+
+    private final static int MAX_ISLAND_RADIUS = 5;
 
     private static Tile[][] generateIslands(int width, int height) {
         WorldMap map = new WorldMap(generateWater(width, height));
 
         Random r = new Random();
 
-        int count = (int) Math.pow(width * height, 0.4);
+        //One island per 300 tiles
+        int count = Math.max(2, width * height / 300);
 
-        for (int i = 0; i < count; i++) {
-            int x = r.nextInt(height);
-            int y = r.nextInt(width);
-            boolean startsWithRock = r.nextBoolean();
-            map.getTiles()[x][y].setTileType(startsWithRock ? TileType.Rock : TileType.Grass);
-
-            Queue<Tile> tiles = new ArrayDeque<>();
-            tiles.add(map.getTiles()[x][y]);
-
-            double rockLikelihood = Math.sqrt(count) / 8;
-
-            while (!tiles.isEmpty()) {
-                for (Tile tile : map.getAdjacent(tiles.remove())) {
-                    if (tile.getTileType() != TileType.Water) {
-                        continue;
-                    }
-                    if (rockLikelihood < 0.05) {
-                        tile.setTileType(TileType.Coastal);
-                    } else {
-                        tile.setTileType(r.nextDouble() < rockLikelihood / 2 ? TileType.Rock : TileType.Grass);
-                    }
-                    if (r.nextDouble() < rockLikelihood) {
-                        tiles.add(tile);
-                    }
-                }
-                rockLikelihood /= 1.4;
-            }
-        }
+        System.out.println("Generating " + count + " islands");
+        genericDistanceGenerator(MAX_ISLAND_RADIUS, count, map);
 
         return map.getTiles();
+    }
+
+    private static void genericDistanceGenerator(int maxRadius, int amount, WorldMap map) {
+        Random r = new Random();
+        for (int i = 0; i < amount; i++) {
+            //Get coordinates for next random island
+            int x = r.nextInt(map.getHeight());
+            int y = r.nextInt(map.getWidth());
+
+            //Random mountain in the middle
+            boolean startsWithRock = r.nextBoolean();
+
+            //Set the center
+            map.getTiles()[x][y].setTileType(startsWithRock ? TileType.Rock : TileType.Grass);
+
+            //Queue with all neighbours
+            Queue<Tile> remainingTiles = new ArrayDeque<>();
+            Set<Tile> blob = new HashSet<>();
+            blob.add(map.getTiles()[x][y]);
+
+            int radius = maxRadius;
+
+            while (radius > 1) {
+                remainingTiles.addAll(map.getAdjacent(blob));
+                while (!remainingTiles.isEmpty()) {
+                    Tile temp = remainingTiles.remove();
+                    if (r.nextDouble() < (double) radius / maxRadius) {
+                        temp.setTileType(r.nextDouble() < (double) (radius / 3) / maxRadius ? TileType.Rock : TileType.Grass);
+                        blob.add(temp);
+                    }
+                }
+                radius--;
+            }
+
+            remainingTiles.addAll(map.getAdjacent(blob));
+
+            while (!remainingTiles.isEmpty()) {
+                Tile temp = remainingTiles.remove();
+                temp.setTileType(TileType.Coastal);
+                blob.add(temp);
+            }
+
+        }
     }
 
     private static Tile[][] generatePangea(int width, int height, int depth) {
@@ -128,14 +122,15 @@ public class MapGenerator {
         int counter = 0;
         int grassCounter = 0;
         int mountainCounter = 0;
+
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
                 double noise = noiseGenerator.noise(i, j);
-                if (noise < 0.05) {
+                if (noise < -0.4) {
                     result[i][j] = new Tile(TileType.Water, counter++);
-                } else if (noise < 0.1) {
+                } else if (noise < -0.3) {
                     result[i][j] = new Tile(TileType.Coastal, counter++);
-                } else if (noise < 0.5) {
+                } else if (noise < 0.2) {
                     grassCounter++;
                     result[i][j] = new Tile(TileType.Grass, counter++);
                 } else {
@@ -144,10 +139,10 @@ public class MapGenerator {
                 }
             }
         }
-
         if (grassCounter < width * height / 1.5 || mountainCounter < width * height / 20) {
             return generatePangea(width, height, ++depth);
         }
+
 
         System.out.println(depth + " generations");
         return result;

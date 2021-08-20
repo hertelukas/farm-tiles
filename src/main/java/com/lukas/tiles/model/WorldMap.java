@@ -157,6 +157,20 @@ public class WorldMap {
         return Optional.empty();
     }
 
+    public Set<Tile> getAdjacent(Collection<Tile> tiles) {
+        Set<Tile> result = new HashSet<>();
+
+        for (Tile tile : tiles) {
+            for (Tile tile1 : getAdjacent(tile)) {
+                if (!tiles.contains(tile1)) {
+                    result.add(tile1);
+                }
+            }
+        }
+
+        return Collections.unmodifiableSet(result);
+    }
+
     @Unmodifiable
     public Set<Tile> getAdjacent(Tile tile) {
         Coordinate coordinate = getCoordinate(tile);
