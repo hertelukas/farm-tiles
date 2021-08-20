@@ -21,6 +21,7 @@ public class Farmer {
             observers = new ArrayList<>();
         }
         this.observers.add(observer);
+        observer.update(this);
     }
 
     private void updateFarmer() {
@@ -52,5 +53,13 @@ public class Farmer {
     @Override
     public int hashCode() {
         return Objects.hash(money, name);
+    }
+
+    @Override
+    public String toString() {
+        return "Farmer{" +
+                "money=" + money +
+                ", name='" + name + '\'' +
+                '}';
     }
 }
