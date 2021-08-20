@@ -5,8 +5,6 @@ import com.lukas.tiles.model.TileType;
 import com.lukas.tiles.model.WorldMap;
 import com.lukas.tiles.viewModel.game.Hexagon;
 import com.lukas.tiles.viewModel.game.MapViewModel;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;

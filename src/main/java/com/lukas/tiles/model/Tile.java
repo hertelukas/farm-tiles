@@ -1,15 +1,21 @@
 package com.lukas.tiles.model;
 
+import com.lukas.tiles.model.building.Building;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.paint.Color;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Tile {
+public class Tile implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 143647069791664939L;
     private TileType tileType;
     private boolean selected;
     private final int id;
+    private Building building;
     private transient StringProperty name;
 
     public Tile(TileType tileType, int id) {
@@ -54,17 +60,25 @@ public class Tile {
         return tileType.getColor();
     }
 
+    public void setBuilding(Building building) {
+        this.building = building;
+    }
+
+    public Building getBuilding() {
+        return building;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Tile tile = (Tile) o;
-        return id == tile.id && selected == tile.selected && tileType == tile.tileType;
+        return Objects.equals(building, tile.building) && id == tile.id && selected == tile.selected && tileType == tile.tileType;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(tileType, selected, id);
+        return Objects.hash(building, tileType, selected, id);
     }
 
     @Override

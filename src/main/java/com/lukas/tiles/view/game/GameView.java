@@ -34,7 +34,7 @@ public class GameView extends BorderPane {
         if (tile == null) {
             this.setRight(null);
         } else {
-            this.setRight(new TileView(tile));
+            this.setRight(new TileView(tile, gameViewModel.getGame()));
         }
     }
 }

@@ -1,11 +1,15 @@
 package com.lukas.tiles.model;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.Objects;
 
 /**
  * The class which represents all money. Saved in cents
  */
-public class Money {
+public class Money implements Serializable {
+    @Serial
+    private static final long serialVersionUID = -5226220695056180322L;
     private long amount;
 
     public Money() {
@@ -16,6 +20,9 @@ public class Money {
         amount = cents;
     }
 
+    /**
+     * @return the amount of cash in cents
+     */
     public long getAmount() {
         return amount;
     }
@@ -41,6 +48,16 @@ public class Money {
 
         this.amount -= amount;
         return true;
+    }
+
+    /**
+     * Sub amount only if the balance is high enough
+     *
+     * @param money that gets removed
+     * @return if the transaction is successful
+     */
+    public boolean subAmountIfPossible(Money money) {
+        return subAmountIfPossible(money.getAmount());
     }
 
     /**

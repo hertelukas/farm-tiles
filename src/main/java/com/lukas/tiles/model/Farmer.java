@@ -2,10 +2,16 @@ package com.lukas.tiles.model;
 
 import com.lukas.tiles.viewModel.game.FarmerObserver;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class Farmer {
+public class Farmer implements Serializable {
+    @Serial
+    private static final long serialVersionUID = -4787293802369998854L;
     private final Money money;
     private final String name;
     private transient ArrayList<FarmerObserver> observers;
@@ -20,7 +26,7 @@ public class Farmer {
         if (observers == null) {
             observers = new ArrayList<>();
         }
-        this.observers.add(observer);
+        observers.add(observer);
         observer.update(this);
     }
 
@@ -61,5 +67,11 @@ public class Farmer {
                 "money=" + money +
                 ", name='" + name + '\'' +
                 '}';
+    }
+
+    @Serial
+    private void readObject(ObjectInputStream ois) throws ClassNotFoundException, IOException {
+        ois.defaultReadObject();
+        observers = new ArrayList<>();
     }
 }

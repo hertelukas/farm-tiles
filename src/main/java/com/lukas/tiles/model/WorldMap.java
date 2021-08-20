@@ -7,10 +7,14 @@ import com.lukas.tiles.viewModel.game.MapObserver;
 import org.jetbrains.annotations.TestOnly;
 import org.jetbrains.annotations.Unmodifiable;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.*;
 
-public class WorldMap {
-    private final List<MapObserver> mapObservers;
+public class WorldMap implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 7454031335131925460L;
+    private transient List<MapObserver> mapObservers;
 
     private final Tile[][] tiles;
     private final int width;
@@ -32,6 +36,9 @@ public class WorldMap {
     }
 
     public void subscribe(MapObserver mapObserver) {
+        if (mapObservers == null) {
+            mapObservers = new ArrayList<>();
+        }
         mapObservers.add(mapObserver);
     }
 
@@ -210,6 +217,9 @@ public class WorldMap {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         WorldMap worldMap = (WorldMap) o;
+        System.out.println("Width: " + (width == worldMap.width));
+        System.out.println("Height: " + (height == worldMap.height));
+        System.out.println("Tiles: " + Arrays.deepEquals(tiles, worldMap.tiles));
         return width == worldMap.width && height == worldMap.height && Arrays.deepEquals(tiles, worldMap.tiles);
     }
 

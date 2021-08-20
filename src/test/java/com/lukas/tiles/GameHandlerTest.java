@@ -3,6 +3,7 @@ package com.lukas.tiles;
 import com.lukas.tiles.io.GameHandler;
 import com.lukas.tiles.model.Game;
 import com.lukas.tiles.model.Setup;
+import com.lukas.tiles.model.building.Farm;
 import com.lukas.tiles.model.setup.Difficulty;
 import com.lukas.tiles.model.setup.MapSize;
 import org.junit.jupiter.api.AfterEach;
@@ -34,12 +35,26 @@ public class GameHandlerTest {
     }
 
     @Test
-    public void saveAndLoadGame() throws IOException {
+    public void saveAndLoadGame() throws Exception {
         Setup setup = new Setup();
         setup.setMapSize(MapSize.Medium);
         setup.setDifficulty(Difficulty.Medium);
         Game game = Game.generate(setup);
         game.setName("test");
+
+        assertTrue(GameHandler.save(game));
+
+        assertEquals(game, GameHandler.load("test"));
+    }
+
+    @Test
+    public void saveAndLoadGameWithBuildings() throws Exception {
+        Setup setup = new Setup();
+        setup.setMapSize(MapSize.Medium);
+        setup.setDifficulty(Difficulty.Medium);
+        Game game = Game.generate(setup);
+        game.setName("test");
+        game.getMap().getTiles()[0][0].setBuilding(new Farm());
 
         assertTrue(GameHandler.save(game));
 
