@@ -11,7 +11,10 @@ import com.lukas.tiles.view.game.GameView;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.event.Event;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 import java.util.HashSet;
@@ -57,10 +60,13 @@ public class LoadViewModel implements LanguageObserver {
         }
     }
 
-    public Set<Button> generateButtons() {
-        Set<Button> buttons = new HashSet<>();
+    // TODO: 8/20/21 exception handling
+    public Set<HBox> generateLoadMenu() {
+        Set<HBox> rows = new HashSet<>();
         Set<String> games = GameHandler.getGames();
         for (String game : games) {
+            HBox row = new HBox();
+            row.setAlignment(Pos.CENTER);
             Button button = new Button(game);
             button.setOnAction(event -> {
                 try {
@@ -72,8 +78,19 @@ public class LoadViewModel implements LanguageObserver {
                 }
 
             });
-            buttons.add(button);
+
+            Button delete = new Button("❌");
+            delete.setOnAction(event -> {
+                try {
+                    GameHandler.delete(game);
+                    row.setVisible(false);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            });
+            row.getChildren().addAll(button, delete);
+            rows.add(row);
         }
-        return buttons;
+        return rows;
     }
 }

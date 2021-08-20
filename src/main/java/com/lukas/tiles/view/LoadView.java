@@ -30,7 +30,7 @@ public class LoadView extends VBox {
         label.getStyleClass().add("h1");
         this.getChildren().add(label);
 
-        this.getChildren().addAll(loadViewModel.generateButtons());
+        this.getChildren().addAll(loadViewModel.generateLoadMenu());
 
         Button button = new Button();
         button.textProperty().bind(loadViewModel.backProperty());
