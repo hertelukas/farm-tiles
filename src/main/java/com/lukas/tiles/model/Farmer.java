@@ -36,8 +36,16 @@ public class Farmer implements Serializable {
         }
     }
 
-    public Money getMoney() {
-        return money;
+    public boolean buy(Money price) {
+        if (money.subAmountIfPossible(price)) {
+            updateFarmer();
+            return true;
+        }
+        return false;
+    }
+
+    public String getMoney() {
+        return money.toString();
     }
 
     public String getName() {

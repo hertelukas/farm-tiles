@@ -23,6 +23,6 @@ public class BottomBarViewModel implements FarmerObserver {
 
     @Override
     public void update(Farmer player) {
-        moneyProperty.set(player.getMoney().toString());
+        moneyProperty.set(player.getMoney());
     }
 }
