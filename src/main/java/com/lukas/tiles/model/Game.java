@@ -11,21 +11,11 @@ public class Game {
     private final WorldMap map;
     private String name;
 
-    public Game(List<Farmer> farmers, WorldMap map) {
+    public Game(List<Farmer> farmers, WorldMap map, String name) {
         this.farmers = farmers;
         this.map = map;
-        this.name = "test";
+        this.name = name;
         GameHandler.save(this);
-    }
-
-    public static Game generate(Setup setup) {
-        List<Farmer> tempFarmers = new ArrayList<>();
-        //The first farmer is always the player
-        for (int i = 1; i < setup.getFarmers(); i++) {
-            tempFarmers.add(Farmer.generate(setup.getDifficulty().getFarmerStart()));
-        }
-
-        return new Game(tempFarmers, new WorldMap(setup.getMapSize(), setup.getMapType()));
     }
 
     public List<Farmer> getFarmers() {
@@ -59,5 +49,16 @@ public class Game {
     @Override
     public int hashCode() {
         return Objects.hash(farmers, map, name);
+    }
+
+    public static Game generate(Setup setup) {
+        List<Farmer> tempFarmers = new ArrayList<>();
+        tempFarmers.add(Farmer.generate(setup.getDifficulty().getPlayerStart()));
+        //The first farmer is always the player
+        for (int i = 1; i < setup.getFarmers(); i++) {
+            tempFarmers.add(Farmer.generate(setup.getDifficulty().getFarmerStart()));
+        }
+
+        return new Game(tempFarmers, new WorldMap(setup.getMapSize(), setup.getMapType()), setup.getName());
     }
 }

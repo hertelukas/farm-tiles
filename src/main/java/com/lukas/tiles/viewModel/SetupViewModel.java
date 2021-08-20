@@ -19,12 +19,16 @@ public class SetupViewModel implements LanguageObserver {
         config.subscribe(this);
         setup = new Setup();
         setup.setDifficulty(Difficulty.Easy);
+
+        gameName.addListener((observable, oldValue, newValue) -> setup.setName(newValue));
     }
 
     private final StringProperty title = new SimpleStringProperty("Setup");
     private final StringProperty play = new SimpleStringProperty("Play");
     private final StringProperty mapSettings = new SimpleStringProperty("Map");
     private final StringProperty gameSettings = new SimpleStringProperty("Game");
+    private final StringProperty gameName = new SimpleStringProperty();
+    private final StringProperty nameHelper = new SimpleStringProperty("Name...");
 
     @Override
     public void update(Language language) {
@@ -88,5 +92,21 @@ public class SetupViewModel implements LanguageObserver {
 
     public void setMapType(MapType selectedItem) {
         setup.setMapType(selectedItem);
+    }
+
+    public String getGameName() {
+        return gameName.get();
+    }
+
+    public StringProperty gameNameProperty() {
+        return gameName;
+    }
+
+    public String getNameHelper() {
+        return nameHelper.get();
+    }
+
+    public StringProperty nameHelperProperty() {
+        return nameHelper;
     }
 }

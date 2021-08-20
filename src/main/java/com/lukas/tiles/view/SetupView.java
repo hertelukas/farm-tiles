@@ -8,16 +8,14 @@ import com.lukas.tiles.viewModel.SetupViewModel;
 import com.sun.javafx.collections.ImmutableObservableList;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.Separator;
+import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 public class SetupView extends VBox {
 
     private final SetupViewModel setupViewModel;
+    Button playButton;
 
     public SetupView(Config config) {
         this.getStylesheets().add(FarmTilesApplication.getMainStyle());
@@ -30,6 +28,10 @@ public class SetupView extends VBox {
         this.setSpacing(Style.getVSpacing());
         this.setAlignment(Pos.TOP_CENTER);
         this.setPadding(Style.getMARGIN());
+
+        playButton = new Button();
+        playButton.textProperty().bind(setupViewModel.playProperty());
+        playButton.setOnAction(e -> setupViewModel.play());
 
         //Content setup
         Label label = new Label();
@@ -46,9 +48,7 @@ public class SetupView extends VBox {
         hBox.getChildren().addAll(mapSettingsVBox, new Separator(Orientation.VERTICAL), gameSettingsVBox);
         this.getChildren().add(hBox);
 
-        Button playButton = new Button();
-        playButton.textProperty().bind(setupViewModel.playProperty());
-        playButton.setOnAction(e -> setupViewModel.play());
+
         this.getChildren().add(playButton);
     }
 
@@ -63,7 +63,11 @@ public class SetupView extends VBox {
         label.getStyleClass().add("h2");
         result.getChildren().add(label);
 
-
+        TextField nameInput = new TextField();
+        nameInput.textProperty().bindBidirectional(setupViewModel.gameNameProperty());
+        nameInput.accessibleHelpProperty().bind(setupViewModel.nameHelperProperty());
+        result.getChildren().add(nameInput);
+        playButton.disableProperty().bind(setupViewModel.gameNameProperty().isEmpty());
         return result;
     }
 

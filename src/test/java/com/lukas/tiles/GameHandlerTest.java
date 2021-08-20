@@ -6,6 +6,7 @@ import com.lukas.tiles.model.Setup;
 import com.lukas.tiles.model.setup.Difficulty;
 import com.lukas.tiles.model.setup.MapSize;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -45,6 +46,7 @@ public class GameHandlerTest {
         assertEquals(game, GameHandler.load("test"));
     }
 
+    @Disabled
     @Test
     public void showsCorrectGames() {
         Setup setup = new Setup();

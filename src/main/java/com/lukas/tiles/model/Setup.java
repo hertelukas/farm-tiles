@@ -10,6 +10,8 @@ public class Setup {
     private MapSize mapSize = MapSize.getDefault();
     private MapType mapType = MapType.getDefault();
 
+    private String name;
+
     public int getFarmers() {
         return farmers;
     }
@@ -43,5 +45,13 @@ public class Setup {
 
     public void setMapType(MapType mapType) {
         this.mapType = mapType;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
