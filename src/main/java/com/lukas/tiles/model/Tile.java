@@ -13,7 +13,7 @@ public class Tile implements Serializable {
     @Serial
     private static final long serialVersionUID = 143647069791664939L;
     private TileType tileType;
-    private boolean selected;
+    private transient boolean selected;
     private final int id;
     private Building building;
     private transient StringProperty name;
