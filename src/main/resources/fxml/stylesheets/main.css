@@ -30,6 +30,23 @@
     -fx-font-size: 1.1em;
 }
 
+.button:pressed {
+    -fx-background-color: #888888;
+}
+
+.btn-lg {
+    -fx-font-size: 1.5em;
+}
+
+.btn-lg:hover {
+    -fx-font-size: 1.7em;
+}
+
+.text-field {
+    -fx-background-color: white;
+    -fx-font-family: 'Raleway Medium', sans-serif;
+}
+
 .choice-box {
     -fx-background-color: white;
     -fx-font-family: 'Raleway Medium', sans-serif;
