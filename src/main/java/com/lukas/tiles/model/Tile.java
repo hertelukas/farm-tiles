@@ -10,7 +10,7 @@ public class Tile {
     private TileType tileType;
     private boolean selected;
     private final int id;
-    private final StringProperty name;
+    private transient StringProperty name;
 
     public Tile(TileType tileType, int id) {
         this.tileType = tileType;
@@ -37,6 +37,9 @@ public class Tile {
     }
 
     public StringProperty nameProperty() {
+        if (name == null) {
+            name = new SimpleStringProperty(getName());
+        }
         return name;
     }
 
