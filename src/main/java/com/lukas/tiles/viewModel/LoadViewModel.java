@@ -67,7 +67,7 @@ public class LoadViewModel implements LanguageObserver {
                     Game loadedGame = GameHandler.load(game);
                     SceneLoader.getInstance().loadScene(new GameView(loadedGame));
 
-                } catch (IOException e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
 

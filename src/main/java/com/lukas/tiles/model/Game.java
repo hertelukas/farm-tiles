@@ -2,11 +2,15 @@ package com.lukas.tiles.model;
 
 import com.lukas.tiles.io.GameHandler;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Game {
+public class Game implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 4745910367962440544L;
     private final List<Farmer> farmers;
     private final WorldMap map;
     private String name;

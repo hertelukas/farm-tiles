@@ -33,7 +33,7 @@ public class ConfigHandlerTest {
     }
 
     @Test
-    public void saveAndLoadConfig() throws IOException {
+    public void saveAndLoadConfig() throws IOException, ClassNotFoundException {
         Config config = new Config();
         config.setLanguage(Language.Deutsch);
 

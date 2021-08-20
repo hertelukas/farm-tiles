@@ -4,12 +4,16 @@ package com.lukas.tiles;
 import com.lukas.tiles.text.LanguageObserver;
 import org.springframework.stereotype.Service;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 @Service
-public class Config {
+public class Config implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 3463174116091515175L;
     //Observer
     private final transient List<LanguageObserver> languageObservers = new ArrayList<>();
 

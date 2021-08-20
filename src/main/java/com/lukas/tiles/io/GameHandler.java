@@ -1,10 +1,8 @@
 package com.lukas.tiles.io;
 
-import com.google.gson.Gson;
 import com.lukas.tiles.model.Game;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Objects;
@@ -13,7 +11,6 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class GameHandler {
-    private final static Gson gson = new Gson();
 
     public static boolean save(Game game) {
         if (game.getName() == null) {
@@ -21,7 +18,10 @@ public class GameHandler {
             return false;
         }
         try {
-            Files.writeString(Path.of(game.getName() + "_game.tiles"), gson.toJson(game));
+            FileOutputStream fileOutputStream = new FileOutputStream(game.getName() + "_game.tiles");
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+            objectOutputStream.writeObject(game);
+            objectOutputStream.close();
             return true;
         } catch (IOException e) {
             e.printStackTrace();
@@ -29,8 +29,12 @@ public class GameHandler {
         }
     }
 
-    public static Game load(String name) throws IOException {
-        return gson.fromJson(Files.newBufferedReader(Path.of(name + "_game.tiles")), Game.class);
+    public static Game load(String name) throws ClassNotFoundException, IOException {
+        FileInputStream fileInputStream = new FileInputStream(name + "_game.tiles");
+        ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+        Game result = (Game) objectInputStream.readObject();
+        objectInputStream.close();
+        return result;
     }
 
     public static boolean delete(Game game) {

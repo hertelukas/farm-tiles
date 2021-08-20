@@ -2,7 +2,9 @@ package com.lukas.tiles.model;
 
 import javafx.scene.paint.Color;
 
-public enum TileType {
+import java.io.Serializable;
+
+public enum TileType implements Serializable {
     Water(Color.BLUE),
     Grass(Color.GREEN),
     Coastal(Color.YELLOW),
