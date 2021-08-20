@@ -5,6 +5,8 @@ import com.lukas.tiles.model.TileType;
 import com.lukas.tiles.model.WorldMap;
 import com.lukas.tiles.viewModel.game.Hexagon;
 import com.lukas.tiles.viewModel.game.MapViewModel;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
@@ -15,13 +17,13 @@ public class MapView extends Pane implements MapViewModelObserver {
     private final MapViewModel mapViewModel;
     private final Canvas canvas;
 
-
     public MapView(WorldMap map) {
         mapViewModel = new MapViewModel(map);
         mapViewModel.subscribe(this);
         canvas = new Canvas();
         canvas.widthProperty().bind(this.widthProperty());
         canvas.heightProperty().bind(this.heightProperty());
+        this.widthProperty().addListener((observable, oldValue, newValue) -> draw());
         this.getChildren().add(canvas);
 
         Hexagon.bindWidth(this.widthProperty());
@@ -38,6 +40,11 @@ public class MapView extends Pane implements MapViewModelObserver {
     public void update() {
         draw();
     }
+
+    public void setOnSelect(TileSelectedHandler handler) {
+        mapViewModel.setOnSelect(handler);
+    }
+
 
     private void draw() {
         canvas.getGraphicsContext2D().setFill(TileType.Water.getColor());

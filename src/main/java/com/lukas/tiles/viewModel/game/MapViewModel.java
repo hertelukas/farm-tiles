@@ -3,6 +3,7 @@ package com.lukas.tiles.viewModel.game;
 import com.lukas.tiles.model.Tile;
 import com.lukas.tiles.model.WorldMap;
 import com.lukas.tiles.view.game.MapViewModelObserver;
+import com.lukas.tiles.view.game.TileSelectedHandler;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
@@ -14,6 +15,8 @@ import java.util.List;
 public class MapViewModel implements MapObserver {
     private final WorldMap map;
     private final List<MapViewModelObserver> mapViewModelObservers;
+
+    private TileSelectedHandler selectedHandler;
 
     private double zoom = 1;
     private final static double MAX_ZOOM = 2;
@@ -103,14 +106,22 @@ public class MapViewModel implements MapObserver {
 
         if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
             for (int i = 0; i < hexagons.length; i++) {
-                tiles[i / map.getWidth()][i % map.getWidth()].setSelected(hexagons[i].isInside(mouseEvent.getSceneY(), mouseEvent.getSceneX()));
+                Tile current = tiles[i / map.getWidth()][i % map.getWidth()];
+                if (hexagons[i].isInside(mouseEvent.getSceneY(), mouseEvent.getSceneX())) {
+                    current.setSelected(true);
+                    selectedHandler.handle(current);
+                } else {
+                    current.setSelected(false);
+                }
             }
         } else if (mouseEvent.getButton().equals(MouseButton.SECONDARY)) {
+            selectedHandler.handle(null);
             for (int i = 0; i < hexagons.length; i++) {
                 tiles[i / map.getWidth()][i % map.getWidth()].setSelected(false);
             }
         }
 
+        //Recalculation not necessary, only one tile might have changed color
         updateMapView();
     }
 
@@ -134,4 +145,7 @@ public class MapViewModel implements MapObserver {
     }
 
 
+    public void setOnSelect(TileSelectedHandler handler) {
+        this.selectedHandler = handler;
+    }
 }
