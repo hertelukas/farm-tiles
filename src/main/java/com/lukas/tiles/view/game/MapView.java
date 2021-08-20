@@ -47,7 +47,7 @@ public class MapView extends Pane implements MapViewModelObserver {
         int jump = -1;
         int i = 0;
 
-        while (mapViewModel.getHexagons()[i].getX()[4] < 0) {
+        while (i < mapViewModel.getHexagons().length && mapViewModel.getHexagons()[i].getX()[4] < 0) {
             i += mapViewModel.getWidth();
         }
         for (; i < mapViewModel.getHexagons().length; i++) {
