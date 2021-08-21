@@ -29,7 +29,6 @@ public class GameView extends BorderPane {
         this.setCenter(mapView);
 
         this.setFocused(true);
-        System.out.println(this.isFocused());
         this.addEventHandler(KeyEvent.KEY_PRESSED, gameViewModel::handleKey);
 
         mapView.setOnSelect(this::showTile);
