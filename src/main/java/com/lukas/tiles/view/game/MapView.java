@@ -24,8 +24,6 @@ public class MapView extends Pane implements MapViewModelObserver {
         this.widthProperty().addListener((observable, oldValue, newValue) -> draw());
         this.getChildren().add(canvas);
 
-        Hexagon.bindWidth(this.widthProperty());
-
         this.addEventHandler(ScrollEvent.SCROLL, mapViewModel::handleScroll);
         this.addEventHandler(MouseEvent.MOUSE_DRAGGED, e -> mapViewModel.handleDragged(e, this.getWidth(), this.getHeight()));
         this.addEventHandler(MouseEvent.MOUSE_PRESSED, mapViewModel::mouseDown);

@@ -4,6 +4,7 @@ import com.lukas.tiles.model.Game;
 import com.lukas.tiles.model.Setup;
 import com.lukas.tiles.model.Tile;
 import com.lukas.tiles.viewModel.game.GameViewModel;
+import com.lukas.tiles.viewModel.game.Hexagon;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 
@@ -30,6 +31,8 @@ public class GameView extends BorderPane {
 
         this.setFocused(true);
         this.addEventHandler(KeyEvent.KEY_PRESSED, gameViewModel::handleKey);
+
+        Hexagon.bindWidth(this.widthProperty());
 
         mapView.setOnSelect(this::showTile);
     }
