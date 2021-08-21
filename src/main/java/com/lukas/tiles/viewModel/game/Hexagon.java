@@ -38,13 +38,46 @@ public class Hexagon {
         return width.doubleValue() * SCALE;
     }
 
-    // TODO: 8/19/21 not accurate, clicks in the top corner are getting ignored
     public boolean isInside(double x, double y) {
-        if (this.y[0] > y) return false;
-        if (this.y[2] < y) return false;
-        if (this.x[0] > x) return false;
-        if (this.x[3] < x) return false;
-        return true;
+        return mightBeInIt(x, y) && (isInCenter(x, y) || isInTopLeft(x, y) || isInTopRight(x, y) || isInBottomLeft(x, y) || isInBottomRight(x, y));
+    }
+
+    private static final double tan = Math.tan(Math.toRadians(30));
+
+    private boolean mightBeInIt(double x, double y) {
+        return x > this.x[1] && x < this.x[4] && y > this.y[0] && y < this.y[2];
+    }
+
+    private boolean isInCenter(double x, double y) {
+        return this.y[0] < y && this.x[0] < x && this.y[3] > y && this.x[3] > x;
+    }
+
+    private boolean isInTopLeft(double x, double y) {
+        double cathetus = y - this.y[0];
+        double opposite = tan * cathetus;
+
+        return x > this.x[0] - opposite && x < this.x[0] && y < this.y[1];
+    }
+
+    private boolean isInTopRight(double x, double y) {
+        double cathetus = this.y[2] - y;
+        double opposite = tan * cathetus;
+
+        return x > this.x[0] - opposite && x < this.x[0] && y > this.y[1];
+    }
+
+    private boolean isInBottomLeft(double x, double y) {
+        double cathetus = y - this.y[0];
+        double opposite = tan * cathetus;
+
+        return x < this.x[5] + opposite && x > this.x[5] && y < this.y[1];
+    }
+
+    private boolean isInBottomRight(double x, double y) {
+        double cathetus = this.y[2] - y;
+        double opposite = tan * cathetus;
+
+        return x < this.x[5] + opposite && x > this.x[5] && y > this.y[1];
     }
 
     public double[] getX() {
