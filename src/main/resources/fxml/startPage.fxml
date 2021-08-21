@@ -12,10 +12,10 @@
     </padding>
     <Label styleClass="h1" text="Farm Tiles"/>
     <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" VBox.vgrow="ALWAYS">
-        <Button fx:id="btPlay" mnemonicParsing="false" onAction="#play" styleClass="btn-lg"/>
-        <Button fx:id="btLoad" mnemonicParsing="false" onAction="#load" styleClass="btn-lg"/>
-        <Button fx:id="btSettings" mnemonicParsing="false" onAction="#openSettings" styleClass="btn-lg"/>
-        <Button fx:id="btExit" mnemonicParsing="false" onAction="#exit" styleClass="btn-lg"/>
+        <Button fx:id="btPlay" mnemonicParsing="false" onAction="#play"/>
+        <Button fx:id="btLoad" mnemonicParsing="false" onAction="#load"/>
+        <Button fx:id="btSettings" mnemonicParsing="false" onAction="#openSettings"/>
+        <Button fx:id="btExit" mnemonicParsing="false" onAction="#exit"/>
     </VBox>
     <VBox alignment="CENTER" spacing="10.0">
         <ProgressBar fx:id="pb" prefWidth="200.0" progress="0.0" visible="false"/>
