@@ -75,6 +75,56 @@ public class WorldMap implements Serializable {
         return null;
     }
 
+    public Set<Set<Tile>> getIslands() {
+        Set<Set<Tile>> result = new HashSet<>();
+
+        for (Tile[] row : tiles) {
+            for (Tile tile : row) {
+                if (tile.getTileType() != TileType.Water) {
+                    boolean isAlreadyInSet = false;
+                    for (Set<Tile> tileSet : result) {
+                        if (tileSet.contains(tile)) {
+                            isAlreadyInSet = true;
+                            break;
+                        }
+                    }
+
+                    if (!isAlreadyInSet) {
+                        Set<Tile> newIsland = getIsland(tile);
+                        result.add(newIsland);
+                    }
+                }
+            }
+        }
+
+        return result;
+    }
+
+    @Unmodifiable
+    public Set<Tile> getIsland(Tile tile) {
+        //If not an island, return empty
+        if (tile.getTileType() == TileType.Water) {
+            return Collections.emptySet();
+        }
+        Set<Tile> result = new HashSet<>();
+
+        Queue<Tile> tilesWithNeighbours = new ArrayDeque<>();
+        tilesWithNeighbours.add(tile);
+        result.add(tile);
+
+        while (!tilesWithNeighbours.isEmpty()) {
+            Set<Tile> neighbours = getAdjacent(tilesWithNeighbours.remove());
+            for (Tile neighbour : neighbours) {
+                if (neighbour.getTileType() != TileType.Water && !result.contains(neighbour)) {
+                    tilesWithNeighbours.add(neighbour);
+                    result.add(neighbour);
+                }
+            }
+        }
+
+        return Collections.unmodifiableSet(result);
+    }
+
     public Optional<Tile> getLeft(Tile from) {
         return getLeft(getCoordinate(from));
     }

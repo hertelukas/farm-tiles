@@ -47,9 +47,18 @@ public class MapGenerator {
         int maxRadius = (int) Math.sqrt(width * height) / 2;
 
         System.out.println("Generating " + count + " continents with a radius of " + maxRadius);
-        genericDistanceGenerator(maxRadius, count, map);
+
+        int counter = 0;
+        while (map.getIslands().size() < 2 || map.getIslands().size() > 4) {
+            map = new WorldMap(generateWater(width, height));
+            genericDistanceGenerator(maxRadius, count, map);
+            counter++;
+            //Emergency loop stopper -> trying to generate smaller continents
+            maxRadius = r.nextBoolean() ? maxRadius - 1 : maxRadius;
+        }
 
 
+        System.out.println("Needed " + counter + " tries");
         return map.getTiles();
     }
 
@@ -63,8 +72,13 @@ public class MapGenerator {
         //One island per 300 tiles
         int count = Math.max(2, width * height / 300);
 
-        System.out.println("Generating " + count + " islands");
-        genericDistanceGenerator(MAX_ISLAND_RADIUS, count, map);
+        int counter = 0;
+        while (map.getIslands().size() < count * 0.8) {
+            map = new WorldMap(generateWater(width, height));
+            genericDistanceGenerator(MAX_ISLAND_RADIUS, count, map);
+            counter++;
+        }
+        System.out.println("Needed " + counter + " tries");
 
         return map.getTiles();
     }
