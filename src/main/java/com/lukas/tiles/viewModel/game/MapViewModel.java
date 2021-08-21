@@ -71,16 +71,23 @@ public class MapViewModel implements MapObserver {
     }
 
     public void handleScroll(ScrollEvent scrollEvent, double width, double height) {
-        zoom += scrollEvent.getDeltaY() / SENSITIVITY;
-        zoom = Math.max(MIN_ZOOM, Math.min(MAX_ZOOM, zoom));
+
         //Find the current hovered hexagon
-        int hoveredHexagonIndex = 0;
+        int hoveredHexagonIndex = -1;
         for (int i = 0; i < hexagons.length; i++) {
             if (hexagons[i].isInside(scrollEvent.getSceneY(), scrollEvent.getSceneX())) {
                 hoveredHexagonIndex = i;
                 break;
             }
         }
+        //Ignore the scroll if we are outside the map
+        if (hoveredHexagonIndex == -1) {
+            return;
+        }
+
+        zoom += scrollEvent.getDeltaY() / SENSITIVITY;
+        zoom = Math.max(MIN_ZOOM, Math.min(MAX_ZOOM, zoom));
+
         double oldX = hexagons[hoveredHexagonIndex].getX()[0];
         double oldY = hexagons[hoveredHexagonIndex].getY()[1];
         forceCalculate = hoveredHexagonIndex;
