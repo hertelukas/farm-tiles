@@ -4,7 +4,6 @@ import com.lukas.tiles.model.Tile;
 import com.lukas.tiles.model.WorldMap;
 import com.lukas.tiles.view.game.MapViewModelObserver;
 import com.lukas.tiles.view.game.TileSelectedHandler;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;

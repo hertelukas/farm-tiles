@@ -1,7 +1,6 @@
 package com.lukas.tiles.view.game;
 
 import com.lukas.tiles.FarmTilesApplication;
-import com.lukas.tiles.io.GameHandler;
 import com.lukas.tiles.model.Game;
 import com.lukas.tiles.view.Style;
 import com.lukas.tiles.viewModel.game.EscapeMenuViewModel;
@@ -16,7 +15,7 @@ import javafx.stage.StageStyle;
 
 public class EscapeMenu extends Stage {
 
-    private EscapeMenuViewModel escapeMenuViewModel;
+    private final EscapeMenuViewModel escapeMenuViewModel;
 
     public EscapeMenu(Game game) {
         escapeMenuViewModel = new EscapeMenuViewModel(game);
