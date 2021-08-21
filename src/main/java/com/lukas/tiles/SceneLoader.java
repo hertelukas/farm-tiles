@@ -3,6 +3,8 @@ package com.lukas.tiles;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCharacterCombination;
+import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -43,6 +45,7 @@ public class SceneLoader {
         stage.setScene(mainScene);
         stage.setFullScreen(true);
         stage.setFullScreenExitHint("");
+        stage.setFullScreenExitKeyCombination(new KeyCharacterCombination("F", KeyCombination.SHIFT_ANY));
         stage.show();
     }
 
@@ -62,5 +65,9 @@ public class SceneLoader {
     public void loadScene(Parent item) {
         root.getChildren().removeIf(node -> true);
         root.setCenter(item);
+    }
+
+    public void loadStage(Stage stage) {
+        stage.show();
     }
 }

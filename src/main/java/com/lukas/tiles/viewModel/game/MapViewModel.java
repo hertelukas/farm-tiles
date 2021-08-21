@@ -76,10 +76,6 @@ public class MapViewModel implements MapObserver {
         updateMapView();
     }
 
-    public void handleKey(KeyEvent keyEvent) {
-        System.out.println("Pressed key");
-    }
-
     public void handleDragged(MouseEvent mouseEvent, double width, double height) {
 
         double horizontalFactor = Math.sqrt(3) * zoom * Hexagon.getRelativeScale();
