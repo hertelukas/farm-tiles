@@ -138,11 +138,11 @@ public class MapGenerator {
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
                 double noise = noiseGenerator.noise(i, j);
-                if (noise < -0.4) {
+                if (noise < -0.3) {
                     result[i][j] = new Tile(TileType.Water, counter++);
-                } else if (noise < -0.3) {
+                } else if (noise < -0.2) {
                     result[i][j] = new Tile(TileType.Coastal, counter++);
-                } else if (noise < 0.2) {
+                } else if (noise < 0.4) {
                     grassCounter++;
                     result[i][j] = new Tile(TileType.Grass, counter++);
                 } else {
@@ -151,7 +151,7 @@ public class MapGenerator {
                 }
             }
         }
-        if (grassCounter < width * height / 1.5 || mountainCounter < width * height / 20) {
+        if (grassCounter < width * height / 1.75 || mountainCounter < width * height / 20) {
             return generatePangea(width, height, ++depth);
         }
 
