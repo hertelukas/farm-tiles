@@ -46,37 +46,24 @@ public class MapView extends Pane implements MapViewModelObserver {
         canvas.getGraphicsContext2D().setFill(TileType.Water.getColor());
         canvas.getGraphicsContext2D().fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
-        int firstVisible = -1;
-        int jump = -1;
         int i = 0;
 
         while (i < mapViewModel.getHexagons().length && mapViewModel.getHexagons()[i].getX()[4] < 0) {
             i += mapViewModel.getWidth();
         }
+        Hexagon tempHex;
+        Tile tempTile;
         for (; i < mapViewModel.getHexagons().length; i++) {
+            tempHex = mapViewModel.getHexagons()[i];
             //All future tiles are below
-            if (mapViewModel.getHexagons()[i].getX()[1] > this.getHeight()) {
+            if (tempHex.getX()[1] > this.getHeight()) {
                 return;
             }
-            //Horizontal optimisation (not working)
-//            //Not drawing everything
-//            if (firstVisible == -1 && mapViewModel.getHexagons()[i].getY()[2] > 0) {
-//                firstVisible = i;
-//            }
-//            //current one no more visible
-//            if (mapViewModel.getHexagons()[i].getY()[0] > this.getWidth()) {
-//                if (jump == -1) {
-//                    jump = mapViewModel.getWidth() - i % mapViewModel.getWidth() + firstVisible - 2;
-//                }
-//                i += jump;
-//                if (i >= mapViewModel.getHexagons().length) {
-//                    break;
-//                }
-//            }
-
-            Tile temp = mapViewModel.getTiles()[i / mapViewModel.getWidth()][i % mapViewModel.getWidth()];
-            canvas.getGraphicsContext2D().setFill(temp.getColor());
-            canvas.getGraphicsContext2D().fillPolygon(mapViewModel.getHexagons()[i].getY(), mapViewModel.getHexagons()[i].getX(), 6);
+            if (tempHex.isVisible()) {
+                tempTile = mapViewModel.getTiles()[i / mapViewModel.getWidth()][i % mapViewModel.getWidth()];
+                canvas.getGraphicsContext2D().setFill(tempTile.getColor());
+                canvas.getGraphicsContext2D().fillPolygon(tempHex.getY(), tempHex.getX(), 6);
+            }
         }
     }
 }

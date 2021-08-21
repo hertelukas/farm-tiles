@@ -11,10 +11,19 @@ public class Hexagon {
 
     private final double[] x;
     private final double[] y;
+    private boolean visible = true;
 
     public Hexagon(int xCoordinate, int yCoordinate, double scale, double xOffset, double yOffset) {
         x = new double[]{0.5, 0, 0.5, 1.5, 2, 1.5};
         y = new double[]{0, dis, 2 * dis, 2 * dis, dis, 0};
+
+        boolean yNotVisible = (y[3] + yCoordinate * 2 * dis + dis) * scale * getRelativeScale() + yOffset < 0 || (y[0] + yCoordinate * 2 * dis) * scale * getRelativeScale() + yOffset > width.doubleValue();
+        boolean xNotVisible = (x[4] + xCoordinate * 1.5) * scale * getRelativeScale() + xOffset < 0;
+
+        if (yNotVisible || xNotVisible) {
+            visible = false;
+            return;
+        }
 
         for (int i = 0; i < 6; i++) {
             x[i] = (x[i] + xCoordinate * 1.5) * scale * getRelativeScale() + xOffset;
@@ -25,7 +34,7 @@ public class Hexagon {
             }
             //Uneven row
             else {
-                y[i] = y[i] = (y[i] + yCoordinate * 2 * dis + dis) * scale * getRelativeScale() + yOffset;
+                y[i] = (y[i] + yCoordinate * 2 * dis + dis) * scale * getRelativeScale() + yOffset;
             }
         }
     }
@@ -86,5 +95,9 @@ public class Hexagon {
 
     public double[] getY() {
         return y;
+    }
+
+    public boolean isVisible() {
+        return visible;
     }
 }
