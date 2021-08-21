@@ -36,6 +36,9 @@ public class SetupView extends VBox {
         playButton.textProperty().bind(setupViewModel.playProperty());
         playButton.setOnAction(e -> setupViewModel.play());
 
+        Label feedback = new Label();
+        feedback.setVisible(false);
+
         //Content setup
         Label label = new Label();
         label.textProperty().bind(setupViewModel.titleProperty());
@@ -56,13 +59,13 @@ public class SetupView extends VBox {
             try {
                 SceneLoader.getInstance().loadScene(FarmTilesApplication.getStartPage());
             } catch (IOException ioException) {
-                // TODO: 8/20/21 handle
+                feedback.setText("Failed to load main menu");
+                feedback.setVisible(true);
                 ioException.printStackTrace();
             }
         });
 
-
-        this.getChildren().addAll(playButton, backButton);
+        this.getChildren().addAll(playButton, backButton, feedback);
     }
 
     private VBox generateMapSettingsVBox() {

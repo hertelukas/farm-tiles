@@ -36,6 +36,12 @@ public class LoadView extends VBox {
         button.textProperty().bind(loadViewModel.backProperty());
         button.setOnAction(loadViewModel::goBack);
         this.getChildren().add(button);
+
+        Label feedback = new Label();
+        feedback.visibleProperty().bind(loadViewModel.feedbackTextProperty().isNotEmpty());
+        feedback.textProperty().bind(loadViewModel.feedbackTextProperty());
+
+        this.getChildren().add(feedback);
     }
 }
 

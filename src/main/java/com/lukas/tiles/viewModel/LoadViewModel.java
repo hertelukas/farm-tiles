@@ -27,6 +27,7 @@ public class LoadViewModel implements LanguageObserver {
 
     private final StringProperty titleProperty = new SimpleStringProperty("Load Game");
     private final StringProperty back = new SimpleStringProperty("Back");
+    private final StringProperty feedbackText = new SimpleStringProperty();
 
     @Override
     public void update(Language language) {
@@ -50,16 +51,19 @@ public class LoadViewModel implements LanguageObserver {
         return back;
     }
 
+    public StringProperty feedbackTextProperty() {
+        return feedbackText;
+    }
+
     public void goBack(Event event) {
         try {
             SceneLoader.getInstance().loadScene(FarmTilesApplication.getStartPage());
         } catch (IOException e) {
-            // TODO: 8/19/21 handle exception
+            feedbackText.set("Failed to load main menu.");
             e.printStackTrace();
         }
     }
 
-    // TODO: 8/20/21 exception handling
     public Set<HBox> generateLoadMenu() {
         Set<HBox> rows = new HashSet<>();
         Set<String> games = GameHandler.getGames();
@@ -73,6 +77,7 @@ public class LoadViewModel implements LanguageObserver {
                     SceneLoader.getInstance().loadScene(new GameView(loadedGame));
 
                 } catch (Exception e) {
+                    feedbackText.set("Failed to load game.");
                     e.printStackTrace();
                 }
             });
