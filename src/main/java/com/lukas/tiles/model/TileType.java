@@ -5,10 +5,10 @@ import javafx.scene.paint.Color;
 import java.io.Serializable;
 
 public enum TileType implements Serializable {
-    Water(Color.BLUE),
-    Grass(Color.GREEN),
-    Coastal(Color.YELLOW),
-    Rock(Color.GREY);
+    Water(Color.web("4EADD3")),
+    Grass(Color.web("496000")),
+    Coastal(Color.web("EAB47C")),
+    Rock(Color.web("53565b"));
 
     private final Color color;
 
