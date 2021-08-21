@@ -33,6 +33,8 @@ public class MapViewModel implements MapObserver {
     private double xOffset = 0;
     private double yOffset = 0;
 
+    private int forceCalculate = -1;
+
     public MapViewModel(WorldMap map) {
         this.map = map;
         map.subscribe(this);
@@ -68,25 +70,47 @@ public class MapViewModel implements MapObserver {
         mapViewModelObservers.add(observer);
     }
 
-    public void handleScroll(ScrollEvent scrollEvent) {
+    public void handleScroll(ScrollEvent scrollEvent, double width, double height) {
         zoom += scrollEvent.getDeltaY() / SENSITIVITY;
         zoom = Math.max(MIN_ZOOM, Math.min(MAX_ZOOM, zoom));
+        //Find the current hovered hexagon
+        int hoveredHexagonIndex = 0;
+        for (int i = 0; i < hexagons.length; i++) {
+            if (hexagons[i].isInside(scrollEvent.getSceneY(), scrollEvent.getSceneX())) {
+                hoveredHexagonIndex = i;
+                break;
+            }
+        }
+        double oldX = hexagons[hoveredHexagonIndex].getX()[0];
+        double oldY = hexagons[hoveredHexagonIndex].getY()[1];
+        forceCalculate = hoveredHexagonIndex;
+        recalculate();
+
+        double newX = hexagons[hoveredHexagonIndex].getX()[0];
+        double newY = hexagons[hoveredHexagonIndex].getY()[1];
+
+        move((oldX - newX), (oldY - newY), width, height);
+        forceCalculate = -1;
+
         recalculate();
         updateMapView();
     }
 
     public void handleDragged(MouseEvent mouseEvent, double width, double height) {
-
-        double horizontalFactor = Math.sqrt(3) * zoom * Hexagon.getRelativeScale();
-        double verticalFactor = 1.5 * zoom * Hexagon.getRelativeScale();
-        yOffset = Math.max(-1 * (map.getWidth() + 1) * horizontalFactor + width, Math.min(0.5 * horizontalFactor, yOffset + mouseEvent.getSceneX() - lastY));
-        xOffset = Math.max(-1 * (map.getHeight() + 1) * verticalFactor + height, Math.min(0.5 * verticalFactor, xOffset + mouseEvent.getSceneY() - lastX));
+        move(mouseEvent.getSceneY() - lastX, mouseEvent.getSceneX() - lastY, width, height);
 
         lastY = mouseEvent.getSceneX();
         lastX = mouseEvent.getSceneY();
 
         recalculate();
         updateMapView();
+    }
+
+    private void move(double x, double y, double width, double height) {
+        double horizontalFactor = Math.sqrt(3) * zoom * Hexagon.getRelativeScale();
+        double verticalFactor = 1.5 * zoom * Hexagon.getRelativeScale();
+        yOffset = Math.max(-1 * (map.getWidth() + 1) * horizontalFactor + width, Math.min(0.5 * horizontalFactor, yOffset + y));
+        xOffset = Math.max(-1 * (map.getHeight() + 1) * verticalFactor + height, Math.min(0.5 * verticalFactor, xOffset + x));
     }
 
     public void mouseDown(MouseEvent mouseEvent) {
@@ -134,8 +158,10 @@ public class MapViewModel implements MapObserver {
     }
 
     private void recalculate() {
+        boolean force;
         for (int i = 0; i < hexagons.length; i++) {
-            hexagons[i] = new Hexagon(i / width, i % width, zoom, xOffset, yOffset);
+            force = i == forceCalculate;
+            hexagons[i] = new Hexagon(i / width, i % width, zoom, xOffset, yOffset, force);
         }
     }
 

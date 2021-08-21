@@ -13,16 +13,18 @@ public class Hexagon {
     private final double[] y;
     private boolean visible = true;
 
-    public Hexagon(int xCoordinate, int yCoordinate, double scale, double xOffset, double yOffset) {
+    public Hexagon(int xCoordinate, int yCoordinate, double scale, double xOffset, double yOffset, boolean forceCalculation) {
         x = new double[]{0.5, 0, 0.5, 1.5, 2, 1.5};
         y = new double[]{0, dis, 2 * dis, 2 * dis, dis, 0};
 
-        boolean yNotVisible = (y[3] + yCoordinate * 2 * dis + dis) * scale * getRelativeScale() + yOffset < 0 || (y[0] + yCoordinate * 2 * dis) * scale * getRelativeScale() + yOffset > width.doubleValue();
-        boolean xNotVisible = (x[4] + xCoordinate * 1.5) * scale * getRelativeScale() + xOffset < 0;
+        if (!forceCalculation) {
+            boolean yNotVisible = (y[3] + yCoordinate * 2 * dis + dis) * scale * getRelativeScale() + yOffset < 0 || (y[0] + yCoordinate * 2 * dis) * scale * getRelativeScale() + yOffset > width.doubleValue();
+            boolean xNotVisible = (x[4] + xCoordinate * 1.5) * scale * getRelativeScale() + xOffset < 0;
 
-        if (yNotVisible || xNotVisible) {
-            visible = false;
-            return;
+            if (yNotVisible || xNotVisible) {
+                visible = false;
+                return;
+            }
         }
 
         for (int i = 0; i < 6; i++) {
@@ -48,6 +50,9 @@ public class Hexagon {
     }
 
     public boolean isInside(double x, double y) {
+        if (!isVisible()) {
+            return false;
+        }
         return mightBeInIt(x, y) && (isInCenter(x, y) || isInTopLeft(x, y) || isInTopRight(x, y) || isInBottomLeft(x, y) || isInBottomRight(x, y));
     }
 
