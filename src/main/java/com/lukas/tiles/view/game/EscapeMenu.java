@@ -1,9 +1,13 @@
 package com.lukas.tiles.view.game;
 
 import com.lukas.tiles.FarmTilesApplication;
+import com.lukas.tiles.io.GameHandler;
 import com.lukas.tiles.model.Game;
+import com.lukas.tiles.view.Style;
 import com.lukas.tiles.viewModel.game.EscapeMenuViewModel;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
@@ -29,11 +33,36 @@ public class EscapeMenu extends Stage {
 
     private VBox generateContent() {
         VBox result = new VBox();
+        result.setAlignment(Pos.CENTER);
+        result.setPadding(Style.getMARGIN());
+        result.setSpacing(Style.getVSpacing());
 
         Label label = new Label("Menu");
         label.getStyleClass().add("h2");
 
-        result.getChildren().add(label);
+
+        Button saveButton = new Button("Save");
+        saveButton.setOnAction(e -> {
+            escapeMenuViewModel.save();
+            this.close();
+        });
+
+        Button saveAndMenuButton = new Button("Save & Menu");
+        saveAndMenuButton.setOnAction(e -> {
+            escapeMenuViewModel.saveAndMenu();
+            this.close();
+        });
+
+        Button saveAndQuitButton = new Button("Save & Exit");
+        saveAndQuitButton.setOnAction(e -> {
+            escapeMenuViewModel.saveAndQuit();
+            this.close();
+        });
+
+        Button closeButton = new Button("Close");
+        closeButton.setOnAction(e -> this.close());
+
+        result.getChildren().addAll(label, saveButton, saveAndMenuButton, saveAndQuitButton, closeButton);
         return result;
     }
 }
