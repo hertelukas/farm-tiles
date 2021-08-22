@@ -4,6 +4,8 @@ import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.ReadOnlyDoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 
+import java.util.Arrays;
+
 public class Hexagon {
     private final static double dis = Math.sqrt(3) / 2;
     private final static DoubleProperty width = new SimpleDoubleProperty();
@@ -104,5 +106,14 @@ public class Hexagon {
 
     public boolean isVisible() {
         return visible;
+    }
+
+    @Override
+    public String toString() {
+        return "Hexagon{" +
+                "x=" + Arrays.toString(x) +
+                ", y=" + Arrays.toString(y) +
+                ", visible=" + visible +
+                '}';
     }
 }

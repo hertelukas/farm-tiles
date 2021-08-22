@@ -24,6 +24,10 @@ public class MapView extends Pane implements MapViewModelObserver {
         this.widthProperty().addListener((observable, oldValue, newValue) -> draw());
         this.getChildren().add(canvas);
 
+
+        canvas.heightProperty().addListener(e -> mapViewModel.update());
+        canvas.widthProperty().addListener(e -> mapViewModel.update());
+
         this.addEventHandler(ScrollEvent.SCROLL, e -> mapViewModel.handleScroll(e, this.getWidth(), this.getHeight()));
         this.addEventHandler(MouseEvent.MOUSE_DRAGGED, e -> mapViewModel.handleDragged(e, this.getWidth(), this.getHeight()));
         this.addEventHandler(MouseEvent.MOUSE_PRESSED, mapViewModel::mouseDown);
@@ -39,8 +43,8 @@ public class MapView extends Pane implements MapViewModelObserver {
         mapViewModel.setOnSelect(handler);
     }
 
-
     private void draw() {
+        System.out.println("Drawing... Canvas: " + canvas.getWidth() + " x " + canvas.getHeight());
         canvas.getGraphicsContext2D().setFill(TileType.Water.getColor());
         canvas.getGraphicsContext2D().fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
 

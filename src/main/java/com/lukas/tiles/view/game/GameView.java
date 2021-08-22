@@ -26,13 +26,13 @@ public class GameView extends BorderPane {
     }
 
     private void initialize() {
+        Hexagon.bindWidth(this.widthProperty());
+
         this.setBottom(new BottomBarView(gameViewModel.getGame().getFarmers().get(0)));
         this.setCenter(mapView);
 
         this.setFocused(true);
         this.addEventHandler(KeyEvent.KEY_PRESSED, gameViewModel::handleKey);
-
-        Hexagon.bindWidth(this.widthProperty());
 
         mapView.setOnSelect(this::showTile);
     }
