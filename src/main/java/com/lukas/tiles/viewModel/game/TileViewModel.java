@@ -23,6 +23,7 @@ public class TileViewModel {
         //Check if enough money
         if (game.getFarmers().get(0).buy(building.getPrice())) {
             tile.setBuilding(building);
+            game.startBuilding(building);
             GameHandler.save(game);
             return true;
         }

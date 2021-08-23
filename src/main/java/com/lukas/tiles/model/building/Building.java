@@ -3,6 +3,7 @@ package com.lukas.tiles.model.building;
 import com.lukas.tiles.model.Money;
 import com.lukas.tiles.model.ScheduledObject;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.VBox;
 
 import java.io.Serial;
@@ -27,6 +28,11 @@ public abstract class Building extends ScheduledObject {
     public VBox getDescription() {
         VBox result = new VBox();
         result.getChildren().add(new Label(getClass().getName()));
+        if (!this.isFinished()) {
+            ProgressBar pb = new ProgressBar();
+            pb.progressProperty().bind(progressProperty());
+            result.getChildren().add(pb);
+        }
         return result;
     }
 

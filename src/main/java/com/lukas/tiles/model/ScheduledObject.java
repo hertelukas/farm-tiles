@@ -39,6 +39,10 @@ public abstract class ScheduledObject implements Serializable {
         progress.set((double) timeBuild / buildTime);
     }
 
+    public DoubleProperty progressProperty() {
+        return progress;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

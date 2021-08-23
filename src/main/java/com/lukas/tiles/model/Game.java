@@ -1,6 +1,7 @@
 package com.lukas.tiles.model;
 
 import com.lukas.tiles.io.GameHandler;
+import com.lukas.tiles.model.building.Building;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -40,6 +41,10 @@ public class Game implements Serializable {
         this.name = name;
     }
 
+    public void startBuilding(Building building) {
+        scheduler.addObject(building);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -66,4 +71,6 @@ public class Game implements Serializable {
 
         return new Game(tempFarmers, new WorldMap(setup.getMapSize(), setup.getMapType()), setup.getName());
     }
+
+
 }

@@ -26,15 +26,20 @@ public class Scheduler implements Serializable {
                 counter++;
 
                 //Make one build for future updates
-                for (long i = counter; i < latestUpdate; i++) {
-                    for (ScheduledObject scheduledObject : finishObserver.get(i)) {
-                        scheduledObject.buildStep();
+                for (long i = counter; i <= latestUpdate; i++) {
+                    if (finishObserver.containsKey(i) && finishObserver.get(i) != null) {
+                        for (ScheduledObject scheduledObject : finishObserver.get(i)) {
+                            scheduledObject.buildStep();
+                        }
                     }
                 }
 
-                for (ScheduledObject scheduledObject : finishObserver.get(counter)) {
-                    scheduledObject.setFinished(true);
+                if (finishObserver.containsKey(counter) && finishObserver.get(counter) != null) {
+                    for (ScheduledObject scheduledObject : finishObserver.get(counter)) {
+                        scheduledObject.setFinished(true);
+                    }
                 }
+
                 //Remove the list that was now finished
                 finishObserver.remove(counter);
             }
@@ -48,6 +53,7 @@ public class Scheduler implements Serializable {
         //Update the new latest object
         if (counter + object.getBuildTime() > latestUpdate) {
             latestUpdate = counter + object.getBuildTime();
+            System.out.println("Latest update is now: " + latestUpdate);
         }
         //If there is no list with this time, make new list
         if (finishObserver.get(counter + object.getBuildTime()) == null) {
