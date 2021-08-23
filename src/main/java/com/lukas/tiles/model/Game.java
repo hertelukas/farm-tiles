@@ -14,18 +14,19 @@ public class Game implements Serializable {
     private final List<Farmer> farmers;
     private final WorldMap map;
     private String name;
+    private final Scheduler scheduler;
 
     public Game(List<Farmer> farmers, WorldMap map, String name) {
         this.farmers = farmers;
         this.map = map;
         this.name = name;
+        this.scheduler = new Scheduler();
         GameHandler.save(this);
     }
 
     public List<Farmer> getFarmers() {
         return farmers;
     }
-
 
     public WorldMap getMap() {
         return map;
