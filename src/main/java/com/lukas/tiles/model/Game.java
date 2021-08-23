@@ -1,6 +1,7 @@
 package com.lukas.tiles.model;
 
 import com.lukas.tiles.io.GameHandler;
+import com.lukas.tiles.model.building.Building;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -14,18 +15,19 @@ public class Game implements Serializable {
     private final List<Farmer> farmers;
     private final WorldMap map;
     private String name;
+    private final Scheduler scheduler;
 
     public Game(List<Farmer> farmers, WorldMap map, String name) {
         this.farmers = farmers;
         this.map = map;
         this.name = name;
+        this.scheduler = new Scheduler();
         GameHandler.save(this);
     }
 
     public List<Farmer> getFarmers() {
         return farmers;
     }
-
 
     public WorldMap getMap() {
         return map;
@@ -37,6 +39,10 @@ public class Game implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void startBuilding(Building building) {
+        scheduler.addObject(building);
     }
 
     @Override
@@ -65,4 +71,6 @@ public class Game implements Serializable {
 
         return new Game(tempFarmers, new WorldMap(setup.getMapSize(), setup.getMapType()), setup.getName());
     }
+
+
 }
