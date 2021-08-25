@@ -166,7 +166,6 @@ public class MapViewModel implements MapObserver {
     }
 
     private void recalculate() {
-        System.out.println("Recalculating... ");
         boolean force;
         for (int i = 0; i < hexagons.length; i++) {
             force = i == forceCalculate;

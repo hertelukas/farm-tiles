@@ -44,7 +44,6 @@ public class MapView extends Pane implements MapViewModelObserver {
     }
 
     private void draw() {
-        System.out.println("Drawing... Canvas: " + canvas.getWidth() + " x " + canvas.getHeight());
         canvas.getGraphicsContext2D().setFill(TileType.Water.getColor());
         canvas.getGraphicsContext2D().fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
