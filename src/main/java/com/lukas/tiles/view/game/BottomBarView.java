@@ -1,5 +1,6 @@
 package com.lukas.tiles.view.game;
 
+import com.lukas.tiles.FarmTilesApplication;
 import com.lukas.tiles.model.Farmer;
 import com.lukas.tiles.model.Scheduler;
 import com.lukas.tiles.view.Style;
@@ -14,16 +15,19 @@ public class BottomBarView extends HBox {
 
     public BottomBarView(Farmer player, Scheduler scheduler) {
         bottomBarViewModel = new BottomBarViewModel(player, scheduler);
+        this.getStylesheets().add(FarmTilesApplication.getMainStyle());
         setupBindings();
     }
 
     private void setupBindings() {
         super.setAlignment(Pos.CENTER);
         super.setSpacing(Style.getHSpacing());
+        super.setPadding(Style.getSmallPadding());
 
 
         Label cashLabel = new Label();
         cashLabel.textProperty().bind(bottomBarViewModel.moneyPropertyProperty());
+        cashLabel.getStyleClass().add("h3");
 
         Label timeLabel = new Label();
         timeLabel.textProperty().bind(bottomBarViewModel.scheduleProperty().asString());

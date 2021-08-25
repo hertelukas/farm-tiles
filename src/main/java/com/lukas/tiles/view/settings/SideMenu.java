@@ -30,7 +30,7 @@ public class SideMenu extends VBox {
         this.getChildren().add(space);
 
         this.setSpacing(Style.getVSpacing());
-        this.setPadding(Style.getMARGIN());
+        this.setPadding(Style.getPADDING());
     }
 
 

@@ -22,7 +22,7 @@ public class LoadView extends VBox {
         //VBox setup
         this.setSpacing(Style.getVSpacing());
         this.setAlignment(Pos.TOP_CENTER);
-        this.setPadding(Style.getMARGIN());
+        this.setPadding(Style.getPADDING());
 
         //Content setup
         Label label = new Label();

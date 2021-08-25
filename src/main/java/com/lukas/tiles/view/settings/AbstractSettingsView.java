@@ -27,7 +27,7 @@ public abstract class AbstractSettingsView extends VBox {
         //Setup margins etc
         this.setSpacing(Style.getVSpacing());
         this.setAlignment(Pos.TOP_CENTER);
-        this.setPadding(Style.getMARGIN());
+        this.setPadding(Style.getPADDING());
         HBox.setHgrow(this, Priority.ALWAYS);
 
         initialize();

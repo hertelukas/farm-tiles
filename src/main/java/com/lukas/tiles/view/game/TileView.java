@@ -5,7 +5,6 @@ import com.lukas.tiles.model.Game;
 import com.lukas.tiles.model.Money;
 import com.lukas.tiles.model.Tile;
 import com.lukas.tiles.model.TileType;
-import com.lukas.tiles.model.building.Building;
 import com.lukas.tiles.model.building.BuildingEnum;
 import com.lukas.tiles.model.building.Farm;
 import com.lukas.tiles.view.Style;
@@ -19,7 +18,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 
 import java.util.Set;
-import java.util.function.Predicate;
 
 public class TileView extends VBox {
     private final TileViewModel tileViewModel;
@@ -34,7 +32,7 @@ public class TileView extends VBox {
         //VBox setup
         this.setSpacing(Style.getVSpacing());
         this.setAlignment(Pos.TOP_CENTER);
-        this.setPadding(Style.getMARGIN());
+        this.setPadding(Style.getPADDING());
 
         //Content setup
         Label label = new Label();

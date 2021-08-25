@@ -33,7 +33,7 @@ public class EscapeMenu extends Stage {
     private VBox generateContent() {
         VBox result = new VBox();
         result.setAlignment(Pos.CENTER);
-        result.setPadding(Style.getMARGIN());
+        result.setPadding(Style.getPADDING());
         result.setSpacing(Style.getVSpacing());
 
         Label label = new Label("Menu");
