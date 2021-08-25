@@ -18,6 +18,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 
+import java.util.Set;
 import java.util.function.Predicate;
 
 public class TileView extends VBox {
@@ -46,7 +47,7 @@ public class TileView extends VBox {
         if (tileViewModel.hasBuilding()) {
             this.getChildren().add(tileViewModel.getBuilding().getDescription());
         } else {
-            TableView<BuildingEnum> buildingsTableView = generateBuildingsTable(tileViewModel.getTileType());
+            TableView<BuildingEnum> buildingsTableView = generateBuildingsTable(tileViewModel.getTileType(), tileViewModel.getNeighbourTileTypes());
 
             Button button = new Button();
             //Disable button if nothing is selected
@@ -81,7 +82,7 @@ public class TileView extends VBox {
         this.getChildren().add(feedback);
     }
 
-    private TableView<BuildingEnum> generateBuildingsTable(TileType type) {
+    private TableView<BuildingEnum> generateBuildingsTable(TileType type, Set<TileType> neighbours) {
         TableView<BuildingEnum> result = new TableView<>();
         result.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 
@@ -94,7 +95,7 @@ public class TileView extends VBox {
         result.getColumns().add(colBuildDuration);
 
         result.getItems().addAll(BuildingEnum.values());
-        result.getItems().removeIf(buildingEnum -> !buildingEnum.canBeBuildOn(type));
+        result.getItems().removeIf(buildingEnum -> !buildingEnum.canBeBuild(type, neighbours));
 
         colName.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getName()));
         colPrice.setCellValueFactory(param -> new ObservableValueBase<>() {

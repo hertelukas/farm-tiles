@@ -10,6 +10,9 @@ import com.lukas.tiles.model.building.Farm;
 import com.lukas.tiles.model.building.Port;
 import javafx.beans.property.StringProperty;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class TileViewModel {
     private final Tile tile;
     private final Game game;
@@ -55,5 +58,14 @@ public class TileViewModel {
 
     public boolean hasBuilding() {
         return getBuilding() != null;
+    }
+
+    public Set<TileType> getNeighbourTileTypes() {
+        Set<TileType> result = new HashSet<>();
+        for (Tile tile1 : game.getMap().getAdjacent(tile)) {
+            result.add(tile1.getTileType());
+        }
+
+        return result;
     }
 }
