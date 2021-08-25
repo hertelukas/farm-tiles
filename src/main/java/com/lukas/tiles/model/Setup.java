@@ -1,11 +1,15 @@
 package com.lukas.tiles.model;
 
 import com.lukas.tiles.model.setup.Difficulty;
+import com.lukas.tiles.model.setup.FarmerColor;
 import com.lukas.tiles.model.setup.MapSize;
 import com.lukas.tiles.model.setup.MapType;
+import javafx.scene.paint.Color;
+
 
 public class Setup {
     private int farmers = 5;
+    private FarmerColor farmerColor;
     private Difficulty difficulty;
     private MapSize mapSize = MapSize.getDefault();
     private MapType mapType = MapType.getDefault();
@@ -53,5 +57,13 @@ public class Setup {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void setColor(FarmerColor farmerColor) {
+        this.farmerColor = farmerColor;
+    }
+
+    public FarmerColor getColor() {
+        return farmerColor;
     }
 }

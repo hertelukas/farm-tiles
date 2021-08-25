@@ -1,6 +1,8 @@
 package com.lukas.tiles.model;
 
+import com.lukas.tiles.model.setup.FarmerColor;
 import com.lukas.tiles.viewModel.game.FarmerObserver;
+import javafx.scene.paint.Color;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -12,14 +14,16 @@ import java.util.Objects;
 public class Farmer implements Serializable {
     @Serial
     private static final long serialVersionUID = -4787293802369998854L;
+    private final FarmerColor color;
     private final Money money;
     private final String name;
     private transient ArrayList<FarmerObserver> observers;
 
-    public Farmer(Money money, String name) {
+    public Farmer(Money money, String name, FarmerColor color) {
         observers = new ArrayList<>();
         this.money = money;
         this.name = name;
+        this.color = color;
     }
 
     public void subscribe(FarmerObserver observer) {
@@ -52,8 +56,12 @@ public class Farmer implements Serializable {
         return name;
     }
 
-    public static Farmer generate(Money startMoney) {
-        return new Farmer(startMoney, "Joe");
+    public Color getColor() {
+        return color.getColor();
+    }
+
+    public static Farmer generate(Money startMoney, FarmerColor color) {
+        return new Farmer(startMoney, "Joe", color);
     }
 
     @Override

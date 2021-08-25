@@ -2,6 +2,8 @@ package com.lukas.tiles.model;
 
 import com.lukas.tiles.io.GameHandler;
 import com.lukas.tiles.model.building.Building;
+import com.lukas.tiles.model.setup.FarmerColor;
+import javafx.scene.paint.Color;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -67,10 +69,10 @@ public class Game implements Serializable {
 
     public static Game generate(Setup setup) {
         List<Farmer> tempFarmers = new ArrayList<>();
-        tempFarmers.add(Farmer.generate(setup.getDifficulty().getPlayerStart()));
+        tempFarmers.add(Farmer.generate(setup.getDifficulty().getPlayerStart(), setup.getColor()));
         //The first farmer is always the player
         for (int i = 1; i < setup.getFarmers(); i++) {
-            tempFarmers.add(Farmer.generate(setup.getDifficulty().getFarmerStart()));
+            tempFarmers.add(Farmer.generate(setup.getDifficulty().getFarmerStart(), FarmerColor.getDefault()));
         }
 
         return new Game(tempFarmers, new WorldMap(setup.getMapSize(), setup.getMapType()), setup.getName());

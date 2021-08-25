@@ -5,12 +5,14 @@ import com.lukas.tiles.Language;
 import com.lukas.tiles.SceneLoader;
 import com.lukas.tiles.model.Setup;
 import com.lukas.tiles.model.setup.Difficulty;
+import com.lukas.tiles.model.setup.FarmerColor;
 import com.lukas.tiles.model.setup.MapSize;
 import com.lukas.tiles.model.setup.MapType;
 import com.lukas.tiles.text.LanguageObserver;
 import com.lukas.tiles.view.game.GameView;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.scene.paint.Color;
 
 public class SetupViewModel implements LanguageObserver {
     private final Setup setup;
@@ -92,6 +94,10 @@ public class SetupViewModel implements LanguageObserver {
 
     public void setMapType(MapType selectedItem) {
         setup.setMapType(selectedItem);
+    }
+
+    public void setColor(FarmerColor color) {
+        setup.setColor(color);
     }
 
     public String getGameName() {

@@ -3,6 +3,7 @@ package com.lukas.tiles.view;
 import com.lukas.tiles.Config;
 import com.lukas.tiles.FarmTilesApplication;
 import com.lukas.tiles.SceneLoader;
+import com.lukas.tiles.model.setup.FarmerColor;
 import com.lukas.tiles.model.setup.MapSize;
 import com.lukas.tiles.model.setup.MapType;
 import com.lukas.tiles.viewModel.SetupViewModel;
@@ -89,7 +90,12 @@ public class SetupView extends VBox {
         mapTypeChoiceBox.getSelectionModel().select(MapType.getDefault());
         mapTypeChoiceBox.setOnAction(e -> setupViewModel.setMapType(mapTypeChoiceBox.getSelectionModel().getSelectedItem()));
 
-        result.getChildren().addAll(label, mapSizeChoiceBox, mapTypeChoiceBox);
+        ChoiceBox<FarmerColor> colorPicker = new ChoiceBox<>();
+        colorPicker.setItems(new ImmutableObservableList<>(FarmerColor.values()));
+        colorPicker.getSelectionModel().select(FarmerColor.getDefault());
+        colorPicker.setOnAction(e -> setupViewModel.setColor(colorPicker.getSelectionModel().getSelectedItem()));
+
+        result.getChildren().addAll(label, mapSizeChoiceBox, mapTypeChoiceBox, colorPicker);
         return result;
     }
 
