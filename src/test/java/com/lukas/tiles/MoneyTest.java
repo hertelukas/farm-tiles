@@ -4,6 +4,10 @@ import com.lukas.tiles.model.Money;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
@@ -48,5 +52,27 @@ public class MoneyTest {
         //Sub $120.00
         money.subAmount(12000);
         assertEquals(-2000, money.getAmount());
+    }
+
+    @Test
+    public void testSort() {
+        Money moneyLowest = new Money(-400);
+        Money moneyZero = new Money();
+        Money money = new Money(230);
+        Money moneyHighest = new Money(500);
+
+        List<Money> moneyList = new ArrayList<>();
+        moneyList.add(money);
+        moneyList.add(moneyLowest);
+        moneyList.add(moneyHighest);
+        moneyList.add(moneyZero);
+
+        moneyList.sort(Comparator.naturalOrder());
+
+        System.out.println(moneyList);
+
+        assertTrue(moneyList.get(0).getAmount() <= moneyList.get(1).getAmount());
+        assertTrue(moneyList.get(1).getAmount() <= moneyList.get(2).getAmount());
+        assertTrue(moneyList.get(2).getAmount() <= moneyList.get(3).getAmount());
     }
 }

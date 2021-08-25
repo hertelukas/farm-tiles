@@ -1,5 +1,7 @@
 package com.lukas.tiles.model;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
@@ -7,7 +9,7 @@ import java.util.Objects;
 /**
  * The class which represents all money. Saved in cents
  */
-public class Money implements Serializable {
+public class Money implements Serializable, Comparable<Money> {
     @Serial
     private static final long serialVersionUID = -5226220695056180322L;
     private long amount;
@@ -91,5 +93,11 @@ public class Money implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(amount);
+    }
+
+    @Override
+    public int compareTo(@NotNull Money o) {
+        Long thisAmount = this.amount;
+        return thisAmount.compareTo(o.amount);
     }
 }
