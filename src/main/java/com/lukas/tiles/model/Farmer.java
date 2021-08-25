@@ -44,8 +44,8 @@ public class Farmer implements Serializable {
         return false;
     }
 
-    public String getMoney() {
-        return money.toString();
+    public Money getMoney() {
+        return money;
     }
 
     public String getName() {

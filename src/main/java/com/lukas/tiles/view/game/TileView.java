@@ -49,16 +49,20 @@ public class TileView extends VBox {
 
             Button button = new Button();
             //Disable button if nothing is selected
-            button.disableProperty().bind(buildingsTableView.getSelectionModel().selectedItemProperty().isNull());
+            button.visibleProperty().bind(buildingsTableView.getSelectionModel().selectedItemProperty().isNotNull());
 
             buildingsTableView.getSelectionModel().getSelectedItems().addListener((ListChangeListener<BuildingEnum>) c -> {
                 button.setText("Buy " + c.getList().get(0).getName());
+                button.setDisable(c.getList().get(0).getPrice().getAmount() > tileViewModel.getPlayerMoney().getAmount());
                 button.setOnAction(e -> {
                     if (!tileViewModel.buyBuilding(c.getList().get(0))) {
                         feedback.setVisible(true);
                         feedback.setText("Failed to buy building");
                     } else {
                         this.getChildren().remove(button);
+                        this.getChildren().remove(buildingsTableView);
+                        //Insert description in front of the feedback label
+                        this.getChildren().add(1, tileViewModel.getBuilding().getDescription());
                     }
                 });
             });

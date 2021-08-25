@@ -2,6 +2,7 @@ package com.lukas.tiles.viewModel.game;
 
 import com.lukas.tiles.io.GameHandler;
 import com.lukas.tiles.model.Game;
+import com.lukas.tiles.model.Money;
 import com.lukas.tiles.model.Tile;
 import com.lukas.tiles.model.TileType;
 import com.lukas.tiles.model.building.Building;
@@ -10,6 +11,7 @@ import com.lukas.tiles.model.building.Farm;
 import com.lukas.tiles.model.building.Port;
 import javafx.beans.property.StringProperty;
 
+import javax.management.MalformedObjectNameException;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -67,5 +69,9 @@ public class TileViewModel {
         }
 
         return result;
+    }
+
+    public Money getPlayerMoney() {
+        return game.getFarmers().get(0).getMoney();
     }
 }
