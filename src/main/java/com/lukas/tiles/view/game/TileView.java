@@ -2,14 +2,23 @@ package com.lukas.tiles.view.game;
 
 import com.lukas.tiles.FarmTilesApplication;
 import com.lukas.tiles.model.Game;
+import com.lukas.tiles.model.Money;
 import com.lukas.tiles.model.Tile;
+import com.lukas.tiles.model.TileType;
+import com.lukas.tiles.model.building.Building;
+import com.lukas.tiles.model.building.BuildingEnum;
 import com.lukas.tiles.model.building.Farm;
 import com.lukas.tiles.view.Style;
 import com.lukas.tiles.viewModel.game.TileViewModel;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableValueBase;
+import javafx.collections.ListChangeListener;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
+
+import java.util.function.Predicate;
 
 public class TileView extends VBox {
     private final TileViewModel tileViewModel;
@@ -37,7 +46,24 @@ public class TileView extends VBox {
         if (tileViewModel.hasBuilding()) {
             this.getChildren().add(tileViewModel.getBuilding().getDescription());
         } else {
-            Button button = new Button("Buy farm");
+            TableView<BuildingEnum> buildingsTableView = generateBuildingsTable(tileViewModel.getTileType());
+
+            Button button = new Button();
+            //Disable button if nothing is selected
+            button.disableProperty().bind(buildingsTableView.getSelectionModel().selectedItemProperty().isNull());
+
+            buildingsTableView.getSelectionModel().getSelectedItems().addListener((ListChangeListener<BuildingEnum>) c -> {
+                button.setText("Buy " + c.getList().get(0).getName());
+                button.setOnAction(e -> {
+                    if (!tileViewModel.buyBuilding(c.getList().get(0))) {
+                        feedback.setVisible(true);
+                        feedback.setText("Failed to buy building");
+                    } else {
+                        this.getChildren().remove(button);
+                    }
+                });
+            });
+
             button.setOnAction(e -> {
                 if (!tileViewModel.buyBuilding(new Farm())) {
                     feedback.setVisible(true);
@@ -46,12 +72,39 @@ public class TileView extends VBox {
                     this.getChildren().remove(button);
                 }
             });
-            this.getChildren().add(button);
+            this.getChildren().addAll(buildingsTableView, button);
         }
 
 
         feedback.setVisible(false);
 
         this.getChildren().add(feedback);
+    }
+
+    private TableView<BuildingEnum> generateBuildingsTable(TileType type) {
+        TableView<BuildingEnum> result = new TableView<>();
+        result.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+
+        TableColumn<BuildingEnum, String> colName = new TableColumn<>("Name");
+        TableColumn<BuildingEnum, Money> colPrice = new TableColumn<>("Price");
+        TableColumn<BuildingEnum, Integer> colBuildDuration = new TableColumn<>("Duration");
+
+        result.getColumns().add(colName);
+        result.getColumns().add(colPrice);
+        result.getColumns().add(colBuildDuration);
+
+        result.getItems().addAll(BuildingEnum.values());
+        result.getItems().removeIf(buildingEnum -> !buildingEnum.canBeBuildOn(type));
+
+        colName.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getName()));
+        colPrice.setCellValueFactory(param -> new ObservableValueBase<>() {
+            @Override
+            public Money getValue() {
+                return param.getValue().getPrice();
+            }
+        });
+        colBuildDuration.setCellValueFactory(new PropertyValueFactory<>("buildTime"));
+
+        return result;
     }
 }

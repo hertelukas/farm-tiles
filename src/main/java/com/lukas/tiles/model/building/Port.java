@@ -8,14 +8,13 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.Serial;
 
-public class Farm extends Building {
+public class Port extends Building {
     @Serial
-    private static final long serialVersionUID = 6538625479050341086L;
-    private final static long PRICE = 40000; //$400.00
+    private static final long serialVersionUID = -1233125229887741946L;
+    private final static long PRICE = 5000; //$50.00
     private final static int BUILD_TIME = 20;
 
-
-    public Farm() {
+    public Port() {
         super(new Money(PRICE), BUILD_TIME);
     }
 

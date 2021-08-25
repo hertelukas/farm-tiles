@@ -2,9 +2,11 @@ package com.lukas.tiles.model.building;
 
 import com.lukas.tiles.model.Money;
 import com.lukas.tiles.model.ScheduledObject;
-import javafx.scene.control.Label;
+import javafx.scene.Parent;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.Serial;
 import java.util.Objects;
@@ -24,16 +26,17 @@ public abstract class Building extends ScheduledObject {
         return price;
     }
 
+    @NotNull
+    public abstract Parent getDescription();
 
-    public VBox getDescription() {
-        VBox result = new VBox();
-        result.getChildren().add(new Label(getClass().getName()));
-        if (!this.isFinished()) {
-            ProgressBar pb = new ProgressBar();
-            pb.progressProperty().bind(progressProperty());
-            result.getChildren().add(pb);
-        }
-        return result;
+    @NotNull
+    protected Parent progressBar() {
+        VBox vBox = new VBox();
+        ProgressBar pb = new ProgressBar();
+        pb.progressProperty().bind(progressProperty());
+
+        vBox.getChildren().add(pb);
+        return vBox;
     }
 
 
