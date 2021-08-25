@@ -1,9 +1,10 @@
 package com.lukas.tiles.model;
 
 import com.lukas.tiles.model.building.Building;
+import com.lukas.tiles.model.setup.FarmerColor;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import javafx.scene.paint.Color;
+import javafx.scene.paint.*;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -17,6 +18,7 @@ public class Tile implements Serializable {
     private final int id;
     private Building building;
     private transient StringProperty name;
+    private Farmer owner;
 
     public Tile(TileType tileType, int id) {
         this.tileType = tileType;
@@ -53,11 +55,27 @@ public class Tile implements Serializable {
         return tileType.name() + " " + id;
     }
 
-    public Color getColor() {
+    public Paint getPaint() {
         if (isSelected()) {
             return Color.RED;
         }
-        return tileType.getColor();
+        if (owner == null) {
+            return tileType.getColor();
+        } else {
+            Stop[] stops = new Stop[]{
+                    new Stop(0.2, tileType.getColor()),
+                    new Stop(0.6, owner.getColor())
+            };
+            return new RadialGradient(0, 0, 0.5, 0.5, 1, true, CycleMethod.NO_CYCLE, stops);
+        }
+    }
+
+    public void setOwner(Farmer farmer) {
+        this.owner = farmer;
+    }
+
+    public Farmer getOwner() {
+        return owner;
     }
 
     public void setBuilding(Building building) {

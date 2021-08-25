@@ -62,7 +62,7 @@ public class MapView extends Pane implements MapViewModelObserver {
             }
             if (tempHex.isVisible()) {
                 tempTile = mapViewModel.getTiles()[i / mapViewModel.getWidth()][i % mapViewModel.getWidth()];
-                canvas.getGraphicsContext2D().setFill(tempTile.getColor());
+                canvas.getGraphicsContext2D().setFill(tempTile.getPaint());
                 canvas.getGraphicsContext2D().fillPolygon(tempHex.getY(), tempHex.getX(), 6);
             }
         }

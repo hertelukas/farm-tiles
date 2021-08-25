@@ -11,7 +11,6 @@ import com.lukas.tiles.model.building.Farm;
 import com.lukas.tiles.model.building.Port;
 import javafx.beans.property.StringProperty;
 
-import javax.management.MalformedObjectNameException;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -31,6 +30,7 @@ public class TileViewModel {
     public boolean buyBuilding(Building building) {
         //Check if enough money
         if (game.getFarmers().get(0).buy(building.getPrice())) {
+            tile.setOwner(game.getFarmers().get(0));
             tile.setBuilding(building);
             game.startBuilding(building);
             GameHandler.save(game);
