@@ -4,7 +4,6 @@ import com.lukas.tiles.model.Money;
 import com.lukas.tiles.model.ScheduledObject;
 import javafx.scene.Parent;
 import javafx.scene.control.ProgressBar;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import org.jetbrains.annotations.NotNull;
 

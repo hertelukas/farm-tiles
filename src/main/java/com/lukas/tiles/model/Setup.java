@@ -4,7 +4,6 @@ import com.lukas.tiles.model.setup.Difficulty;
 import com.lukas.tiles.model.setup.FarmerColor;
 import com.lukas.tiles.model.setup.MapSize;
 import com.lukas.tiles.model.setup.MapType;
-import javafx.scene.paint.Color;
 
 
 public class Setup {

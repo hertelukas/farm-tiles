@@ -3,7 +3,6 @@ package com.lukas.tiles.model;
 import com.lukas.tiles.io.GameHandler;
 import com.lukas.tiles.model.building.Building;
 import com.lukas.tiles.model.setup.FarmerColor;
-import javafx.scene.paint.Color;
 
 import java.io.Serial;
 import java.io.Serializable;

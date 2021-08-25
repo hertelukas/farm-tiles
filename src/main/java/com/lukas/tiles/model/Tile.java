@@ -1,7 +1,6 @@
 package com.lukas.tiles.model;
 
 import com.lukas.tiles.model.building.Building;
-import com.lukas.tiles.model.setup.FarmerColor;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.paint.*;

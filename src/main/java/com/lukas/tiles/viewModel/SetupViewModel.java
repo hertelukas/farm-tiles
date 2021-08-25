@@ -12,7 +12,6 @@ import com.lukas.tiles.text.LanguageObserver;
 import com.lukas.tiles.view.game.GameView;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import javafx.scene.paint.Color;
 
 public class SetupViewModel implements LanguageObserver {
     private final Setup setup;
