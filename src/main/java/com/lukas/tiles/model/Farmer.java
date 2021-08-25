@@ -69,18 +69,19 @@ public class Farmer implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Farmer farmer = (Farmer) o;
-        return Objects.equals(money, farmer.money) && Objects.equals(name, farmer.name);
+        return color == farmer.color && Objects.equals(money, farmer.money) && Objects.equals(name, farmer.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(money, name);
+        return Objects.hash(color, money, name);
     }
 
     @Override
     public String toString() {
         return "Farmer{" +
-                "money=" + money +
+                "color=" + color +
+                ", money=" + money +
                 ", name='" + name + '\'' +
                 '}';
     }

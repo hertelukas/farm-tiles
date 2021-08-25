@@ -68,10 +68,10 @@ public class Game implements Serializable {
 
     public static Game generate(Setup setup) {
         List<Farmer> tempFarmers = new ArrayList<>();
-        tempFarmers.add(Farmer.generate(setup.getDifficulty().getPlayerStart(), setup.getColor()));
+        tempFarmers.add(Farmer.generate(new Money(setup.getDifficulty().getPlayerStart()), setup.getColor()));
         //The first farmer is always the player
         for (int i = 1; i < setup.getFarmers(); i++) {
-            tempFarmers.add(Farmer.generate(setup.getDifficulty().getFarmerStart(), FarmerColor.getDefault()));
+            tempFarmers.add(Farmer.generate(new Money(setup.getDifficulty().getFarmerStart()), FarmerColor.getDefault()));
         }
 
         return new Game(tempFarmers, new WorldMap(setup.getMapSize(), setup.getMapType()), setup.getName());

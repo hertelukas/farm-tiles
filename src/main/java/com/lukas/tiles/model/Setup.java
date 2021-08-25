@@ -65,4 +65,16 @@ public class Setup {
     public FarmerColor getColor() {
         return farmerColor;
     }
+
+    @Override
+    public String toString() {
+        return "Setup{" +
+                "farmers=" + farmers +
+                ", farmerColor=" + farmerColor +
+                ", difficulty=" + difficulty +
+                ", mapSize=" + mapSize +
+                ", mapType=" + mapType +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }

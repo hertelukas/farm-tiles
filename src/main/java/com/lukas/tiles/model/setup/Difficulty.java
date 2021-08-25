@@ -3,24 +3,24 @@ package com.lukas.tiles.model.setup;
 import com.lukas.tiles.model.Money;
 
 public enum Difficulty {
-    Easy(new Money(50000), new Money(50000)),
-    Medium(new Money(10000), new Money(50000)),
-    Hard(new Money(1000), new Money(50000));
+    Easy(50000, 50000),
+    Medium( 10000,  50000),
+    Hard(1000, 50000);
 
-    private final Money playerStart;
-    private final Money farmerStart;
+    private final long playerStart;
+    private final long farmerStart;
 
 
-    Difficulty(Money playerStart, Money farmerStart) {
+    Difficulty(long playerStart, long farmerStart) {
         this.playerStart = playerStart;
         this.farmerStart = farmerStart;
     }
 
-    public Money getPlayerStart() {
+    public long getPlayerStart() {
         return playerStart;
     }
 
-    public Money getFarmerStart() {
+    public long getFarmerStart() {
         return farmerStart;
     }
 }
