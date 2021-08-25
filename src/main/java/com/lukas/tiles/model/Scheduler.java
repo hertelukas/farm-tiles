@@ -1,5 +1,9 @@
 package com.lukas.tiles.model;
 
+import javafx.application.Platform;
+import javafx.beans.property.LongProperty;
+import javafx.beans.property.SimpleLongProperty;
+
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.Serial;
@@ -11,11 +15,13 @@ public class Scheduler implements Serializable {
     private static final long serialVersionUID = -7623687222760332639L;
     private long counter = 0;
     private long latestUpdate = 0;
+    private transient LongProperty counterProperty;
 
     private final Map<Long, List<ScheduledObject>> finishObserver;
 
     public Scheduler() {
         finishObserver = new HashMap<>();
+        counterProperty = new SimpleLongProperty(counter);
         start();
     }
 
@@ -24,6 +30,7 @@ public class Scheduler implements Serializable {
             @Override
             public void run() {
                 counter++;
+                Platform.runLater(() -> counterProperty.set(counter));
 
                 //Make one build for future updates
                 for (long i = counter; i <= latestUpdate; i++) {
@@ -49,6 +56,7 @@ public class Scheduler implements Serializable {
         timer.scheduleAtFixedRate(timerTask, 0, 1000);
     }
 
+
     public void addObject(ScheduledObject object) {
         //Update the new latest object
         if (counter + object.getBuildTime() > latestUpdate) {
@@ -65,9 +73,14 @@ public class Scheduler implements Serializable {
         }
     }
 
+    public LongProperty counterProperty() {
+        return counterProperty;
+    }
+
     @Serial
     private void readObject(ObjectInputStream ois) throws ClassNotFoundException, IOException {
         ois.defaultReadObject();
+        counterProperty = new SimpleLongProperty(counter);
         start();
     }
 }

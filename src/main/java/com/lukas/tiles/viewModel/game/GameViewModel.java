@@ -2,6 +2,7 @@ package com.lukas.tiles.viewModel.game;
 
 import com.lukas.tiles.SceneLoader;
 import com.lukas.tiles.model.Game;
+import com.lukas.tiles.model.Scheduler;
 import com.lukas.tiles.model.Setup;
 import com.lukas.tiles.view.game.EscapeMenu;
 import javafx.scene.input.KeyCode;
@@ -27,5 +28,9 @@ public class GameViewModel {
         if (event.getCode().equals(KeyCode.ESCAPE)) {
             SceneLoader.getInstance().loadStage(new EscapeMenu(game));
         }
+    }
+
+    public Scheduler getGameScheduler(){
+        return game.getScheduler();
     }
 }

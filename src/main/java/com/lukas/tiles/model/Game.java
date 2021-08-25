@@ -41,6 +41,10 @@ public class Game implements Serializable {
         this.name = name;
     }
 
+    public Scheduler getScheduler() {
+        return scheduler;
+    }
+
     public void startBuilding(Building building) {
         scheduler.addObject(building);
     }

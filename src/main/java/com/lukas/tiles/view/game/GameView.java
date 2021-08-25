@@ -28,7 +28,7 @@ public class GameView extends BorderPane {
     private void initialize() {
         Hexagon.bindWidth(this.widthProperty());
 
-        this.setBottom(new BottomBarView(gameViewModel.getGame().getFarmers().get(0)));
+        this.setBottom(new BottomBarView(gameViewModel.getGame().getFarmers().get(0), gameViewModel.getGameScheduler()));
         this.setCenter(mapView);
 
         this.setFocused(true);
