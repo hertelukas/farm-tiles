@@ -7,6 +7,7 @@ import com.lukas.tiles.viewModel.game.GameViewModel;
 import com.lukas.tiles.viewModel.game.Hexagon;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 
 public class GameView extends BorderPane {
 
@@ -31,8 +32,7 @@ public class GameView extends BorderPane {
         this.setBottom(new BottomBarView(gameViewModel.getGame().getFarmers().get(0), gameViewModel.getGameScheduler()));
         this.setCenter(mapView);
 
-        this.setFocused(true);
-        this.addEventHandler(KeyEvent.KEY_PRESSED, gameViewModel::handleKey);
+        Stage.getWindows().get(0).addEventHandler(KeyEvent.KEY_PRESSED, gameViewModel::handleKey);
 
         mapView.setOnSelect(this::showTile);
     }
