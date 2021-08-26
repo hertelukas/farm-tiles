@@ -40,16 +40,6 @@ public class TileViewModel {
         return false;
     }
 
-    public boolean buyBuilding(BuildingEnum buildingEnum) {
-        boolean result = false;
-        switch (buildingEnum) {
-            case FarmEnum -> result = buyBuilding(new Farm());
-            case PortEnum -> result = buyBuilding(new Port());
-        }
-
-        return result;
-    }
-
     public TileType getTileType() {
         return tile.getTileType();
     }

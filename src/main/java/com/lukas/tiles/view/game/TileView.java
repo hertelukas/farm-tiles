@@ -55,7 +55,7 @@ public class TileView extends VBox {
                 button.setText("Buy " + c.getList().get(0).getName());
                 button.setDisable(c.getList().get(0).getPrice().getAmount() > tileViewModel.getPlayerMoney().getAmount());
                 button.setOnAction(e -> {
-                    if (!tileViewModel.buyBuilding(c.getList().get(0))) {
+                    if (!tileViewModel.buyBuilding(c.getList().get(0).instantiate())) {
                         feedback.setVisible(true);
                         feedback.setText("Failed to buy building");
                     } else {
