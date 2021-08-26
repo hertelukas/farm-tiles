@@ -38,7 +38,11 @@ public class GameViewModel {
 
     public void handleKey(KeyEvent event) {
         if (event.getCode().equals(KeyCode.ESCAPE)) {
-            SceneLoader.getInstance().loadStage(new EscapeMenu(game));
+            if (showingTab) {
+                toggleTab();
+            } else {
+                SceneLoader.getInstance().loadStage(new EscapeMenu(game));
+            }
             return;
         }
 
