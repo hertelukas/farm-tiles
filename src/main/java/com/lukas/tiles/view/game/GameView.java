@@ -35,6 +35,7 @@ public class GameView extends BorderPane implements BasicObserver {
         this.setBottom(new BottomBarView(gameViewModel.getGame().getFarmers().get(0), gameViewModel.getGameScheduler()));
         this.setCenter(mapView);
 
+        // FIXME: 8/26/21 Remove event handler when game gets closed
         Stage.getWindows().get(0).addEventHandler(KeyEvent.KEY_PRESSED, gameViewModel::handleKey);
 
         mapView.setOnSelect(this::showTile);

@@ -12,7 +12,8 @@ public class Farm extends Building {
     @Serial
     private static final long serialVersionUID = 6538625479050341086L;
     private final static long PRICE = 40000; //$400.00
-    private final static int BUILD_TIME = 20;
+    private final static int BUILD_TIME = 60;
+    private final static long MAINTENANCE_COST = 10000; //$100.00
 
 
     public Farm() {
@@ -25,6 +26,10 @@ public class Farm extends Building {
 
     public static int buildTime() {
         return BUILD_TIME;
+    }
+
+    public static Money getMaintenance() {
+        return new Money(MAINTENANCE_COST);
     }
 
     @Override

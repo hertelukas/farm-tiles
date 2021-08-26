@@ -13,6 +13,8 @@ public class Port extends Building {
     private static final long serialVersionUID = -1233125229887741946L;
     private final static long PRICE = 5000; //$50.00
     private final static int BUILD_TIME = 20;
+    private final static int MAINTENANCE_COST = 10000; //$100.00
+
 
     public Port() {
         super(new Money(PRICE), BUILD_TIME);
@@ -25,6 +27,11 @@ public class Port extends Building {
     public static int buildTime() {
         return BUILD_TIME;
     }
+
+    public static Money getMaintenance() {
+        return new Money(MAINTENANCE_COST);
+    }
+
 
     @Override
     public long getCost() {

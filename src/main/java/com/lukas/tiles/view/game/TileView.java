@@ -91,10 +91,12 @@ public class TileView extends VBox {
         TableColumn<BuildingEnum, String> colName = new TableColumn<>("Name");
         TableColumn<BuildingEnum, Money> colPrice = new TableColumn<>("Price");
         TableColumn<BuildingEnum, Integer> colBuildDuration = new TableColumn<>("Duration");
+        TableColumn<BuildingEnum, Money> colMaintenance = new TableColumn<>("Maintenance");
 
         result.getColumns().add(colName);
         result.getColumns().add(colPrice);
         result.getColumns().add(colBuildDuration);
+        result.getColumns().add(colMaintenance);
 
         result.getItems().addAll(BuildingEnum.values());
         result.getItems().removeIf(buildingEnum -> !buildingEnum.canBeBuild(type, neighbours));
@@ -107,6 +109,12 @@ public class TileView extends VBox {
             }
         });
         colBuildDuration.setCellValueFactory(new PropertyValueFactory<>("buildTime"));
+        colMaintenance.setCellValueFactory(param -> new ObservableValueBase<>() {
+            @Override
+            public Money getValue() {
+                return param.getValue().getMaintenance();
+            }
+        });
 
         return result;
     }
