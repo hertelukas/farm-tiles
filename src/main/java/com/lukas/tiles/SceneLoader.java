@@ -45,7 +45,7 @@ public class SceneLoader {
         stage.setScene(mainScene);
         stage.setFullScreen(true);
         stage.setFullScreenExitHint("");
-        stage.setFullScreenExitKeyCombination(new KeyCharacterCombination("F", KeyCombination.SHIFT_ANY));
+        stage.setFullScreenExitKeyCombination(new KeyCharacterCombination("F", KeyCombination.CONTROL_DOWN));
         stage.show();
     }
 
