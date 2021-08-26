@@ -41,6 +41,7 @@ public class TabView extends HBox {
         //Load the different tabViews
         abstractTabViews.add(new OverviewView(gameViewModel.getGame().getFarmers().get(0)));
         abstractTabViews.add(new ShopView());
+        abstractTabViews.add(new FinanceView(gameViewModel.getGame().getFarmers().get(0), gameViewModel.getGame().getScheduler().counterProperty()));
 
         //Side menu
         SideMenu sideMenu = new SideMenu(new SimpleStringProperty("Menu"));
@@ -48,6 +49,7 @@ public class TabView extends HBox {
 
         sideMenu.addMenuEntry(new MenuEntry(this::loadView, new SimpleStringProperty("Overview")));
         sideMenu.addMenuEntry(new MenuEntry(this::loadView, new SimpleStringProperty("Shop")));
+        sideMenu.addMenuEntry(new MenuEntry(this::loadView, new SimpleStringProperty("Finance")));
 
         sideMenu.addBottomEntry(new MenuEntry(index -> close(), new SimpleStringProperty("Close")));
 

@@ -1,5 +1,6 @@
 package com.lukas.tiles.model;
 
+import javafx.scene.chart.NumberAxis;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.Serial;
@@ -93,6 +94,10 @@ public class Money implements Serializable, Comparable<Money> {
         }
         String start = isNegative ? "-$" : "$";
         return start + Math.abs(full) + "." + centsString;
+    }
+
+    public static String format(Number number) {
+        return new Money(number.longValue()).toString();
     }
 
     @Override

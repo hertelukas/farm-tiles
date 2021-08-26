@@ -55,7 +55,6 @@ public class GameViewModel {
     public void toggleTab() {
         showingTab = !showingTab;
         promoteUpdate();
-        promoteUpdate();
     }
 
     public boolean isShowingTab() {

@@ -4,12 +4,14 @@ import com.lukas.tiles.model.building.Building;
 import com.lukas.tiles.model.setup.FarmerColor;
 import com.lukas.tiles.viewModel.game.FarmerObserver;
 import javafx.scene.paint.Color;
+import org.jetbrains.annotations.Unmodifiable;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -20,11 +22,13 @@ public class Farmer implements Serializable, TurnBasedUpdatable {
     private final Money money;
     private final String name;
     private final List<Building> buildings;
+    private final List<Long> moneyHistory;
     private transient ArrayList<FarmerObserver> observers;
 
     public Farmer(Money money, String name, FarmerColor color) {
         observers = new ArrayList<>();
         buildings = new ArrayList<>();
+        moneyHistory = new ArrayList<>();
         this.money = money;
         this.name = name;
         this.color = color;
@@ -77,11 +81,17 @@ public class Farmer implements Serializable, TurnBasedUpdatable {
         return buildings;
     }
 
+    @Unmodifiable
+    public List<Long> getMoneyHistory() {
+        return Collections.unmodifiableList(moneyHistory);
+    }
+
     @Override
     public void doTurnBasedUpdate() {
         for (Building building : buildings) {
             this.money.subAmount(building.getCost());
         }
+        moneyHistory.add(money.getAmount());
         promoteUpdate();
     }
 
