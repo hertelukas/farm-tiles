@@ -26,10 +26,12 @@ public class Port extends Building {
         return BUILD_TIME;
     }
 
-
     @Override
-    public Money getCost() {
-        return new Money(2000); //Hardcoded $20 expenses
+    public long getCost() {
+        if (isFinished()) {
+            return 2000; //Hardcoded $20 expenses
+        }
+        return 0;
     }
 
     @Override

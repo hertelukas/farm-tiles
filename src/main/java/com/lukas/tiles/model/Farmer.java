@@ -73,10 +73,14 @@ public class Farmer implements Serializable, TurnBasedUpdatable {
         return color.getColor();
     }
 
+    public List<Building> getBuildings() {
+        return buildings;
+    }
+
     @Override
     public void doTurnBasedUpdate() {
         for (Building building : buildings) {
-            this.money.subAmount(building.getPrice());
+            this.money.subAmount(building.getCost());
         }
         promoteUpdate();
     }

@@ -4,6 +4,8 @@ import com.lukas.tiles.io.GameHandler;
 import com.lukas.tiles.model.building.Building;
 import com.lukas.tiles.model.setup.FarmerColor;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -25,6 +27,10 @@ public class Game implements Serializable {
         this.scheduler = new Scheduler();
         GameHandler.save(this);
 
+        setup();
+    }
+
+    private void setup() {
         //Update the game every ten seconds
         scheduler.counterProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue.longValue() % 10 == 0) {
@@ -91,5 +97,10 @@ public class Game implements Serializable {
         return new Game(tempFarmers, new WorldMap(setup.getMapSize(), setup.getMapType()), setup.getName());
     }
 
+    @Serial
+    private void readObject(ObjectInputStream ois) throws ClassNotFoundException, IOException {
+        ois.defaultReadObject();
+        setup();
+    }
 
 }

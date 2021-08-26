@@ -55,6 +55,22 @@ public class MoneyTest {
     }
 
     @Test
+    public void negativeToString() {
+        Money money = new Money(-4234);
+        String expected = "-$42.34";
+
+        assertEquals(expected, money.toString());
+    }
+
+    @Test
+    public void subtractNegativeAmount() {
+        Money money = new Money(10000);
+        money.subAmount(-10000);
+
+        assertEquals(20000, money.getAmount());
+    }
+
+    @Test
     public void testSort() {
         Money moneyLowest = new Money(-400);
         Money moneyZero = new Money();

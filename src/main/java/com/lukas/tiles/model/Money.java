@@ -83,13 +83,16 @@ public class Money implements Serializable, Comparable<Money> {
 
     @Override
     public String toString() {
+        boolean isNegative = amount < 0;
+
         long full = amount / 100;
         long cents = (amount - full * 100);
-        String centsString = "" + cents;
+        String centsString = "" + Math.abs(cents);
         if (cents == 0) {
             centsString = "00";
         }
-        return "$" + full + "." + centsString;
+        String start = isNegative ? "-$" : "$";
+        return start + Math.abs(full) + "." + centsString;
     }
 
     @Override

@@ -28,8 +28,11 @@ public class Farm extends Building {
     }
 
     @Override
-    public Money getCost() {
-        return new Money(-10000); //Hardcoded $100.00 per ten seconds
+    public long getCost() {
+        if (isFinished()) {
+            return -10000; //Hardcoded $100 earnings
+        }
+        return 0;
     }
 
     @Override

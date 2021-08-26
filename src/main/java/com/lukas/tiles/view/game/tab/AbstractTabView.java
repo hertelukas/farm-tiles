@@ -24,8 +24,6 @@ public abstract class AbstractTabView extends VBox {
         this.setAlignment(Pos.TOP_CENTER);
         this.setPadding(Style.getPADDING());
         HBox.setHgrow(this, Priority.ALWAYS);
-
-        initialize();
     }
 
     abstract void initialize();
