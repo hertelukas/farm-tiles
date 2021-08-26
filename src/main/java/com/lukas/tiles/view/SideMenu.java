@@ -1,7 +1,6 @@
-package com.lukas.tiles.view.settings;
+package com.lukas.tiles.view;
 
 import com.lukas.tiles.FarmTilesApplication;
-import com.lukas.tiles.view.Style;
 import com.lukas.tiles.view.menu.MenuEntry;
 import javafx.beans.property.StringProperty;
 import javafx.scene.control.Button;

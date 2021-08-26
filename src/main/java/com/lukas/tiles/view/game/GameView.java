@@ -3,13 +3,15 @@ package com.lukas.tiles.view.game;
 import com.lukas.tiles.model.Game;
 import com.lukas.tiles.model.Setup;
 import com.lukas.tiles.model.Tile;
+import com.lukas.tiles.view.BasicObserver;
+import com.lukas.tiles.view.game.tab.TabView;
 import com.lukas.tiles.viewModel.game.GameViewModel;
 import com.lukas.tiles.viewModel.game.Hexagon;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-public class GameView extends BorderPane {
+public class GameView extends BorderPane implements BasicObserver {
 
     private final GameViewModel gameViewModel;
     private final MapView mapView;
@@ -27,6 +29,7 @@ public class GameView extends BorderPane {
     }
 
     private void initialize() {
+        gameViewModel.subscribe(this);
         Hexagon.bindWidth(this.widthProperty());
 
         this.setBottom(new BottomBarView(gameViewModel.getGame().getFarmers().get(0), gameViewModel.getGameScheduler()));
@@ -43,5 +46,18 @@ public class GameView extends BorderPane {
         } else {
             this.setRight(new TileView(tile, gameViewModel.getGame()));
         }
+    }
+
+    private void toggleTab(boolean show) {
+        if (show) {
+            this.setCenter(new TabView(gameViewModel));
+        } else {
+            this.setCenter(mapView);
+        }
+    }
+
+    @Override
+    public void update() {
+        toggleTab(gameViewModel.isShowingTab());
     }
 }
