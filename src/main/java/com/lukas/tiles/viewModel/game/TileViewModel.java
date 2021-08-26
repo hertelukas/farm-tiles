@@ -6,9 +6,6 @@ import com.lukas.tiles.model.Money;
 import com.lukas.tiles.model.Tile;
 import com.lukas.tiles.model.TileType;
 import com.lukas.tiles.model.building.Building;
-import com.lukas.tiles.model.building.BuildingEnum;
-import com.lukas.tiles.model.building.Farm;
-import com.lukas.tiles.model.building.Port;
 import javafx.beans.property.StringProperty;
 
 import java.util.HashSet;
@@ -27,6 +24,7 @@ public class TileViewModel {
         return tile.nameProperty();
     }
 
+    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     public boolean buyBuilding(Building building) {
         //Check if enough money
         if (game.getFarmers().get(0).buy(building.getPrice())) {
