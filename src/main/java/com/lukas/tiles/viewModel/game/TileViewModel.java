@@ -27,7 +27,7 @@ public class TileViewModel {
     @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     public boolean buyBuilding(Building building) {
         //Check if enough money
-        if (game.getFarmers().get(0).buy(building.getPrice())) {
+        if (game.getFarmers().get(0).buyBuilding(building)) {
             tile.setOwner(game.getFarmers().get(0));
             tile.setBuilding(building);
             game.startBuilding(building);

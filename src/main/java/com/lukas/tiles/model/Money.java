@@ -71,6 +71,16 @@ public class Money implements Serializable, Comparable<Money> {
         this.amount -= amount;
     }
 
+    /**
+     * Force the subtraction, even if balance is not high enough
+     *
+     * @param amount that gets removed
+     */
+    public void subAmount(Money amount) {
+        subAmount(amount.getAmount());
+    }
+
+
     @Override
     public String toString() {
         long full = amount / 100;

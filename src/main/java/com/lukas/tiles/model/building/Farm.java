@@ -28,6 +28,11 @@ public class Farm extends Building {
     }
 
     @Override
+    public Money getCost() {
+        return new Money(-10000); //Hardcoded $100.00 per ten seconds
+    }
+
+    @Override
     public @NotNull Parent getDescription() {
         if (!isFinished()) {
             return progressBar();

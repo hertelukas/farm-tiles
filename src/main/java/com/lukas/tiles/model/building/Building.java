@@ -25,6 +25,8 @@ public abstract class Building extends ScheduledObject {
         return price;
     }
 
+    public abstract Money getCost();
+
     @NotNull
     public abstract Parent getDescription();
 

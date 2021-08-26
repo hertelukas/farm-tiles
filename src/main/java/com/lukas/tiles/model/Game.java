@@ -24,6 +24,13 @@ public class Game implements Serializable {
         this.name = name;
         this.scheduler = new Scheduler();
         GameHandler.save(this);
+
+        //Update the game every ten seconds
+        scheduler.counterProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue.longValue() % 10 == 0) {
+                update();
+            }
+        });
     }
 
     public List<Farmer> getFarmers() {
@@ -48,6 +55,13 @@ public class Game implements Serializable {
 
     public void startBuilding(Building building) {
         scheduler.addObject(building);
+    }
+
+    public void update() {
+        System.out.println("Updating game...");
+        for (Farmer farmer : farmers) {
+            farmer.doTurnBasedUpdate();
+        }
     }
 
     @Override
