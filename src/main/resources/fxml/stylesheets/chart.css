@@ -1,0 +1,17 @@
+.line-chart {
+    symbol-color0: #e9967a;
+    symbol-color1: #e9967a;
+    symbol-color2: #e9967a;
+    symbol-color3: #e9967a;
+    symbol-color4: #e9967a;
+    symbol-color5: #e9967a;
+    symbol-color6: #e9967a;
+}
+
+.default-color0.chart-line-symbol { -fx-background-color: symbol-color0, white; }
+.default-color1.chart-line-symbol { -fx-background-color: symbol-color1, white; }
+.default-color2.chart-line-symbol { -fx-background-color: symbol-color2, white; }
+.default-color3.chart-line-symbol { -fx-background-color: symbol-color3, white; }
+.default-color4.chart-line-symbol { -fx-background-color: symbol-color4, white; }
+.default-color5.chart-line-symbol { -fx-background-color: symbol-color5, white; }
+.default-color6.chart-line-symbol { -fx-background-color: symbol-color6, white; }
