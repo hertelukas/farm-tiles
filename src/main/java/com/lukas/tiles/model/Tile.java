@@ -77,6 +77,10 @@ public class Tile implements Serializable {
         return owner;
     }
 
+    public int getId() {
+        return id;
+    }
+
     public void setBuilding(Building building) {
         this.building = building;
     }

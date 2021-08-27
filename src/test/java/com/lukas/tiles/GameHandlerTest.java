@@ -54,7 +54,7 @@ public class GameHandlerTest {
         setup.setDifficulty(Difficulty.Medium);
         Game game = Game.generate(setup);
         game.setName("test");
-        game.getMap().getTiles()[0][0].setBuilding(new Farm());
+        game.getMap().getTiles()[0][0].setBuilding(new Farm(game.getMap().getTiles()[0][0]));
 
         assertTrue(GameHandler.save(game));
 

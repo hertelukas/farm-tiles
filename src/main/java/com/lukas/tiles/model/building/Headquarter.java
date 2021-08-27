@@ -1,6 +1,7 @@
 package com.lukas.tiles.model.building;
 
 import com.lukas.tiles.model.Money;
+import com.lukas.tiles.model.Tile;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
@@ -16,8 +17,8 @@ public class Headquarter extends Building {
     private final static int BUILD_TIME = 5;
     private final static long MAINTENANCE_COST = 10000; //$100.00
 
-    public Headquarter() {
-        super(new Money(PRICE), BUILD_TIME);
+    public Headquarter(Tile tile) {
+        super(new Money(PRICE), BUILD_TIME, tile);
     }
 
     public static Money price() {
@@ -46,5 +47,6 @@ public class Headquarter extends Building {
         VBox result = new VBox();
         Label label = new Label(getClass().getSimpleName());
         result.getChildren().add(label);
-        return result;    }
+        return result;
+    }
 }

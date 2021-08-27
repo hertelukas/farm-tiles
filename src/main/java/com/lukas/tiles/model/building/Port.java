@@ -1,6 +1,7 @@
 package com.lukas.tiles.model.building;
 
 import com.lukas.tiles.model.Money;
+import com.lukas.tiles.model.Tile;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
@@ -15,9 +16,8 @@ public class Port extends Building {
     private final static int BUILD_TIME = 20;
     private final static int MAINTENANCE_COST = 10000; //$100.00
 
-
-    public Port() {
-        super(new Money(PRICE), BUILD_TIME);
+    public Port(Tile tile) {
+        super(new Money(PRICE), BUILD_TIME, tile);
     }
 
     public static Money price() {

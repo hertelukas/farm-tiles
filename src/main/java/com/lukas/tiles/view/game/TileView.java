@@ -52,7 +52,7 @@ public class TileView extends VBox {
                 button.setText("Buy " + c.getList().get(0).getName());
                 button.setDisable(c.getList().get(0).getPrice().getAmount() > tileViewModel.getPlayerMoney().getAmount());
                 button.setOnAction(e -> {
-                    if (!tileViewModel.buyBuilding(c.getList().get(0).instantiate())) {
+                    if (!tileViewModel.buyBuilding(c.getList().get(0).instantiate(tileViewModel.getTile()))) {
                         feedback.setVisible(true);
                         feedback.setText("Failed to buy building");
                     } else {
@@ -64,14 +64,6 @@ public class TileView extends VBox {
                 });
             });
 
-            button.setOnAction(e -> {
-                if (!tileViewModel.buyBuilding(new Farm())) {
-                    feedback.setVisible(true);
-                    feedback.setText("Failed to buy farm");
-                } else {
-                    this.getChildren().remove(button);
-                }
-            });
             this.getChildren().addAll(buildingsTableView, button);
         }
 

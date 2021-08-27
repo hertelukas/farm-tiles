@@ -2,6 +2,7 @@ package com.lukas.tiles.model.building;
 
 import com.lukas.tiles.model.Money;
 import com.lukas.tiles.model.ScheduledObject;
+import com.lukas.tiles.model.Tile;
 import javafx.scene.Parent;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.VBox;
@@ -14,11 +15,13 @@ public abstract class Building extends ScheduledObject {
     @Serial
     private static final long serialVersionUID = -2101702233736096724L;
     private final Money price;
+    private final Tile tile;
 
-    protected Building(Money price, int buildTime_seconds) {
+    protected Building(Money price, int buildTime_seconds, Tile tile) {
         super(buildTime_seconds);
 
         this.price = price;
+        this.tile = tile;
     }
 
     public Money getPrice() {
@@ -26,6 +29,10 @@ public abstract class Building extends ScheduledObject {
     }
 
     public abstract long getCost();
+
+    public Tile getTile() {
+        return tile;
+    }
 
     @NotNull
     public abstract Parent getDescription();

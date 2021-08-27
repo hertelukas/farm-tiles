@@ -3,6 +3,7 @@ package com.lukas.tiles.view.game.tab;
 import com.lukas.tiles.FarmTilesApplication;
 import com.lukas.tiles.view.SideMenu;
 import com.lukas.tiles.view.Style;
+import com.lukas.tiles.view.game.GameView;
 import com.lukas.tiles.view.menu.MenuEntry;
 import com.lukas.tiles.viewModel.game.GameViewModel;
 import com.lukas.tiles.viewModel.game.TabViewModel;
@@ -20,11 +21,13 @@ public class TabView extends HBox {
     private final TabViewModel tabViewModel;
     private final List<AbstractTabView> abstractTabViews;
     private final GameViewModel gameViewModel;
+    private final GameView gameView;
 
-    public TabView(GameViewModel gameViewModel) {
+    public TabView(GameView gameView, GameViewModel gameViewModel) {
         abstractTabViews = new ArrayList<>();
         tabViewModel = new TabViewModel();
         this.gameViewModel = gameViewModel;
+        this.gameView = gameView;
 
         this.getStylesheets().add(FarmTilesApplication.getMainStyle());
 
@@ -39,7 +42,7 @@ public class TabView extends HBox {
 
     private void initialize() {
         //Load the different tabViews
-        abstractTabViews.add(new OverviewView(gameViewModel.getGame().getFarmers().get(0)));
+        abstractTabViews.add(new OverviewView(gameView, gameViewModel.getGame().getFarmers().get(0)));
         abstractTabViews.add(new ShopView());
         abstractTabViews.add(new FinanceView(gameViewModel.getGame().getFarmers().get(0), gameViewModel.getGame().getScheduler().counterProperty()));
 

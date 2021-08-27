@@ -2,6 +2,7 @@ package com.lukas.tiles.model.building;
 
 import com.lukas.tiles.model.Farmer;
 import com.lukas.tiles.model.Money;
+import com.lukas.tiles.model.Tile;
 import com.lukas.tiles.model.TileType;
 
 import java.util.Set;
@@ -28,8 +29,8 @@ public enum BuildingEnum {
         this.predicate = predicate;
     }
 
-    public Building instantiate() {
-        return factory.create();
+    public Building instantiate(Tile tile) {
+        return factory.create(tile);
     }
 
     public String getName() {

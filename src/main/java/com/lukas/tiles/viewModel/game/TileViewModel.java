@@ -18,6 +18,10 @@ public class TileViewModel {
         this.game = game;
     }
 
+    public Tile getTile() {
+        return tile;
+    }
+
     public StringProperty getName() {
         return tile.nameProperty();
     }

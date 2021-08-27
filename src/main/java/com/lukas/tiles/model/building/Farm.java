@@ -1,6 +1,7 @@
 package com.lukas.tiles.model.building;
 
 import com.lukas.tiles.model.Money;
+import com.lukas.tiles.model.Tile;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
@@ -16,8 +17,8 @@ public class Farm extends Building {
     private final static long MAINTENANCE_COST = 10000; //$100.00
 
 
-    public Farm() {
-        super(new Money(PRICE), BUILD_TIME);
+    public Farm(Tile tile) {
+        super(new Money(PRICE), BUILD_TIME, tile);
     }
 
     public static Money price() {

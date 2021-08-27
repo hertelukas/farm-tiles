@@ -51,7 +51,7 @@ public class GameView extends BorderPane implements BasicObserver {
 
     private void toggleTab(boolean show) {
         if (show) {
-            this.setCenter(new TabView(gameViewModel));
+            this.setCenter(new TabView(this, gameViewModel));
         } else {
             this.setCenter(mapView);
         }
