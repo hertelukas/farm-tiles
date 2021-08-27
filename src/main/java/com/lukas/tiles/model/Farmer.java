@@ -25,6 +25,8 @@ public class Farmer implements Serializable, TurnBasedUpdatable {
     private final List<Long> moneyHistory;
     private transient ArrayList<FarmerObserver> observers;
 
+    private boolean hasHeadquarter = false;
+
     public Farmer(Money money, String name, FarmerColor color) {
         observers = new ArrayList<>();
         buildings = new ArrayList<>();
@@ -79,6 +81,14 @@ public class Farmer implements Serializable, TurnBasedUpdatable {
 
     public List<Building> getBuildings() {
         return buildings;
+    }
+
+    public boolean isHasHeadquarter() {
+        return hasHeadquarter;
+    }
+
+    public void setHasHeadquarter(boolean hasHeadquarter) {
+        this.hasHeadquarter = hasHeadquarter;
     }
 
     @Unmodifiable

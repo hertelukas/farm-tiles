@@ -1,11 +1,9 @@
 package com.lukas.tiles.viewModel.game;
 
 import com.lukas.tiles.io.GameHandler;
-import com.lukas.tiles.model.Game;
-import com.lukas.tiles.model.Money;
-import com.lukas.tiles.model.Tile;
-import com.lukas.tiles.model.TileType;
+import com.lukas.tiles.model.*;
 import com.lukas.tiles.model.building.Building;
+import com.lukas.tiles.model.building.Headquarter;
 import javafx.beans.property.StringProperty;
 
 import java.util.HashSet;
@@ -31,6 +29,9 @@ public class TileViewModel {
             tile.setOwner(game.getFarmers().get(0));
             tile.setBuilding(building);
             game.startBuilding(building);
+            if (building instanceof Headquarter) {
+                game.getFarmers().get(0).setHasHeadquarter(true);
+            }
             GameHandler.save(game);
             return true;
         }
@@ -60,6 +61,10 @@ public class TileViewModel {
     }
 
     public Money getPlayerMoney() {
-        return game.getFarmers().get(0).getMoney();
+        return getFarmer().getMoney();
+    }
+
+    public Farmer getFarmer() {
+        return game.getFarmers().get(0);
     }
 }

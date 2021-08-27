@@ -1,10 +1,7 @@
 package com.lukas.tiles.view.game;
 
 import com.lukas.tiles.FarmTilesApplication;
-import com.lukas.tiles.model.Game;
-import com.lukas.tiles.model.Money;
-import com.lukas.tiles.model.Tile;
-import com.lukas.tiles.model.TileType;
+import com.lukas.tiles.model.*;
 import com.lukas.tiles.model.building.BuildingEnum;
 import com.lukas.tiles.model.building.Farm;
 import com.lukas.tiles.view.Style;
@@ -45,7 +42,7 @@ public class TileView extends VBox {
         if (tileViewModel.hasBuilding()) {
             this.getChildren().add(tileViewModel.getBuilding().getDescription());
         } else {
-            TableView<BuildingEnum> buildingsTableView = generateBuildingsTable(tileViewModel.getTileType(), tileViewModel.getNeighbourTileTypes());
+            TableView<BuildingEnum> buildingsTableView = generateBuildingsTable(tileViewModel.getTileType(), tileViewModel.getNeighbourTileTypes(), tileViewModel.getFarmer());
 
             Button button = new Button();
             //Disable button if nothing is selected
@@ -84,7 +81,7 @@ public class TileView extends VBox {
         this.getChildren().add(feedback);
     }
 
-    private TableView<BuildingEnum> generateBuildingsTable(TileType type, Set<TileType> neighbours) {
+    private TableView<BuildingEnum> generateBuildingsTable(TileType type, Set<TileType> neighbours, Farmer farmer) {
         TableView<BuildingEnum> result = new TableView<>();
         result.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 
@@ -99,7 +96,7 @@ public class TileView extends VBox {
         result.getColumns().add(colMaintenance);
 
         result.getItems().addAll(BuildingEnum.values());
-        result.getItems().removeIf(buildingEnum -> !buildingEnum.canBeBuild(type, neighbours));
+        result.getItems().removeIf(buildingEnum -> !buildingEnum.canBeBuild(type, neighbours, farmer));
 
         colName.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getName()));
         colPrice.setCellValueFactory(param -> new ObservableValueBase<>() {

@@ -1,5 +1,6 @@
 package com.lukas.tiles.model.building;
 
+import com.lukas.tiles.model.Farmer;
 import com.lukas.tiles.model.Money;
 import com.lukas.tiles.model.TileType;
 
@@ -7,8 +8,9 @@ import java.util.Set;
 
 
 public enum BuildingEnum {
-    FarmEnum(Farm::new, "Farm", Farm.price(), Farm.buildTime(), Farm.getMaintenance(), (standingOn, neighbours) -> standingOn == TileType.Grass),
-    PortEnum(Port::new, "Port", Port.price(), Port.buildTime(), Port.getMaintenance(), (standingOn, neighbours) -> standingOn == TileType.Coastal && neighbours.contains(TileType.Water));
+    FarmEnum(Farm::new, "Farm", Farm.price(), Farm.buildTime(), Farm.getMaintenance(), (standingOn, neighbours, farmer) -> standingOn == TileType.Grass && farmer.isHasHeadquarter()),
+    PortEnum(Port::new, "Port", Port.price(), Port.buildTime(), Port.getMaintenance(), (standingOn, neighbours, farmer) -> standingOn == TileType.Coastal && neighbours.contains(TileType.Water) && farmer.isHasHeadquarter()),
+    HeadquarterEnum(Headquarter::new, "Headquarter", Headquarter.price(), Headquarter.buildTime(), Headquarter.getMaintenance(), (standingOn, neighbours, farmer) -> standingOn == TileType.Grass && !farmer.isHasHeadquarter());
 
     private final BuildingFactory factory;
     private final String name;
@@ -46,7 +48,7 @@ public enum BuildingEnum {
         return maintenance;
     }
 
-    public boolean canBeBuild(TileType standingOn, Set<TileType> neighbours) {
-        return predicate.test(standingOn, neighbours);
+    public boolean canBeBuild(TileType standingOn, Set<TileType> neighbours, Farmer farmer) {
+        return predicate.test(standingOn, neighbours, farmer);
     }
 }
