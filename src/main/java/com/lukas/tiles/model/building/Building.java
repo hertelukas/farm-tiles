@@ -11,12 +11,20 @@ import org.jetbrains.annotations.NotNull;
 import java.io.Serial;
 import java.util.Objects;
 
+/**
+ * An abstraction for every building
+ */
 public abstract class Building extends ScheduledObject {
     @Serial
     private static final long serialVersionUID = -2101702233736096724L;
     private final Money price;
     private final Tile tile;
 
+    /**
+     * @param price             of the building
+     * @param buildTime_seconds time it takes to build
+     * @param tile              name of the building
+     */
     protected Building(Money price, int buildTime_seconds, Tile tile) {
         super(buildTime_seconds);
 
@@ -24,19 +32,31 @@ public abstract class Building extends ScheduledObject {
         this.tile = tile;
     }
 
+    /**
+     * @return the price of the building
+     */
     public Money getPrice() {
         return price;
     }
 
+    /**
+     * @return the current maintenance cost of the building, can be negative if it makes profit
+     */
     public abstract long getCost();
 
     public Tile getTile() {
         return tile;
     }
 
+    /**
+     * @return a JavaFX Parent that shows interaction with the building and gets shown in the tile view
+     */
     @NotNull
     public abstract Parent getDescription();
 
+    /**
+     * @return a JavaFX ProgressBar that shows the progress of the build process
+     */
     @NotNull
     protected Parent progressBar() {
         VBox vBox = new VBox();
