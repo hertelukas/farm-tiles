@@ -4,7 +4,6 @@ import com.lukas.tiles.model.Farmer;
 import com.lukas.tiles.model.Money;
 import com.lukas.tiles.model.building.Building;
 import com.lukas.tiles.view.game.GameView;
-import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValueBase;
 import javafx.collections.ListChangeListener;

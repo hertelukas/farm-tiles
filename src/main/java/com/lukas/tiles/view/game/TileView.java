@@ -3,7 +3,6 @@ package com.lukas.tiles.view.game;
 import com.lukas.tiles.FarmTilesApplication;
 import com.lukas.tiles.model.*;
 import com.lukas.tiles.model.building.BuildingEnum;
-import com.lukas.tiles.model.building.Farm;
 import com.lukas.tiles.view.Style;
 import com.lukas.tiles.viewModel.game.TileViewModel;
 import javafx.beans.property.SimpleStringProperty;

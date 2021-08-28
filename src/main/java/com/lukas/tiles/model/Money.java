@@ -1,6 +1,5 @@
 package com.lukas.tiles.model;
 
-import javafx.scene.chart.NumberAxis;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.Serial;
