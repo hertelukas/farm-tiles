@@ -5,6 +5,9 @@ import org.springframework.stereotype.Service;
 
 import java.io.*;
 
+/**
+ * Handles the saving and loading of the config file
+ */
 @Service
 public class ConfigHandler {
 
@@ -15,6 +18,10 @@ public class ConfigHandler {
     private final static String LOCATION = "config.tiles";
 
 
+    /**
+     * @param config that should be saved
+     * @return whether the save operation was successful
+     */
     public static boolean save(Config config) {
         try {
             FileOutputStream fileOutputStream = new FileOutputStream(LOCATION);
@@ -28,6 +35,11 @@ public class ConfigHandler {
         }
     }
 
+    /**
+     * @return the loaded config file
+     * @throws IOException            when an IOException occurs
+     * @throws ClassNotFoundException when the config class could not be found
+     */
     public static Config load() throws IOException, ClassNotFoundException {
         FileInputStream fileInputStream = new FileInputStream(LOCATION);
         ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
@@ -36,6 +48,9 @@ public class ConfigHandler {
         return result;
     }
 
+    /**
+     * @return the location where the config file gets saved to
+     */
     public static String getLOCATION() {
         return LOCATION;
     }

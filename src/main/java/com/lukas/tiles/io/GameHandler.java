@@ -10,8 +10,15 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/**
+ * Handles the saving and loading of a game
+ */
 public class GameHandler {
 
+    /**
+     * @param game that should be saved
+     * @return whether the operation was successful
+     */
     public static boolean save(Game game) {
         if (game.getName() == null) {
             System.out.println("No game name found");
@@ -29,6 +36,12 @@ public class GameHandler {
         }
     }
 
+    /**
+     * @param name of the game
+     * @return the game that was saved with this name
+     * @throws ClassNotFoundException if the game class can't be found
+     * @throws IOException            when the loading fails
+     */
     public static Game load(String name) throws ClassNotFoundException, IOException {
         FileInputStream fileInputStream = new FileInputStream(name + "_game.tiles");
         ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
@@ -37,10 +50,22 @@ public class GameHandler {
         return result;
     }
 
+    /**
+     * Delete a game based on the reference to the game
+     *
+     * @param game the game that should get deleted
+     * @return whether the operation was successful
+     */
     public static boolean delete(Game game) {
         return delete(game.getName());
     }
 
+    /**
+     * Delete a game based on the name
+     *
+     * @param game name of the game that should get deleted
+     * @return whether the operation was successful
+     */
     public static boolean delete(String game) {
         try {
             Files.delete(Path.of(game + "_game.tiles"));
@@ -51,6 +76,9 @@ public class GameHandler {
         }
     }
 
+    /**
+     * @return a list of all saved games as string
+     */
     public static Set<String> getGames() {
 
         return Stream.of(Objects.requireNonNull(new File(".").listFiles()))
