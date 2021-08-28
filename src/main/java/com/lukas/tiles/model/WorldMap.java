@@ -11,6 +11,9 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.util.*;
 
+/**
+ * Represents a savable map in the game
+ */
 public class WorldMap implements Serializable {
     @Serial
     private static final long serialVersionUID = 7454031335131925460L;
@@ -20,6 +23,10 @@ public class WorldMap implements Serializable {
     private final int width;
     private final int height;
 
+    /**
+     * @param mapSize the size of the map
+     * @param mapType the type of the map
+     */
     public WorldMap(MapSize mapSize, MapType mapType) {
         mapObservers = new ArrayList<>();
         this.width = mapSize.getWidth();

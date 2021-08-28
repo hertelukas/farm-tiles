@@ -34,7 +34,7 @@ public class TileViewModel {
             tile.setBuilding(building);
             game.startBuilding(building);
             if (building instanceof Headquarter) {
-                game.getFarmers().get(0).setHasHeadquarter(true);
+                game.getFarmers().get(0).setHeadquarter();
             }
             GameHandler.save(game);
             return true;

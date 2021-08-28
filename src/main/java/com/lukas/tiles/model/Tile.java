@@ -9,6 +9,9 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
 
+/**
+ * Representation of a tile
+ */
 public class Tile implements Serializable {
     @Serial
     private static final long serialVersionUID = 143647069791664939L;
@@ -19,6 +22,10 @@ public class Tile implements Serializable {
     private transient StringProperty name;
     private Farmer owner;
 
+    /**
+     * @param tileType specifies the ground of this tile
+     * @param id       a unique id of the tile
+     */
     public Tile(TileType tileType, int id) {
         this.tileType = tileType;
         this.id = id;
@@ -26,19 +33,31 @@ public class Tile implements Serializable {
         this.name = new SimpleStringProperty(getName());
     }
 
+    /**
+     * @return the type of the tile
+     */
     public TileType getTileType() {
         return tileType;
     }
 
+    /**
+     * @param tileType that the tile now should be
+     */
     public void setTileType(TileType tileType) {
         this.tileType = tileType;
         name.set(getName());
     }
 
+    /**
+     * @param selected specify whether this tile is selected
+     */
     public void setSelected(boolean selected) {
         this.selected = selected;
     }
 
+    /**
+     * @return whether the tile is selected
+     */
     public boolean isSelected() {
         return selected;
     }
@@ -54,6 +73,9 @@ public class Tile implements Serializable {
         return tileType.name() + " " + id;
     }
 
+    /**
+     * @return the visual representation of the tile based on the buildings, the owner and the tile type
+     */
     public Paint getPaint() {
         if (isSelected()) {
             return Color.RED;
@@ -69,6 +91,9 @@ public class Tile implements Serializable {
         }
     }
 
+    /**
+     * @param farmer set an owner of this tile
+     */
     public void setOwner(Farmer farmer) {
         this.owner = farmer;
     }
@@ -81,6 +106,9 @@ public class Tile implements Serializable {
         return id;
     }
 
+    /**
+     * @param building that is placed on this tile, can only be one
+     */
     public void setBuilding(Building building) {
         this.building = building;
     }

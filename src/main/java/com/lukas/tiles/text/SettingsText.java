@@ -6,6 +6,9 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import org.springframework.stereotype.Service;
 
+/**
+ * All text data for the settingss
+ */
 @Service
 public class SettingsText implements LanguageObserver {
 

@@ -4,6 +4,9 @@ import javafx.scene.paint.Color;
 
 import java.io.Serializable;
 
+/**
+ * Representation of all different tile types
+ */
 public enum TileType implements Serializable {
     Water(Color.web("4EADD3")),
     Grass(Color.web("496000")),

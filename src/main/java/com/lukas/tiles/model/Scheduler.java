@@ -10,6 +10,13 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.util.*;
 
+/**
+ * Is responsible for scheduling a single game
+ * <p>
+ * Has an internal counter and keeps track of ScheduledObjects.
+ *
+ * @see com.lukas.tiles.model.ScheduledObject
+ */
 public class Scheduler implements Serializable {
     @Serial
     private static final long serialVersionUID = -7623687222760332639L;
@@ -25,6 +32,10 @@ public class Scheduler implements Serializable {
         start();
     }
 
+    /**
+     * Creates a new TimerTask that gets updated every second.
+     * Every ScheduledObject gets notified that a new build step occurred
+     */
     private void start() {
         TimerTask timerTask = new TimerTask() {
             @Override
@@ -43,7 +54,7 @@ public class Scheduler implements Serializable {
 
                 if (finishObserver.containsKey(counter) && finishObserver.get(counter) != null) {
                     for (ScheduledObject scheduledObject : finishObserver.get(counter)) {
-                        scheduledObject.setFinished(true);
+                        scheduledObject.setFinished();
                     }
                 }
 
@@ -56,7 +67,9 @@ public class Scheduler implements Serializable {
         timer.scheduleAtFixedRate(timerTask, 0, 1000);
     }
 
-
+    /**
+     * @param object that should get build
+     */
     public void addObject(ScheduledObject object) {
         //Update the new latest object
         if (counter + object.getBuildTime() > latestUpdate) {
@@ -73,6 +86,9 @@ public class Scheduler implements Serializable {
         }
     }
 
+    /**
+     * @return get the current counter
+     */
     public LongProperty counterProperty() {
         return counterProperty;
     }

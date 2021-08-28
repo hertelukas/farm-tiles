@@ -29,10 +29,6 @@ public class Money implements Serializable, Comparable<Money> {
         return amount;
     }
 
-    public void setAmount(long amount) {
-        this.amount = amount;
-    }
-
     public void addAmount(long amount) {
         this.amount += amount;
     }

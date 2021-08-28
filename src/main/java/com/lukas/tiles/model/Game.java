@@ -13,7 +13,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Game implements Serializable {
+/**
+ * Represents a savable game instance
+ */
+public class Game implements Serializable, TurnBasedUpdatable {
     @Serial
     private static final long serialVersionUID = 4745910367962440544L;
     private final List<Farmer> farmers;
@@ -21,50 +24,81 @@ public class Game implements Serializable {
     private String name;
     private final Scheduler scheduler;
 
+    /**
+     * @param farmers all farmers participating in a game
+     * @param map     the map of the current game
+     * @param name    the name of the game
+     */
     public Game(List<Farmer> farmers, WorldMap map, String name) {
         this.farmers = farmers;
         this.map = map;
         this.name = name;
         this.scheduler = new Scheduler();
-        GameHandler.save(this);
 
+        ///Saving the newly created game
+        GameHandler.save(this);
         setup();
     }
 
+    /**
+     * This method sets up listeners and gets called after instantiation and after deserialization
+     */
     private void setup() {
         //Update the game every ten seconds
         scheduler.counterProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue.longValue() % 10 == 0) {
-                update();
+                doTurnBasedUpdate();
             }
         });
     }
 
+    /**
+     * @return a list of farmers participating in the game
+     */
     public List<Farmer> getFarmers() {
         return farmers;
     }
 
+    /**
+     * @return the current map
+     */
     public WorldMap getMap() {
         return map;
     }
 
+    /**
+     * @return the name of the game
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * @param name change the name of the current game
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * @return get the scheduler of this game
+     */
     public Scheduler getScheduler() {
         return scheduler;
     }
 
+    /**
+     * @param building that should be build
+     */
     public void startBuilding(Building building) {
         scheduler.addObject(building);
     }
 
-    public void update() {
+    /**
+     * All game standings are getting recalculated
+     */
+    @Override
+    public void doTurnBasedUpdate() {
         System.out.println("Updating game...");
         for (Farmer farmer : farmers) {
             farmer.doTurnBasedUpdate();
@@ -87,6 +121,10 @@ public class Game implements Serializable {
         return Objects.hash(farmers, map, name);
     }
 
+    /**
+     * @param setup with information about the game
+     * @return a new game instance
+     */
     public static Game generate(Setup setup) {
         List<Farmer> tempFarmers = new ArrayList<>();
         tempFarmers.add(Farmer.generate(new Money(setup.getDifficulty().getPlayerStart()), setup.getColor()));
@@ -103,5 +141,6 @@ public class Game implements Serializable {
         ois.defaultReadObject();
         setup();
     }
+
 
 }
