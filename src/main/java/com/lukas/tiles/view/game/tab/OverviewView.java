@@ -25,7 +25,7 @@ public class OverviewView extends AbstractTabView {
     @Override
     void initialize() {
         //Adding the table view
-        TableView<Building> tableView = new TableView<>();
+        TableView<Building> ownedBuildingsTable = new TableView<>();
 
         TableColumn<Building, String> colType = new TableColumn<>("Type");
         TableColumn<Building, Money> colMaintenance = new TableColumn<>("Maintenance cost");
@@ -48,14 +48,14 @@ public class OverviewView extends AbstractTabView {
             }
         });
 
-        tableView.getColumns().add(colType);
-        tableView.getColumns().add(colMaintenance);
-        tableView.getColumns().add(colTileType);
-        tableView.getColumns().add(colTileId);
+        ownedBuildingsTable.getColumns().add(colType);
+        ownedBuildingsTable.getColumns().add(colMaintenance);
+        ownedBuildingsTable.getColumns().add(colTileType);
+        ownedBuildingsTable.getColumns().add(colTileId);
         
-        tableView.getItems().addAll(farmer.getBuildings());
-        tableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-        tableView.getSelectionModel().getSelectedItems().addListener((ListChangeListener<Building>) c -> gameView.showTile(c.getList().get(0).getTile()));
-        this.getChildren().add(tableView);
+        ownedBuildingsTable.getItems().addAll(farmer.getBuildings());
+        ownedBuildingsTable.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        ownedBuildingsTable.getSelectionModel().getSelectedItems().addListener((ListChangeListener<Building>) c -> gameView.showTile(c.getList().get(0).getTile()));
+        this.getChildren().add(ownedBuildingsTable);
     }
 }

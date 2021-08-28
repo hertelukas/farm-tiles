@@ -22,12 +22,13 @@ public class SetupView extends VBox {
     Button playButton;
 
     public SetupView(Config config) {
-        this.getStylesheets().add(FarmTilesApplication.getMainStyle());
         setupViewModel = new SetupViewModel(config);
         initialize();
     }
 
     private void initialize() {
+        this.getStylesheets().add(Style.getMainStyle());
+
         //VBox setup
         this.setSpacing(Style.getVSpacing());
         this.setAlignment(Pos.TOP_CENTER);

@@ -19,12 +19,13 @@ public class TileView extends VBox {
     private final TileViewModel tileViewModel;
 
     public TileView(Tile tile, Game game) {
-        this.getStylesheets().add(FarmTilesApplication.getMainStyle());
         this.tileViewModel = new TileViewModel(tile, game);
         initialize();
     }
 
     private void initialize() {
+        this.getStylesheets().add(Style.getMainStyle());
+
         //VBox setup
         this.setSpacing(Style.getVSpacing());
         this.setAlignment(Pos.TOP_CENTER);

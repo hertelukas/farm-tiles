@@ -13,12 +13,13 @@ public class LoadView extends VBox {
     private final LoadViewModel loadViewModel;
 
     public LoadView(Config config) {
-        this.getStylesheets().add(FarmTilesApplication.getMainStyle());
         loadViewModel = new LoadViewModel(config);
         initialize();
     }
 
     private void initialize() {
+        this.getStylesheets().add(Style.getMainStyle());
+
         //VBox setup
         this.setSpacing(Style.getVSpacing());
         this.setAlignment(Pos.TOP_CENTER);

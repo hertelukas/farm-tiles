@@ -8,6 +8,7 @@ public class Style {
     private final static double H_SPACING = 40;
     private final static Insets PADDING = new Insets(50);
     private final static Insets SMALL_PADDING = new Insets(20);
+    private final static String MAIN_STYLE = "/fxml/stylesheets/main.css";
     private final static String CHART_STYLE = "/fxml/stylesheets/chart.css";
 
 
@@ -29,6 +30,10 @@ public class Style {
 
     public static String getChartStyle() {
         return CHART_STYLE;
+    }
+
+    public static String getMainStyle() {
+        return MAIN_STYLE;
     }
 
     public static String convertToWebString(Color c) {

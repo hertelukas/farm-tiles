@@ -16,7 +16,7 @@ public abstract class AbstractSettingsView extends VBox {
 
     public AbstractSettingsView(SettingsViewModel settingsViewModel, StringProperty title) {
         this.settingsViewModel = settingsViewModel;
-        this.getStylesheets().add(FarmTilesApplication.getMainStyle());
+        this.getStylesheets().add(Style.getMainStyle());
 
         //Add a titles
         Label label = new Label();

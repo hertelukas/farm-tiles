@@ -13,7 +13,10 @@ import javafx.util.StringConverter;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * This class handles the finance view
+ * For simplicity, no ModelView is created
+ */
 public class FinanceView extends AbstractTabView {
 
     private final List<Farmer> farmers;
@@ -23,7 +26,6 @@ public class FinanceView extends AbstractTabView {
     private final NumberAxis moneyAxis;
     private final List<XYChart.Series<Number, Number>> series;
 
-    // TODO: 8/27/21 show all other farmers finance
     public FinanceView(List<Farmer> farmers, LongProperty time) {
         super(new SimpleStringProperty("Finance"));
         this.farmers = farmers;
@@ -38,6 +40,8 @@ public class FinanceView extends AbstractTabView {
     @Override
     void initialize() {
         this.getStylesheets().add(Style.getChartStyle());
+
+        //Set up the chart
         timeAxis.setForceZeroInRange(false);
         moneyAxis.setForceZeroInRange(false);
         moneyAxis.setTickLabelFormatter(new StringConverter<>() {
@@ -62,6 +66,7 @@ public class FinanceView extends AbstractTabView {
         this.moneyHistoryChart.getData().addAll(series);
 
         //Apply style
+        //Sets the symbols correctly
         StringBuilder style = new StringBuilder();
         for (int i = 0; i < farmers.size(); i++) {
             style.append("symbol-color")
@@ -71,6 +76,7 @@ public class FinanceView extends AbstractTabView {
                     .append(";");
         }
 
+        //Sets the lines correctly
         for (int i = 0; i < farmers.size(); i++) {
             String rgb = String.format("%d, %d, %d",
                     (int) (farmers.get(i).getColor().getRed() * 255),
@@ -83,6 +89,7 @@ public class FinanceView extends AbstractTabView {
 
         updateChart();
 
+        //Every 10 seconds the chart gets updated
         time.addListener((observable, oldValue, newValue) -> {
             if (newValue.longValue() % 10 == 0) {
                 updateChart();
@@ -92,6 +99,9 @@ public class FinanceView extends AbstractTabView {
         this.getChildren().add(moneyHistoryChart);
     }
 
+    /**
+     * This method loads the new money data for the last 12 months
+     */
     private void updateChart() {
         for (int i = 0; i < series.size(); i++) {
             series.get(i).getData().removeIf(numberNumberData -> true);

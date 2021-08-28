@@ -15,7 +15,7 @@ public class BottomBarView extends HBox {
 
     public BottomBarView(Farmer player, Scheduler scheduler) {
         bottomBarViewModel = new BottomBarViewModel(player, scheduler);
-        this.getStylesheets().add(FarmTilesApplication.getMainStyle());
+        this.getStylesheets().add(Style.getMainStyle());
         setupBindings();
     }
 

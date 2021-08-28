@@ -9,10 +9,14 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 
+/**
+ * Abstraction of every view in the tab view menu
+ * Sets only a title and loads the stylesheet
+ */
 public abstract class AbstractTabView extends VBox {
 
     public AbstractTabView(StringProperty title) {
-        this.getStylesheets().add(FarmTilesApplication.getMainStyle());
+        this.getStylesheets().add(Style.getMainStyle());
 
         Label label = new Label();
         label.textProperty().bind(title);
@@ -26,5 +30,11 @@ public abstract class AbstractTabView extends VBox {
         HBox.setHgrow(this, Priority.ALWAYS);
     }
 
+    /**
+     * This method has to be called by every child.
+     * It is not possible to call this by the constructor,
+     * because children might have to assign final fields in theirs
+     * after calling super()
+     */
     abstract void initialize();
 }

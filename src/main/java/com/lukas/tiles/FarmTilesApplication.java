@@ -11,7 +11,6 @@ import org.springframework.context.ConfigurableApplicationContext;
 public class FarmTilesApplication extends Application {
 
     private final static String START_PAGE = "/fxml/startPage.fxml";
-    private final static String MAIN_STYLE = "/fxml/stylesheets/main.css";
 
     ConfigurableApplicationContext springContext;
 
@@ -41,9 +40,5 @@ public class FarmTilesApplication extends Application {
 
     public static String getStartPage() {
         return START_PAGE;
-    }
-
-    public static String getMainStyle() {
-        return MAIN_STYLE;
     }
 }

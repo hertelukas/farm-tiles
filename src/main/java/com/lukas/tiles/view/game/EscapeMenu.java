@@ -25,7 +25,7 @@ public class EscapeMenu extends Stage {
         this.setMinHeight(800);
 
         Scene scene = new Scene(generateContent());
-        scene.getStylesheets().add(FarmTilesApplication.getMainStyle());
+        scene.getStylesheets().add(Style.getMainStyle());
 
         this.setScene(scene);
     }

@@ -20,7 +20,7 @@ public class SideMenu extends VBox {
         title.getStyleClass().add("h3");
         Separator separator = new Separator();
         this.getChildren().addAll(title, separator);
-        this.getStylesheets().add(FarmTilesApplication.getMainStyle());
+        this.getStylesheets().add(Style.getMainStyle());
 
 
         //Setup layout
