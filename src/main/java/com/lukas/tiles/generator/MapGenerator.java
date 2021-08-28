@@ -11,6 +11,13 @@ import java.util.*;
 
 public class MapGenerator {
 
+    /**
+     * Generates a map
+     *
+     * @param mapSize the size of the map
+     * @param mapType the type of the map
+     * @return the generated map
+     */
     public static Tile[][] generate(MapSize mapSize, MapType mapType) {
         Tile[][] result;
         switch (mapType) {
@@ -23,6 +30,13 @@ public class MapGenerator {
         return result;
     }
 
+    /**
+     * Creates a completely random map, every tile is equally randomly chosen
+     *
+     * @param width  is the width of the array
+     * @param height is the height of the array
+     * @return the generated map
+     */
     private static Tile[][] generateRandom(int width, int height) {
         Tile[][] result = new Tile[height][width];
         Random r = new Random();
@@ -37,14 +51,21 @@ public class MapGenerator {
         return result;
     }
 
+    /**
+     * Creates a 2d array with large continents, at least two and max four
+     *
+     * @param width  is the width of the array
+     * @param height is the height of the array
+     * @return the generated map
+     */
+    // TODO: 8/28/21 try generating of continents with perlin noise
     private static Tile[][] generateContinents(int width, int height) {
         WorldMap map = new WorldMap(generateWater(width, height));
 
         Random r = new Random();
 
-        //One island per 300 tiles
         int count = r.nextInt(2) + 2;
-        int maxRadius = (int) Math.sqrt(width * height) / 2;
+        int maxRadius = (int) (Math.sqrt(width * height) / 1.5);
 
         System.out.println("Generating " + count + " continents with a radius of " + maxRadius);
 
@@ -64,6 +85,13 @@ public class MapGenerator {
 
     private final static int MAX_ISLAND_RADIUS = 5;
 
+    /**
+     * Creates a 2d array with islands, at least two and around one island per 300 tiles
+     *
+     * @param width  is the width of the array
+     * @param height is the height of the array
+     * @return the generated map
+     */
     private static Tile[][] generateIslands(int width, int height) {
         WorldMap map = new WorldMap(generateWater(width, height));
 
@@ -83,6 +111,11 @@ public class MapGenerator {
         return map.getTiles();
     }
 
+    /**
+     * @param maxRadius is the maximal radius an island / continent grows from the center
+     * @param amount    amount of islands to create
+     * @param map       the map object that gets modified
+     */
     private static void genericDistanceGenerator(int maxRadius, int amount, WorldMap map) {
         Random r = new Random();
         for (int i = 0; i < amount; i++) {
@@ -126,6 +159,13 @@ public class MapGenerator {
         }
     }
 
+    /**
+     * Generates a pangea map
+     *
+     * @param width  is the width of the array
+     * @param height is the height of the array
+     * @return the final tile array representing a map
+     */
     private static Tile[][] generatePangea(int width, int height, int depth) {
         Tile[][] result = new Tile[height][width];
 
@@ -160,6 +200,13 @@ public class MapGenerator {
         return result;
     }
 
+    /**
+     * Generates a 2D tile array with only water tiles
+     *
+     * @param width  is the width of the array
+     * @param height is the height of the array
+     * @return a 2D tile array
+     */
     private static Tile[][] generateWater(int width, int height) {
         Tile[][] result = new Tile[height][width];
         int counter = 0;
