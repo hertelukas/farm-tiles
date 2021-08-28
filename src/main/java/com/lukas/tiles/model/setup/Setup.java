@@ -1,11 +1,8 @@
-package com.lukas.tiles.model;
+package com.lukas.tiles.model.setup;
 
-import com.lukas.tiles.model.setup.Difficulty;
-import com.lukas.tiles.model.setup.FarmerColor;
-import com.lukas.tiles.model.setup.MapSize;
-import com.lukas.tiles.model.setup.MapType;
-
-
+/**
+ * Represents the game settings defined by a user
+ */
 public class Setup {
     private int farmers = 5;
     private FarmerColor farmerColor = FarmerColor.getDefault();
@@ -58,10 +55,16 @@ public class Setup {
         this.name = name;
     }
 
+    /**
+     * @param farmerColor the color the user should have
+     */
     public void setColor(FarmerColor farmerColor) {
         this.farmerColor = farmerColor;
     }
 
+    /**
+     * @return the color a user chose
+     */
     public FarmerColor getColor() {
         return farmerColor;
     }

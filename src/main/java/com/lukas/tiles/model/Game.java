@@ -3,6 +3,7 @@ package com.lukas.tiles.model;
 import com.lukas.tiles.io.GameHandler;
 import com.lukas.tiles.model.building.Building;
 import com.lukas.tiles.model.setup.FarmerColor;
+import com.lukas.tiles.model.setup.Setup;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;

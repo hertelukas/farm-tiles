@@ -1,10 +1,17 @@
 package com.lukas.tiles.model.setup;
 
 import javafx.scene.paint.Color;
+import org.jetbrains.annotations.NotNull;
 
+/**
+ * Colors that a farmer can choose
+ */
 public enum FarmerColor {
     Pink(Color.PINK),
     Blue(Color.LIGHTBLUE),
+    Red(Color.RED),
+    Black(Color.BLACK),
+    White(Color.WHITE),
     Cyan(Color.CYAN);
 
     private final Color color;
@@ -13,11 +20,17 @@ public enum FarmerColor {
         this.color = color;
     }
 
-    public Color getColor() {
+    /**
+     * @return a predefined color
+     */
+    public @NotNull Color getColor() {
         return color;
     }
 
-    public static FarmerColor getDefault() {
+    /**
+     * @return the default color
+     */
+    public static @NotNull FarmerColor getDefault() {
         return Blue;
     }
 }

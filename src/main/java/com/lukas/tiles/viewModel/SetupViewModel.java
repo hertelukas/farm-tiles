@@ -3,7 +3,7 @@ package com.lukas.tiles.viewModel;
 import com.lukas.tiles.Config;
 import com.lukas.tiles.Language;
 import com.lukas.tiles.SceneLoader;
-import com.lukas.tiles.model.Setup;
+import com.lukas.tiles.model.setup.Setup;
 import com.lukas.tiles.model.setup.Difficulty;
 import com.lukas.tiles.model.setup.FarmerColor;
 import com.lukas.tiles.model.setup.MapSize;

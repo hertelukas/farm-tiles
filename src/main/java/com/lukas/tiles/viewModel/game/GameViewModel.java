@@ -3,7 +3,7 @@ package com.lukas.tiles.viewModel.game;
 import com.lukas.tiles.SceneLoader;
 import com.lukas.tiles.model.Game;
 import com.lukas.tiles.model.Scheduler;
-import com.lukas.tiles.model.Setup;
+import com.lukas.tiles.model.setup.Setup;
 import com.lukas.tiles.view.BasicObserver;
 import com.lukas.tiles.view.game.EscapeMenu;
 import javafx.scene.input.KeyCode;

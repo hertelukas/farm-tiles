@@ -1,5 +1,8 @@
 package com.lukas.tiles.model.setup;
 
+/**
+ * Different predefined map sizes
+ */
 public enum MapSize {
     Small(32, 18),
     Medium(48, 27),
@@ -14,15 +17,25 @@ public enum MapSize {
         this.height = height;
     }
 
-    public static MapSize getDefault() {
-        return Medium;
-    }
-
+    /**
+     * @return the width of the map
+     */
     public int getWidth() {
         return width;
     }
 
+    /**
+     * @return the height of the map
+     */
     public int getHeight() {
         return height;
     }
+
+    /**
+     * @return the default map size
+     */
+    public static MapSize getDefault() {
+        return Medium;
+    }
+
 }

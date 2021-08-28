@@ -2,7 +2,7 @@ package com.lukas.tiles;
 
 import com.lukas.tiles.io.GameHandler;
 import com.lukas.tiles.model.Game;
-import com.lukas.tiles.model.Setup;
+import com.lukas.tiles.model.setup.Setup;
 import com.lukas.tiles.model.building.Farm;
 import com.lukas.tiles.model.setup.Difficulty;
 import com.lukas.tiles.model.setup.MapSize;
