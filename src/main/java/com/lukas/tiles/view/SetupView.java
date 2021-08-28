@@ -16,11 +16,19 @@ import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 
+/**
+ * Visual representation of the setup. Lets the user configure a new game
+ */
 public class SetupView extends VBox {
 
     private final SetupViewModel setupViewModel;
     Button playButton;
 
+    /**
+     * Creates a new SetupView and instantiates a SetupViewModel
+     *
+     * @param config Configuration file of the game
+     */
     public SetupView(Config config) {
         setupViewModel = new SetupViewModel(config);
         initialize();

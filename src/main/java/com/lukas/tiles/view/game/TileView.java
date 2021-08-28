@@ -14,9 +14,19 @@ import javafx.scene.layout.VBox;
 
 import java.util.Set;
 
+/**
+ * The tileView is the visual representation of a tile
+ */
+// TODO: 8/28/21 this class would benefit from some clean up
 public class TileView extends VBox {
     private final TileViewModel tileViewModel;
 
+    /**
+     * Instantiates a new tile view and initializes all components
+     *
+     * @param tile that should be represented
+     * @param game the current game
+     */
     public TileView(Tile tile, Game game) {
         this.tileViewModel = new TileViewModel(tile, game);
         initialize();
@@ -72,6 +82,12 @@ public class TileView extends VBox {
         this.getChildren().add(feedback);
     }
 
+    /**
+     * @param type       The type of the current tile
+     * @param neighbours The neighbour types of the current tile
+     * @param farmer     Of the farmer who opened the TileView
+     * @return A table of all possible buildings on this tile
+     */
     private TableView<BuildingEnum> generateBuildingsTable(TileType type, Set<TileType> neighbours, Farmer farmer) {
         TableView<BuildingEnum> result = new TableView<>();
         result.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);

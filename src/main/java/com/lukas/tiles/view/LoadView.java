@@ -7,10 +7,15 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
-
+/**
+ * A visual representation of the load games menu
+ */
 public class LoadView extends VBox {
     private final LoadViewModel loadViewModel;
 
+    /**
+     * @param config Configuration file of the game
+     */
     public LoadView(Config config) {
         loadViewModel = new LoadViewModel(config);
         initialize();

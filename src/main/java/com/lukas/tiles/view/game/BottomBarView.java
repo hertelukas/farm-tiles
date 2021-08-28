@@ -8,10 +8,17 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 
+/**
+ * Visual representation of the bottom bar
+ */
 public class BottomBarView extends HBox {
 
     private final BottomBarViewModel bottomBarViewModel;
 
+    /**
+     * @param player    the current player
+     * @param scheduler the game scheduler to display the current time
+     */
     public BottomBarView(Farmer player, Scheduler scheduler) {
         bottomBarViewModel = new BottomBarViewModel(player, scheduler);
         this.getStylesheets().add(Style.getMainStyle());

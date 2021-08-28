@@ -10,10 +10,17 @@ public class GeneralSettingsView extends AbstractSettingsView {
 
     private ChoiceBox<Language> languageChoiceBox;
 
+    /**
+     * @param settingsViewModel that controls all different settings
+     * @param title             of the current menu
+     */
     public GeneralSettingsView(SettingsViewModel settingsViewModel, StringProperty title) {
         super(settingsViewModel, title);
     }
 
+    /**
+     * initializes all UI components and wires them to the settingsViewModel
+     */
     @Override
     void initialize() {
         //Language Box

@@ -9,10 +9,18 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 
+/**
+ * A multi-functional side-menu to use in game or in menus
+ */
 public class SideMenu extends VBox {
 
     private int menuIndex = 2;
 
+    /**
+     * Instantiates a new SideMenu with a title and a separator
+     *
+     * @param name the title of the menu
+     */
     public SideMenu(StringProperty name) {
         Label title = new Label();
         title.textProperty().bind(name);
@@ -32,6 +40,9 @@ public class SideMenu extends VBox {
     }
 
 
+    /**
+     * @param entry that should be displayed in the menu
+     */
     public void addMenuEntry(MenuEntry entry) {
         Button temp = new Button();
         temp.textProperty().bind(entry.textProperty());
@@ -41,6 +52,11 @@ public class SideMenu extends VBox {
         menuIndex++;
     }
 
+    /**
+     * Bottom entries are for more meta control - like closing or saving
+     *
+     * @param entry that should be displayed at the bottom
+     */
     public void addBottomEntry(MenuEntry entry) {
         Button temp = new Button();
         temp.textProperty().bind(entry.textProperty());

@@ -2,7 +2,7 @@ package com.lukas.tiles.viewModel.game;
 
 import com.lukas.tiles.model.Tile;
 import com.lukas.tiles.model.WorldMap;
-import com.lukas.tiles.view.game.MapViewModelObserver;
+import com.lukas.tiles.view.BasicObserver;
 import com.lukas.tiles.view.game.TileSelectedHandler;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
@@ -13,7 +13,7 @@ import java.util.List;
 
 public class MapViewModel implements MapObserver {
     private final WorldMap map;
-    private final List<MapViewModelObserver> mapViewModelObservers;
+    private final List<BasicObserver> mapViewModelObservers;
 
     private TileSelectedHandler selectedHandler;
 
@@ -67,7 +67,7 @@ public class MapViewModel implements MapObserver {
         return height;
     }
 
-    public void subscribe(MapViewModelObserver observer) {
+    public void subscribe(BasicObserver observer) {
         mapViewModelObservers.add(observer);
     }
 
@@ -153,7 +153,7 @@ public class MapViewModel implements MapObserver {
     }
 
     private void updateMapView() {
-        for (MapViewModelObserver mapViewModelObserver : mapViewModelObservers) {
+        for (BasicObserver mapViewModelObserver : mapViewModelObservers) {
             mapViewModelObserver.update();
         }
     }

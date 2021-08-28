@@ -12,10 +12,16 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+/**
+ * A stage which represents appears in game by pressing escape
+ */
 public class EscapeMenu extends Stage {
 
     private final EscapeMenuViewModel escapeMenuViewModel;
 
+    /**
+     * @param game the current game
+     */
     public EscapeMenu(Game game) {
         escapeMenuViewModel = new EscapeMenuViewModel(game);
         this.initModality(Modality.APPLICATION_MODAL);

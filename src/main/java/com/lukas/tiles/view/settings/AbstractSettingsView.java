@@ -9,10 +9,17 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 
+/**
+ * An abstraction of all setting menus
+ */
 public abstract class AbstractSettingsView extends VBox {
 
     private final SettingsViewModel settingsViewModel;
 
+    /**
+     * @param settingsViewModel that controls all different settings
+     * @param title             of the current menu
+     */
     public AbstractSettingsView(SettingsViewModel settingsViewModel, StringProperty title) {
         this.settingsViewModel = settingsViewModel;
         this.getStylesheets().add(Style.getMainStyle());
@@ -34,6 +41,9 @@ public abstract class AbstractSettingsView extends VBox {
 
     abstract void initialize();
 
+    /**
+     * @return the controlling settings view model
+     */
     public SettingsViewModel getSettingsViewModel() {
         return settingsViewModel;
     }
