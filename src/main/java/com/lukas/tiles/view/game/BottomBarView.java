@@ -1,6 +1,5 @@
 package com.lukas.tiles.view.game;
 
-import com.lukas.tiles.FarmTilesApplication;
 import com.lukas.tiles.model.Farmer;
 import com.lukas.tiles.model.Scheduler;
 import com.lukas.tiles.view.Style;

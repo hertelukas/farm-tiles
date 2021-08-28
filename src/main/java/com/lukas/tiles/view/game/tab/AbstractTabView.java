@@ -1,6 +1,5 @@
 package com.lukas.tiles.view.game.tab;
 
-import com.lukas.tiles.FarmTilesApplication;
 import com.lukas.tiles.view.Style;
 import javafx.beans.property.StringProperty;
 import javafx.geometry.Pos;

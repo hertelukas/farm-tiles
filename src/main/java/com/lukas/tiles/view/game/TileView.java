@@ -1,6 +1,5 @@
 package com.lukas.tiles.view.game;
 
-import com.lukas.tiles.FarmTilesApplication;
 import com.lukas.tiles.model.*;
 import com.lukas.tiles.model.building.BuildingEnum;
 import com.lukas.tiles.view.Style;

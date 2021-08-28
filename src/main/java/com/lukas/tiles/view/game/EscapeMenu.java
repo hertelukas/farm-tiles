@@ -1,6 +1,5 @@
 package com.lukas.tiles.view.game;
 
-import com.lukas.tiles.FarmTilesApplication;
 import com.lukas.tiles.model.Game;
 import com.lukas.tiles.view.Style;
 import com.lukas.tiles.viewModel.game.EscapeMenuViewModel;
