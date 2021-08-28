@@ -1,8 +1,8 @@
 package com.lukas.tiles.view.game;
 
 import com.lukas.tiles.model.Game;
-import com.lukas.tiles.model.setup.Setup;
 import com.lukas.tiles.model.Tile;
+import com.lukas.tiles.model.setup.Setup;
 import com.lukas.tiles.view.BasicObserver;
 import com.lukas.tiles.view.game.tab.TabView;
 import com.lukas.tiles.viewModel.game.GameViewModel;
