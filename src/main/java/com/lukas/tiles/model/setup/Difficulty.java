@@ -1,18 +1,19 @@
 package com.lukas.tiles.model.setup;
 
+import com.lukas.tiles.model.finance.UnmodifiableMoneyAccount;
+
 /**
  * Default settings for different difficulties
  */
 public enum Difficulty {
-    Easy(50000, 50000),
-    Medium(10000, 50000),
-    Hard(1000, 50000);
+    Easy(new UnmodifiableMoneyAccount(100000), new UnmodifiableMoneyAccount(50000)),
+    Medium(new UnmodifiableMoneyAccount(100000), new UnmodifiableMoneyAccount(10000)),
+    Hard(new UnmodifiableMoneyAccount(50000), new UnmodifiableMoneyAccount(50000));
 
-    private final long playerStart;
-    private final long farmerStart;
+    private final UnmodifiableMoneyAccount playerStart;
+    private final UnmodifiableMoneyAccount farmerStart;
 
-
-    Difficulty(long playerStart, long farmerStart) {
+    Difficulty(UnmodifiableMoneyAccount playerStart, UnmodifiableMoneyAccount farmerStart) {
         this.playerStart = playerStart;
         this.farmerStart = farmerStart;
     }
@@ -20,14 +21,14 @@ public enum Difficulty {
     /**
      * @return the amount a player gets at the start
      */
-    public long getPlayerStart() {
+    public UnmodifiableMoneyAccount getPlayerStart() {
         return playerStart;
     }
 
     /**
      * @return the amount every NPC-farmer gets
      */
-    public long getFarmerStart() {
+    public UnmodifiableMoneyAccount getFarmerStart() {
         return farmerStart;
     }
 }

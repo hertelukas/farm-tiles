@@ -1,6 +1,6 @@
 package com.lukas.tiles;
 
-import com.lukas.tiles.model.Money;
+import com.lukas.tiles.model.finance.EditableMoneyAccount;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -15,21 +15,21 @@ public class MoneyTest {
 
     @Test
     public void testMoneyToString() {
-        Money money = new Money(28234);
+        EditableMoneyAccount money = new EditableMoneyAccount(28234);
         String expected = "$282.34";
         assertEquals(expected, money.toString());
     }
 
     @Test
     public void testMoneyToString2() {
-        Money money = new Money(50000);
+        EditableMoneyAccount money = new EditableMoneyAccount(50000);
         String expected = "$500.00";
         assertEquals(expected, money.toString());
     }
 
     @Test
     public void testSubtraction() {
-        Money money = new Money(10000); //$100.00
+        EditableMoneyAccount money = new EditableMoneyAccount(10000); //$100.00
 
         //Sub $50.00
         assertTrue(money.subAmountIfPossible(5000));
@@ -38,7 +38,7 @@ public class MoneyTest {
 
     @Test
     public void testFailedSubtraction() {
-        Money money = new Money(10000); //$100.00
+        EditableMoneyAccount money = new EditableMoneyAccount(10000); //$100.00
 
         //Sub $120.00
         assertFalse(money.subAmountIfPossible(12000));
@@ -47,7 +47,7 @@ public class MoneyTest {
 
     @Test
     public void testForceSubAmount() {
-        Money money = new Money(10000); //$100.00
+        EditableMoneyAccount money = new EditableMoneyAccount(10000); //$100.00
 
         //Sub $120.00
         money.subAmount(12000);
@@ -56,7 +56,7 @@ public class MoneyTest {
 
     @Test
     public void negativeToString() {
-        Money money = new Money(-4234);
+        EditableMoneyAccount money = new EditableMoneyAccount(-4234);
         String expected = "-$42.34";
 
         assertEquals(expected, money.toString());
@@ -64,7 +64,7 @@ public class MoneyTest {
 
     @Test
     public void subtractNegativeAmount() {
-        Money money = new Money(10000);
+        EditableMoneyAccount money = new EditableMoneyAccount(10000);
         money.subAmount(-10000);
 
         assertEquals(20000, money.getAmount());
@@ -72,12 +72,12 @@ public class MoneyTest {
 
     @Test
     public void testSort() {
-        Money moneyLowest = new Money(-400);
-        Money moneyZero = new Money();
-        Money money = new Money(230);
-        Money moneyHighest = new Money(500);
+        EditableMoneyAccount moneyLowest = new EditableMoneyAccount(-400);
+        EditableMoneyAccount moneyZero = new EditableMoneyAccount();
+        EditableMoneyAccount money = new EditableMoneyAccount(230);
+        EditableMoneyAccount moneyHighest = new EditableMoneyAccount(500);
 
-        List<Money> moneyList = new ArrayList<>();
+        List<EditableMoneyAccount> moneyList = new ArrayList<>();
         moneyList.add(money);
         moneyList.add(moneyLowest);
         moneyList.add(moneyHighest);

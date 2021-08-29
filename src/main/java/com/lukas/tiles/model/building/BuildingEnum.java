@@ -1,9 +1,9 @@
 package com.lukas.tiles.model.building;
 
 import com.lukas.tiles.model.Farmer;
-import com.lukas.tiles.model.Money;
 import com.lukas.tiles.model.Tile;
 import com.lukas.tiles.model.TileType;
+import com.lukas.tiles.model.finance.UnmodifiableMoneyAccount;
 
 import java.util.Set;
 
@@ -26,8 +26,8 @@ public enum BuildingEnum {
 
     private final BuildingFactory factory;
     private final String name;
-    private final Money price;
-    private final Money maintenance;
+    private final UnmodifiableMoneyAccount price;
+    private final UnmodifiableMoneyAccount maintenance;
     private final int buildTime;
     private final BuildPredicate predicate;
 
@@ -39,7 +39,7 @@ public enum BuildingEnum {
      * @param maintenance basic maintenance cost that gets subtracted every game-update
      * @param predicate   whether the building can be placed on a given tile by a given farmer
      */
-    BuildingEnum(BuildingFactory factory, String name, Money price, int buildTime, Money maintenance, BuildPredicate predicate) {
+    BuildingEnum(BuildingFactory factory, String name, UnmodifiableMoneyAccount price, int buildTime, UnmodifiableMoneyAccount maintenance, BuildPredicate predicate) {
         this.factory = factory;
         this.name = name;
         this.price = price;
@@ -66,7 +66,7 @@ public enum BuildingEnum {
     /**
      * @return the price of the building
      */
-    public Money getPrice() {
+    public UnmodifiableMoneyAccount getPrice() {
         return price;
     }
 
@@ -80,7 +80,7 @@ public enum BuildingEnum {
     /**
      * @return the basic maintenance cost for a given building
      */
-    public Money getMaintenance() {
+    public UnmodifiableMoneyAccount getMaintenance() {
         return maintenance;
     }
 

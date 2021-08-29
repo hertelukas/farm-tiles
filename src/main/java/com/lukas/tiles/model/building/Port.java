@@ -1,7 +1,7 @@
 package com.lukas.tiles.model.building;
 
-import com.lukas.tiles.model.Money;
 import com.lukas.tiles.model.Tile;
+import com.lukas.tiles.model.finance.UnmodifiableMoneyAccount;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
@@ -15,22 +15,22 @@ import java.io.Serial;
 public class Port extends Building {
     @Serial
     private static final long serialVersionUID = -1233125229887741946L;
-    private final static long PRICE = 5000; //$50.00
+    private final static UnmodifiableMoneyAccount PRICE = new UnmodifiableMoneyAccount(5000); //$50.00
     private final static int BUILD_TIME = 20;
-    private final static int MAINTENANCE_COST = 10000; //$100.00
+    private final static UnmodifiableMoneyAccount MAINTENANCE_COST = new UnmodifiableMoneyAccount(10000); //$100.00
 
     /**
      * @param tile where the port should stand on
      */
     public Port(Tile tile) {
-        super(new Money(PRICE), BUILD_TIME, tile);
+        super(PRICE, BUILD_TIME, tile);
     }
 
     /**
      * @return the price of the building
      */
-    public static Money price() {
-        return new Money(PRICE);
+    public static UnmodifiableMoneyAccount price() {
+        return PRICE;
     }
 
     /**
@@ -43,19 +43,21 @@ public class Port extends Building {
     /**
      * @return the base maintenance cost of this building
      */
-    public static Money getMaintenance() {
-        return new Money(MAINTENANCE_COST);
+    public static UnmodifiableMoneyAccount getMaintenance() {
+        return MAINTENANCE_COST;
     }
 
     /**
-     * @return the current maintenance cost of the building, can be negative if it makes profit
+     * @return The current maintenance cost of the building, can be negative if it makes profit.
      */
     @Override
-    public long getCost() {
+    public UnmodifiableMoneyAccount getCost() {
         if (isFinished()) {
-            return 2000; //Hardcoded $20 expenses
+            long amount = MAINTENANCE_COST.getAmount();
+            // TODO: 8/29/21 make profit with the port and add it to the amount
+            return new UnmodifiableMoneyAccount(amount);
         }
-        return 0;
+        return UnmodifiableMoneyAccount.EmptyAccount;
     }
 
     /**

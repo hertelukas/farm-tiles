@@ -1,6 +1,8 @@
 package com.lukas.tiles.model;
 
 import com.lukas.tiles.model.building.Building;
+import com.lukas.tiles.model.finance.EditableMoneyAccount;
+import com.lukas.tiles.model.finance.UnmodifiableMoneyAccount;
 import com.lukas.tiles.model.setup.FarmerColor;
 import com.lukas.tiles.viewModel.game.FarmerObserver;
 import javafx.scene.paint.Color;
@@ -22,10 +24,10 @@ public class Farmer implements Serializable, TurnBasedUpdatable {
     @Serial
     private static final long serialVersionUID = -4787293802369998854L;
     private final FarmerColor color;
-    private final Money money;
+    private final EditableMoneyAccount money;
     private final String name;
     private final List<Building> buildings;
-    private final List<Long> moneyHistory;
+    private final List<UnmodifiableMoneyAccount> moneyHistory;
     private transient ArrayList<FarmerObserver> observers;
 
     private boolean hasHeadquarter = false;
@@ -35,10 +37,11 @@ public class Farmer implements Serializable, TurnBasedUpdatable {
      * @param name  of the farmer
      * @param color that represents the farmer in the game, should be unique
      */
-    public Farmer(Money money, String name, FarmerColor color) {
+    public Farmer(EditableMoneyAccount money, String name, FarmerColor color) {
         observers = new ArrayList<>();
         buildings = new ArrayList<>();
         moneyHistory = new ArrayList<>();
+        moneyHistory.add(new UnmodifiableMoneyAccount(money));
         this.money = money;
         this.name = name;
         this.color = color;
@@ -71,8 +74,8 @@ public class Farmer implements Serializable, TurnBasedUpdatable {
      * @param price of the object
      * @return whether transaction was successful
      */
-    public boolean buy(Money price) {
-        if (money.subAmountIfPossible(price)) {
+    public boolean buy(UnmodifiableMoneyAccount price) {
+        if (money.subAmountIfPossible(price.getAmount())) {
             promoteUpdate();
             return true;
         }
@@ -95,12 +98,10 @@ public class Farmer implements Serializable, TurnBasedUpdatable {
     }
 
     /**
-     * @return the money account of the farmer
+     * @return The farmers account as unmodifiable account.
      */
-
-    // TODO: 8/28/21 make unmodifiable
-    public Money getMoney() {
-        return money;
+    public UnmodifiableMoneyAccount getMoney() {
+        return new UnmodifiableMoneyAccount(money);
     }
 
     /**
@@ -142,7 +143,7 @@ public class Farmer implements Serializable, TurnBasedUpdatable {
      * @return a list of all money balances for every game update
      */
     @Unmodifiable
-    public List<Long> getMoneyHistory() {
+    public List<UnmodifiableMoneyAccount> getMoneyHistory() {
         return Collections.unmodifiableList(moneyHistory);
     }
 
@@ -154,7 +155,7 @@ public class Farmer implements Serializable, TurnBasedUpdatable {
         for (Building building : buildings) {
             this.money.subAmount(building.getCost());
         }
-        moneyHistory.add(money.getAmount());
+        moneyHistory.add(new UnmodifiableMoneyAccount(money));
         promoteUpdate();
     }
 
@@ -191,7 +192,7 @@ public class Farmer implements Serializable, TurnBasedUpdatable {
      * @param color      that represents the farmer
      * @return the generated farmer
      */
-    public static Farmer generate(Money startMoney, FarmerColor color) {
+    public static Farmer generate(EditableMoneyAccount startMoney, FarmerColor color) {
         return new Farmer(startMoney, "Joe", color);
     }
 }

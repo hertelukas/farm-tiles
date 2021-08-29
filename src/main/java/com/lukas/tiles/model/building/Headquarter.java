@@ -1,7 +1,7 @@
 package com.lukas.tiles.model.building;
 
-import com.lukas.tiles.model.Money;
 import com.lukas.tiles.model.Tile;
+import com.lukas.tiles.model.finance.UnmodifiableMoneyAccount;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
@@ -18,22 +18,22 @@ public class Headquarter extends Building {
 
     @Serial
     private static final long serialVersionUID = 5078330346355501148L;
-    private final static long PRICE = 50000; //$500.00
+    private final static UnmodifiableMoneyAccount PRICE = new UnmodifiableMoneyAccount(50000); //$500.00
     private final static int BUILD_TIME = 5;
-    private final static long MAINTENANCE_COST = 10000; //$100.00
+    private final static UnmodifiableMoneyAccount MAINTENANCE_COST = new UnmodifiableMoneyAccount(10000); //$100.00
 
     /**
      * @param tile where the HQ should stand on
      */
     public Headquarter(Tile tile) {
-        super(new Money(PRICE), BUILD_TIME, tile);
+        super(PRICE, BUILD_TIME, tile);
     }
 
     /**
      * @return the price of the building
      */
-    public static Money price() {
-        return new Money(PRICE);
+    public static UnmodifiableMoneyAccount price() {
+        return PRICE;
     }
 
     /**
@@ -46,8 +46,8 @@ public class Headquarter extends Building {
     /**
      * @return the base maintenance cost of this building
      */
-    public static Money getMaintenance() {
-        return new Money(MAINTENANCE_COST);
+    public static UnmodifiableMoneyAccount getMaintenance() {
+        return MAINTENANCE_COST;
     }
 
     /**
@@ -56,7 +56,7 @@ public class Headquarter extends Building {
      * @return the current maintenance cost of the building, can be negative if it makes profit
      */
     @Override
-    public long getCost() {
+    public UnmodifiableMoneyAccount getCost() {
         return MAINTENANCE_COST;
     }
 

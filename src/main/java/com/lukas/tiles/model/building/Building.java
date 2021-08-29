@@ -1,8 +1,8 @@
 package com.lukas.tiles.model.building;
 
-import com.lukas.tiles.model.Money;
 import com.lukas.tiles.model.ScheduledObject;
 import com.lukas.tiles.model.Tile;
+import com.lukas.tiles.model.finance.UnmodifiableMoneyAccount;
 import javafx.scene.Parent;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.VBox;
@@ -17,7 +17,7 @@ import java.util.Objects;
 public abstract class Building extends ScheduledObject {
     @Serial
     private static final long serialVersionUID = -2101702233736096724L;
-    private final Money price;
+    private final UnmodifiableMoneyAccount price;
     private final Tile tile;
 
     /**
@@ -25,7 +25,7 @@ public abstract class Building extends ScheduledObject {
      * @param buildTime_seconds time it takes to build
      * @param tile              name of the building
      */
-    protected Building(Money price, int buildTime_seconds, Tile tile) {
+    protected Building(UnmodifiableMoneyAccount price, int buildTime_seconds, Tile tile) {
         super(buildTime_seconds);
 
         this.price = price;
@@ -35,14 +35,14 @@ public abstract class Building extends ScheduledObject {
     /**
      * @return the price of the building
      */
-    public Money getPrice() {
+    public UnmodifiableMoneyAccount getPrice() {
         return price;
     }
 
     /**
      * @return the current maintenance cost of the building, can be negative if it makes profit
      */
-    public abstract long getCost();
+    public abstract UnmodifiableMoneyAccount getCost();
 
     /**
      * @return the tile where the building is standing on

@@ -1,7 +1,7 @@
 package com.lukas.tiles.view.game.tab;
 
 import com.lukas.tiles.model.Farmer;
-import com.lukas.tiles.model.Money;
+import com.lukas.tiles.model.finance.MoneyAccount;
 import com.lukas.tiles.view.Style;
 import javafx.beans.property.LongProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -47,7 +47,7 @@ public class FinanceView extends AbstractTabView {
         moneyAxis.setTickLabelFormatter(new StringConverter<>() {
             @Override
             public String toString(Number object) {
-                return Money.format(object);
+                return MoneyAccount.format(object);
             }
 
             @Override
@@ -107,7 +107,7 @@ public class FinanceView extends AbstractTabView {
             series.get(i).getData().removeIf(numberNumberData -> true);
 
             for (int j = 0; j < 12 && j < farmers.get(i).getMoneyHistory().size(); j++) {
-                series.get(i).getData().add(new XYChart.Data<>((time.get() - j * 10L), farmers.get(i).getMoneyHistory().get(farmers.get(i).getMoneyHistory().size() - (j + 1))));
+                series.get(i).getData().add(new XYChart.Data<>((time.get() - j * 10L), farmers.get(i).getMoneyHistory().get(farmers.get(i).getMoneyHistory().size() - (j + 1)).getAmount()));
             }
         }
     }

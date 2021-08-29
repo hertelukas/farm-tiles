@@ -1,10 +1,14 @@
 package com.lukas.tiles.viewModel.game;
 
 import com.lukas.tiles.io.GameHandler;
-import com.lukas.tiles.model.*;
+import com.lukas.tiles.model.Farmer;
+import com.lukas.tiles.model.Game;
+import com.lukas.tiles.model.Tile;
+import com.lukas.tiles.model.TileType;
 import com.lukas.tiles.model.building.Building;
 import com.lukas.tiles.model.building.BuildingEnum;
 import com.lukas.tiles.model.building.Headquarter;
+import com.lukas.tiles.model.finance.UnmodifiableMoneyAccount;
 import com.lukas.tiles.view.BasicObserver;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -117,7 +121,7 @@ public class TileViewModel {
     /**
      * @return the money instance of the current player
      */
-    public Money getPlayerMoney() {
+    public UnmodifiableMoneyAccount getPlayerMoney() {
         return getFarmer().getMoney();
     }
 
@@ -136,9 +140,9 @@ public class TileViewModel {
         result.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 
         TableColumn<BuildingEnum, String> colName = new TableColumn<>("Name");
-        TableColumn<BuildingEnum, Money> colPrice = new TableColumn<>("Price");
+        TableColumn<BuildingEnum, UnmodifiableMoneyAccount> colPrice = new TableColumn<>("Price");
         TableColumn<BuildingEnum, Integer> colBuildDuration = new TableColumn<>("Duration");
-        TableColumn<BuildingEnum, Money> colMaintenance = new TableColumn<>("Maintenance");
+        TableColumn<BuildingEnum, UnmodifiableMoneyAccount> colMaintenance = new TableColumn<>("Maintenance");
 
         result.getColumns().add(colName);
         result.getColumns().add(colPrice);
@@ -151,14 +155,14 @@ public class TileViewModel {
         colName.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getName()));
         colPrice.setCellValueFactory(param -> new ObservableValueBase<>() {
             @Override
-            public Money getValue() {
+            public UnmodifiableMoneyAccount getValue() {
                 return param.getValue().getPrice();
             }
         });
         colBuildDuration.setCellValueFactory(new PropertyValueFactory<>("buildTime"));
         colMaintenance.setCellValueFactory(param -> new ObservableValueBase<>() {
             @Override
-            public Money getValue() {
+            public UnmodifiableMoneyAccount getValue() {
                 return param.getValue().getMaintenance();
             }
         });

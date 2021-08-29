@@ -1,8 +1,8 @@
 package com.lukas.tiles.view.game.tab;
 
 import com.lukas.tiles.model.Farmer;
-import com.lukas.tiles.model.Money;
 import com.lukas.tiles.model.building.Building;
+import com.lukas.tiles.model.finance.UnmodifiableMoneyAccount;
 import com.lukas.tiles.view.game.GameView;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValueBase;
@@ -28,7 +28,7 @@ public class OverviewView extends AbstractTabView {
         TableView<Building> ownedBuildingsTable = new TableView<>();
 
         TableColumn<Building, String> colType = new TableColumn<>("Type");
-        TableColumn<Building, Money> colMaintenance = new TableColumn<>("Maintenance cost");
+        TableColumn<Building, UnmodifiableMoneyAccount> colMaintenance = new TableColumn<>("Maintenance cost");
         TableColumn<Building, String> colTileType = new TableColumn<>("Tile Type");
         TableColumn<Building, Integer> colTileId = new TableColumn<>("Tile ID");
 
@@ -36,7 +36,7 @@ public class OverviewView extends AbstractTabView {
         colType.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getClass().getSimpleName()));
         colMaintenance.setCellValueFactory(param -> new ObservableValueBase<>() {
             @Override
-            public Money getValue() {
+            public UnmodifiableMoneyAccount getValue() {
                 return param.getValue().getPrice();
             }
         });
@@ -52,7 +52,7 @@ public class OverviewView extends AbstractTabView {
         ownedBuildingsTable.getColumns().add(colMaintenance);
         ownedBuildingsTable.getColumns().add(colTileType);
         ownedBuildingsTable.getColumns().add(colTileId);
-        
+
         ownedBuildingsTable.getItems().addAll(farmer.getBuildings());
         ownedBuildingsTable.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         ownedBuildingsTable.getSelectionModel().getSelectedItems().addListener((ListChangeListener<Building>) c -> gameView.showTile(c.getList().get(0).getTile()));
