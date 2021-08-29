@@ -10,7 +10,7 @@ import java.util.*;
 
 /**
  * Responsible for the generation fo maps.
- * Holds different ways to do so as static methods based on the map type
+ * Holds different ways to do so as static methods based on the map type.
  *
  * @see com.lukas.tiles.model.TileType
  */
@@ -19,11 +19,11 @@ public class MapGenerator {
     private static long seed;
 
     /**
-     * Generates a map
+     * Generates a random map based on a randomly generated seed
      *
-     * @param mapSize the size of the map
-     * @param mapType the type of the map
-     * @return Returns a random generated map
+     * @param mapSize The size of the map.
+     * @param mapType The type of the map.
+     * @return Returns a random generated map.
      */
     public static Tile[][] generate(MapSize mapSize, MapType mapType) {
         long tempSeed = new Random().nextLong();
@@ -31,12 +31,12 @@ public class MapGenerator {
     }
 
     /**
-     * Generates a map
+     * Generates a map based on a given seed.
      *
-     * @param mapSize The size of the map
-     * @param mapType The type of the map
+     * @param mapSize The size of the map.
+     * @param mapType The type of the map.
      * @param seed    Seed for the creation of random values.
-     * @return Returns a random generated map
+     * @return Returns a random generated map based on a specified seed.
      */
     public static Tile[][] generate(MapSize mapSize, MapType mapType, long seed) {
         MapGenerator.seed = seed;
