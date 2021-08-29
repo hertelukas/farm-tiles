@@ -7,7 +7,7 @@ import com.lukas.tiles.model.Tile;
  */
 public interface BuildingFactory {
     /**
-     * @param tile where it should be build on
+     * @param tile where it should be built on
      * @return the created building
      */
     Building create(Tile tile);

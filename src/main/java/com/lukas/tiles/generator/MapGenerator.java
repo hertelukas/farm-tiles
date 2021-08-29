@@ -9,7 +9,7 @@ import com.lukas.tiles.model.setup.MapType;
 import java.util.*;
 
 /**
- * Responsible for the generation fo maps
+ * Responsible for the generation fo maps.
  * Holds different ways to do so as static methods based on the map type
  *
  * @see com.lukas.tiles.model.TileType

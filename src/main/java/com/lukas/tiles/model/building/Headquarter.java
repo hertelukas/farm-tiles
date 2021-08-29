@@ -9,6 +9,11 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.Serial;
 
+/**
+ * A building that manages the whole farm network of a player.
+ * <p>
+ * Can only be build once.
+ */
 public class Headquarter extends Building {
 
     @Serial

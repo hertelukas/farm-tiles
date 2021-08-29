@@ -4,6 +4,7 @@ import com.lukas.tiles.Language;
 
 /**
  * Should be implemented by all ViewModels that have to keep track of the language
+ * <p>
  * Implements the push notification variant of the observer pattern
  */
 public interface LanguageObserver {

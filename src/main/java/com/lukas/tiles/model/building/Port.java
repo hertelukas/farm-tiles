@@ -9,6 +9,9 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.Serial;
 
+/**
+ * A simple port.
+ */
 public class Port extends Building {
     @Serial
     private static final long serialVersionUID = -1233125229887741946L;

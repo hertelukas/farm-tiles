@@ -2,6 +2,7 @@ package com.lukas.tiles.view;
 
 /**
  * A generic functional interface for implementing
+ * <p>
  * the pull notification variant of the observer pattern
  */
 public interface BasicObserver {
