@@ -3,7 +3,7 @@ package com.lukas.tiles.model.finance;
 import java.io.Serial;
 
 /**
- * The class which represents all money. Saved in cents.
+ * The class represents a normal account. Adding and removing money is possible. Saved in cents.
  */
 public final class EditableMoneyAccount extends MoneyAccount {
 

@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * An abstract class that represents a money account. It has only the basic functionality.s
+ * An abstract class that represents a money account. It has only the basic functionality.
  */
 public abstract class MoneyAccount implements Serializable, Comparable<MoneyAccount> {
 

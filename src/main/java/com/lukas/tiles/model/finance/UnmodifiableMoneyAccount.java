@@ -3,7 +3,9 @@ package com.lukas.tiles.model.finance;
 import java.io.Serial;
 
 /**
- * An unmodifiable instance of an account. Should be used
+ * An unmodifiable instance of an account. Adding or removing money is not possible.
+ * <p>
+ * Should be used whenever possible.
  */
 public final class UnmodifiableMoneyAccount extends MoneyAccount {
     @Serial
