@@ -5,7 +5,7 @@ import java.util.Random;
 /**
  * Generates perlin noise
  * <p>
- * Source: <a href="https://gist.github.com/alksily/7a85a1898e65c936f861ee93516e397d>Github</a>
+ * Source: <a href="https://gist.github.com/alksily/7a85a1898e65c936f861ee93516e397d">Github</a>
  */
 public class NoiseGenerator {
     private final double seed;
