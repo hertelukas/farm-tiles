@@ -19,7 +19,7 @@ public class MapGenerator {
     private static long seed;
 
     /**
-     * Generates a random map based on a randomly generated seed
+     * Generates a random map based on a randomly generated seed.
      *
      * @param mapSize The size of the map.
      * @param mapType The type of the map.

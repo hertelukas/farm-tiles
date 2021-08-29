@@ -18,21 +18,23 @@ public enum MapSize {
     }
 
     /**
-     * @return the width of the map
+     * @return The width of the map
      */
     public int getWidth() {
         return width;
     }
 
     /**
-     * @return the height of the map
+     * @return The height of the map
      */
     public int getHeight() {
         return height;
     }
 
     /**
-     * @return the default map size
+     * This method should be called for getting the default map size.
+     *
+     * @return The default map size
      */
     public static MapSize getDefault() {
         return Medium;
