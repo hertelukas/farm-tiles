@@ -3,7 +3,7 @@ package com.lukas.tiles.model;
 import com.lukas.tiles.generator.MapGenerator;
 import com.lukas.tiles.model.setup.MapSize;
 import com.lukas.tiles.model.setup.MapType;
-import com.lukas.tiles.viewModel.game.MapObserver;
+import com.lukas.tiles.view.BasicObserver;
 import org.jetbrains.annotations.TestOnly;
 import org.jetbrains.annotations.Unmodifiable;
 
@@ -17,7 +17,7 @@ import java.util.*;
 public class WorldMap implements Serializable {
     @Serial
     private static final long serialVersionUID = 7454031335131925460L;
-    private transient List<MapObserver> mapObservers;
+    private transient List<BasicObserver> mapObservers;
 
     private final Tile[][] tiles;
     private final int width;
@@ -42,7 +42,12 @@ public class WorldMap implements Serializable {
         width = tiles[0].length;
     }
 
-    public void subscribe(MapObserver mapObserver) {
+    /**
+     * Subscribe to get notified about changes
+     *
+     * @param mapObserver the object that wants to receive updates from the WorldMap
+     */
+    public void subscribe(BasicObserver mapObserver) {
         if (mapObservers == null) {
             mapObservers = new ArrayList<>();
         }
@@ -66,7 +71,7 @@ public class WorldMap implements Serializable {
     }
 
     private void updateMap() {
-        for (MapObserver mapObserver : mapObservers) {
+        for (BasicObserver mapObserver : mapObservers) {
             mapObserver.update();
         }
     }

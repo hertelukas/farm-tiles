@@ -16,11 +16,14 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 
+/**
+ * The ViewModel for the game menu. Controls a fxml file
+ * Responsible for controlling all button presses and displayed information
+ */
 @Service
 public class GameMenuViewModel {
 
     private final static String SETTINGS_PAGE = "/fxml/settings.fxml";
-
 
     private final MenuText menuText;
     private final Config config;
@@ -32,13 +35,17 @@ public class GameMenuViewModel {
     public Label lbFeedback;
     public ProgressBar pb;
 
+    /**
+     * @param config   the configuration file of the game - autowired
+     * @param menuText the menu text service for displaying the correct language - autowired
+     */
     public GameMenuViewModel(Config config, MenuText menuText) {
         this.menuText = menuText;
         this.config = config;
     }
 
     @FXML
-    public void initialize() {
+    private void initialize() {
         setupBindings();
         loadConfig();
     }

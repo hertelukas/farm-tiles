@@ -16,6 +16,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The ViewModel for the settings menu. Controls a fxml file
+ * Responsible for controlling all button presses and displayed information
+ */
 @Service
 public class SettingsViewModel {
 
@@ -30,7 +34,10 @@ public class SettingsViewModel {
     private final SettingsText settingsText;
     private final Config config;
 
-
+    /**
+     * @param settingsText text information in the correct language - autowired
+     * @param config       the configuration file of the application - autowired
+     */
     public SettingsViewModel(SettingsText settingsText, Config config) {
         this.settingsText = settingsText;
         this.config = config;
@@ -64,6 +71,11 @@ public class SettingsViewModel {
 
     }
 
+    /**
+     * Change the language of the application
+     *
+     * @param language that should be set
+     */
     public void setLanguage(Language language) {
         addConfigAction(() -> config.setLanguage(language));
     }
@@ -75,7 +87,7 @@ public class SettingsViewModel {
     @FXML
     private void save() {
         //TODO show progress here
-        
+
         for (ConfigAction configAction : configActions) {
             configAction.apply();
         }
@@ -97,6 +109,9 @@ public class SettingsViewModel {
         }
     }
 
+    /**
+     * @return the config object
+     */
     public Config getConfig() {
         return config;
     }

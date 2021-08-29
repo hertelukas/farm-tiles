@@ -11,7 +11,11 @@ import javafx.scene.input.ScrollEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MapViewModel implements MapObserver {
+/**
+ * The ViewModel for the map view
+ * Responsible for controlling all button presses, the layout of the tiles and other displayed information
+ */
+public class MapViewModel implements BasicObserver {
     private final WorldMap map;
     private final List<BasicObserver> mapViewModelObservers;
 
@@ -23,8 +27,6 @@ public class MapViewModel implements MapObserver {
     private final static double SENSITIVITY = 240; //Higher is slower
 
     private final Tile[][] tiles;
-    private final int width;
-    private final int height;
     private final Hexagon[] hexagons;
 
     private double lastX;
@@ -35,6 +37,11 @@ public class MapViewModel implements MapObserver {
 
     private int forceCalculate = -1;
 
+    /**
+     * Creates a new MapViewModel based on a given map
+     *
+     * @param map that the MapViewModel should represent
+     */
     public MapViewModel(WorldMap map) {
         this.map = map;
         map.subscribe(this);
@@ -43,34 +50,55 @@ public class MapViewModel implements MapObserver {
         mapViewModelObservers = new ArrayList<>();
         hexagons = new Hexagon[map.getSize()];
 
-        width = map.getWidth();
-        height = map.getHeight();
         tiles = map.getTiles();
 
         update();
     }
 
-
+    /**
+     * @return a one dimensional array of all hexagons
+     */
     public Hexagon[] getHexagons() {
         return hexagons;
     }
 
+    /**
+     * @return a two-dimensional array of all tiles
+     */
     public Tile[][] getTiles() {
         return tiles;
     }
 
+    /**
+     * @return the number of tiles on the y-axis
+     */
     public int getWidth() {
-        return width;
+        return map.getWidth();
     }
 
+    /**
+     * @return the number of tiles on the x-axis
+     */
     public int getHeight() {
-        return height;
+        return map.getHeight();
     }
 
+    /**
+     * Subscribe to get notified about changes
+     *
+     * @param observer the object that wants to receive updates from the MapViewModel
+     */
     public void subscribe(BasicObserver observer) {
         mapViewModelObservers.add(observer);
     }
 
+    /**
+     * Handles all scroll events and recalculates the hexagons accordingly
+     *
+     * @param scrollEvent the scroll event that occurred
+     * @param width       the width of the current view where it was called from
+     * @param height      the height of the view where it was called from
+     */
     public void handleScroll(ScrollEvent scrollEvent, double width, double height) {
 
         //Find the current hovered hexagon
@@ -104,6 +132,13 @@ public class MapViewModel implements MapObserver {
         updateMapView();
     }
 
+    /**
+     * Handles all mouse drag events. Used for moving the map
+     *
+     * @param mouseEvent that has occurred
+     * @param width      the width of the current view where it was called from
+     * @param height     the height of the view where it was called from
+     */
     public void handleDragged(MouseEvent mouseEvent, double width, double height) {
         move(mouseEvent.getSceneY() - lastX, mouseEvent.getSceneX() - lastY, width, height);
 
@@ -121,11 +156,21 @@ public class MapViewModel implements MapObserver {
         xOffset = Math.max(-1 * (map.getHeight() + 1) * verticalFactor + height, Math.min(0.5 * verticalFactor, xOffset + x));
     }
 
+    /**
+     * Handles all mouse presses
+     *
+     * @param mouseEvent that has occurred
+     */
     public void mouseDown(MouseEvent mouseEvent) {
         lastY = mouseEvent.getSceneX();
         lastX = mouseEvent.getSceneY();
     }
 
+    /**
+     * Handles all mouse releases. This might indicate the end of a drag or a press on a tile
+     *
+     * @param mouseEvent that has occurred
+     */
     public void mouseUp(MouseEvent mouseEvent) {
         if (lastY != mouseEvent.getSceneX() || lastX != mouseEvent.getSceneY()) {
             return; //Was a drag
@@ -158,7 +203,9 @@ public class MapViewModel implements MapObserver {
         }
     }
 
-
+    /**
+     * Recalculates the hexagons and notifies subscribers about a change
+     */
     @Override
     public void update() {
         recalculate();
@@ -169,11 +216,13 @@ public class MapViewModel implements MapObserver {
         boolean force;
         for (int i = 0; i < hexagons.length; i++) {
             force = i == forceCalculate;
-            hexagons[i] = new Hexagon(i / width, i % width, zoom, xOffset, yOffset, force);
+            hexagons[i] = new Hexagon(i / getWidth(), i % getWidth(), zoom, xOffset, yOffset, force);
         }
     }
 
-
+    /**
+     * @param handler performed action that should happen when a tile gets selected
+     */
     public void setOnSelect(TileSelectedHandler handler) {
         this.selectedHandler = handler;
     }

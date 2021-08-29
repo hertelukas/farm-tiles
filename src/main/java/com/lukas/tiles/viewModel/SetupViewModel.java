@@ -9,9 +9,16 @@ import com.lukas.tiles.view.game.GameView;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
+/**
+ * The ViewModel for the setup.
+ * Responsible for controlling all button presses and displayed information
+ */
 public class SetupViewModel implements LanguageObserver {
     private final Setup setup;
 
+    /**
+     * @param config the config object - autowired
+     */
     public SetupViewModel(Config config) {
         config.subscribe(this);
         setup = new Setup();
@@ -27,6 +34,11 @@ public class SetupViewModel implements LanguageObserver {
     private final StringProperty gameName = new SimpleStringProperty();
     private final StringProperty nameHelper = new SimpleStringProperty("Name...");
 
+    /**
+     * Updates its content based on the specified language
+     *
+     * @param language the newly chosen language
+     */
     @Override
     public void update(Language language) {
         switch (language) {
@@ -45,69 +57,90 @@ public class SetupViewModel implements LanguageObserver {
         }
     }
 
+    /**
+     * @return the title of the setup view as string
+     */
     public String getTitle() {
         return title.get();
     }
 
+    /**
+     * @return the title of the setup view
+     */
     public StringProperty titleProperty() {
         return title;
     }
 
-    public String getPlay() {
-        return play.get();
-    }
-
+    /**
+     * @return the text in the play button
+     */
     public StringProperty playProperty() {
         return play;
     }
 
-    public void play() {
-        SceneLoader.getInstance().loadScene(new GameView(setup));
-    }
-
-    public String getMapSettings() {
-        return mapSettings.get();
-    }
-
+    /**
+     * @return the text for the map settings title
+     */
     public StringProperty mapSettingsProperty() {
         return mapSettings;
     }
 
-    public String getGameSettings() {
-        return gameSettings.get();
-    }
-
+    /**
+     * @return the text for the game settings title
+     */
     public StringProperty gameSettingsProperty() {
         return gameSettings;
     }
 
-
-    //Actions
-    public void setMapSize(MapSize selectedItem) {
-        setup.setMapSize(selectedItem);
-    }
-
-    public void setMapType(MapType selectedItem) {
-        setup.setMapType(selectedItem);
-    }
-
-    public void setColor(FarmerColor color) {
-        setup.setColor(color);
-    }
-
-    public String getGameName() {
-        return gameName.get();
-    }
-
+    /**
+     * This updates the game name, bidirectional
+     *
+     * @return the property controlling the current game name
+     */
     public StringProperty gameNameProperty() {
         return gameName;
     }
 
-    public String getNameHelper() {
-        return nameHelper.get();
-    }
-
+    /**
+     * @return a help text to be shown in a JavaFX TextField
+     */
     public StringProperty nameHelperProperty() {
         return nameHelper;
+    }
+
+    //Actions
+
+    /**
+     * Handles the play button press
+     */
+    public void play() {
+        SceneLoader.getInstance().loadScene(new GameView(setup));
+    }
+
+    /**
+     * Change the map size
+     *
+     * @param selectedItem the chosen map size
+     */
+    public void setMapSize(MapSize selectedItem) {
+        setup.setMapSize(selectedItem);
+    }
+
+    /**
+     * Change the map type
+     *
+     * @param selectedItem the chosen map type
+     */
+    public void setMapType(MapType selectedItem) {
+        setup.setMapType(selectedItem);
+    }
+
+    /**
+     * Set the color representing the player
+     *
+     * @param color the chosen color
+     */
+    public void setColor(FarmerColor color) {
+        setup.setColor(color);
     }
 }
