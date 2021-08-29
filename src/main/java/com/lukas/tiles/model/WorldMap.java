@@ -24,14 +24,16 @@ public class WorldMap implements Serializable {
     private final int height;
 
     /**
-     * @param mapSize the size of the map
-     * @param mapType the type of the map
+     * @param mapSize       The size of the map
+     * @param mapType       The type of the map
+     * @param useCustomSeed Whether the provided seed should be used or a randomly generated should be used
+     * @param seed          Seed for the creation of the map
      */
-    public WorldMap(MapSize mapSize, MapType mapType) {
+    public WorldMap(MapSize mapSize, MapType mapType, boolean useCustomSeed, long seed) {
         mapObservers = new ArrayList<>();
         this.width = mapSize.getWidth();
         this.height = mapSize.getHeight();
-        tiles = MapGenerator.generate(mapSize, mapType);
+        tiles = useCustomSeed ? MapGenerator.generate(mapSize, mapType, seed) : MapGenerator.generate(mapSize, mapType);
     }
 
     /**

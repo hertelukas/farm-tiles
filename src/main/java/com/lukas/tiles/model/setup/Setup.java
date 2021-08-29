@@ -9,6 +9,8 @@ public class Setup {
     private Difficulty difficulty;
     private MapSize mapSize = MapSize.getDefault();
     private MapType mapType = MapType.getDefault();
+    private long seed;
+    private boolean seedIsSet = false;
 
     private String name;
 
@@ -53,6 +55,28 @@ public class Setup {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    /**
+     * @param seed Sets a seed for the map generation
+     */
+    public void setSeed(long seed) {
+        this.seedIsSet = true;
+        this.seed = seed;
+    }
+
+    /**
+     * @return The current seed. Check if a custom seed is set with {@link #seedIsSet}
+     */
+    public long getSeed() {
+        return seed;
+    }
+
+    /**
+     * @return Whether a custom seed is set.
+     */
+    public boolean isSeedIsSet() {
+        return seedIsSet;
     }
 
     /**

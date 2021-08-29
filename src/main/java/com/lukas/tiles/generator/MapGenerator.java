@@ -26,15 +26,8 @@ public class MapGenerator {
      * @return Returns a random generated map
      */
     public static Tile[][] generate(MapSize mapSize, MapType mapType) {
-        seed = new Random().nextLong();
-        Tile[][] result;
-        switch (mapType) {
-            case Random -> result = generateRandom(mapSize.getWidth(), mapSize.getHeight());
-            case Islands -> result = generateIslands(mapSize.getWidth(), mapSize.getHeight());
-            case Pangea -> result = generatePangea(mapSize.getWidth(), mapSize.getHeight(), 0);
-            default -> result = generateContinents(mapSize.getWidth(), mapSize.getHeight());
-        }
-        return result;
+        long tempSeed = new Random().nextLong();
+        return generate(mapSize, mapType, tempSeed);
     }
 
     /**
@@ -47,7 +40,15 @@ public class MapGenerator {
      */
     public static Tile[][] generate(MapSize mapSize, MapType mapType, long seed) {
         MapGenerator.seed = seed;
-        return generate(mapSize, mapType);
+        System.out.println("Using seed: " + seed);
+        Tile[][] result;
+        switch (mapType) {
+            case Random -> result = generateRandom(mapSize.getWidth(), mapSize.getHeight());
+            case Islands -> result = generateIslands(mapSize.getWidth(), mapSize.getHeight());
+            case Pangea -> result = generatePangea(mapSize.getWidth(), mapSize.getHeight(), 0);
+            default -> result = generateContinents(mapSize.getWidth(), mapSize.getHeight());
+        }
+        return result;
     }
 
     /**

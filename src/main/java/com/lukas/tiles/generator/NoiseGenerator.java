@@ -22,14 +22,6 @@ public class NoiseGenerator {
         init();
     }
 
-    /**
-     * Generates a NoiseGenerator based on a random seed
-     */
-    public NoiseGenerator() {
-        this.seed = new Random().nextGaussian() * 255;
-        init();
-    }
-
     private void init() {
         // Initialize the permutation array.
         this.p = new int[512];

@@ -143,4 +143,11 @@ public class SetupViewModel implements LanguageObserver {
     public void setColor(FarmerColor color) {
         setup.setColor(color);
     }
+
+    /**
+     * @param seed Sets a seed for the map generation
+     */
+    public void setSeed(long seed) {
+        setup.setSeed(seed);
+    }
 }

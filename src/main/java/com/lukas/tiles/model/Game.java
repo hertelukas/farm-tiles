@@ -134,7 +134,7 @@ public class Game implements Serializable, TurnBasedUpdatable {
             tempFarmers.add(Farmer.generate(new EditableMoneyAccount(setup.getDifficulty().getFarmerStart()), FarmerColor.getDefault()));
         }
 
-        return new Game(tempFarmers, new WorldMap(setup.getMapSize(), setup.getMapType()), setup.getName());
+        return new Game(tempFarmers, new WorldMap(setup.getMapSize(), setup.getMapType(), setup.isSeedIsSet(), setup.getSeed()), setup.getName());
     }
 
     @Serial

@@ -8,6 +8,8 @@ import com.lukas.tiles.model.setup.MapSize;
 import com.lukas.tiles.model.setup.MapType;
 import com.lukas.tiles.viewModel.SetupViewModel;
 import com.sun.javafx.collections.ImmutableObservableList;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
@@ -123,6 +125,23 @@ public class SetupView extends VBox {
         nameInput.promptTextProperty().bind(setupViewModel.nameHelperProperty());
         nameInput.textProperty().bindBidirectional(setupViewModel.gameNameProperty());
         result.getChildren().add(nameInput);
+
+        TextField seedInput = new TextField();
+        seedInput.promptTextProperty().set("Insert custom seed...");
+        seedInput.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\d*")) {
+                seedInput.setText(newValue.replaceAll("[^\\d]", ""));
+            }
+            try {
+                setupViewModel.setSeed(Long.parseLong(newValue));
+            } catch (NumberFormatException ignored) {
+                //If the input can be parsed, delete everything
+                seedInput.setText("");
+            }
+
+        });
+        result.getChildren().add(seedInput);
+
         playButton.disableProperty().bind(setupViewModel.gameNameProperty().isEmpty());
         return result;
     }
