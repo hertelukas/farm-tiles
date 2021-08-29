@@ -50,6 +50,7 @@ public class FarmTilesApplication extends Application {
     @Override
     public void stop() {
         springContext.stop();
+        System.exit(0); // TODO: 8/29/21 this might not be the best way 
     }
 
     /**
