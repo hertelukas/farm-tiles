@@ -1,25 +1,25 @@
 package com.lukas.tiles.view.game;
 
-import com.lukas.tiles.model.*;
+import com.lukas.tiles.model.Game;
+import com.lukas.tiles.model.Tile;
 import com.lukas.tiles.model.building.BuildingEnum;
+import com.lukas.tiles.view.BasicObserver;
 import com.lukas.tiles.view.Style;
 import com.lukas.tiles.viewModel.game.TileViewModel;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ObservableValueBase;
-import javafx.collections.ListChangeListener;
 import javafx.geometry.Pos;
-import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableView;
 import javafx.scene.layout.VBox;
-
-import java.util.Set;
 
 /**
  * The tileView is the visual representation of a tile
  */
-// TODO: 8/28/21 this class would benefit from some clean up
-public class TileView extends VBox {
+public class TileView extends VBox implements BasicObserver {
     private final TileViewModel tileViewModel;
+    private Button buyButton;
+    private TableView<BuildingEnum> buildingsTableView;
+    private boolean isShowingBuyMenu = false;
 
     /**
      * Instantiates a new tile view and initializes all components
@@ -29,8 +29,10 @@ public class TileView extends VBox {
      */
     public TileView(Tile tile, Game game) {
         this.tileViewModel = new TileViewModel(tile, game);
+        this.tileViewModel.subscribe(this);
         initialize();
     }
+
 
     private void initialize() {
         this.getStylesheets().add(Style.getMainStyle());
@@ -46,80 +48,50 @@ public class TileView extends VBox {
         label.getStyleClass().add("h1");
         this.getChildren().add(label);
 
-        Label feedback = new Label();
 
         if (tileViewModel.hasBuilding()) {
             this.getChildren().add(tileViewModel.getBuilding().getDescription());
         } else {
-            TableView<BuildingEnum> buildingsTableView = generateBuildingsTable(tileViewModel.getTileType(), tileViewModel.getNeighbourTileTypes(), tileViewModel.getFarmer());
+            isShowingBuyMenu = true;
+            buildingsTableView = tileViewModel.generateBuildingsTable();
 
-            Button button = new Button();
+            buyButton = new Button();
+            buyButton.textProperty().bind(tileViewModel.buyButtonTextProperty());
+            buyButton.disableProperty().bind(tileViewModel.canBeBoughtProperty().not());
+
             //Disable button if nothing is selected
-            button.visibleProperty().bind(buildingsTableView.getSelectionModel().selectedItemProperty().isNotNull());
+            buyButton.visibleProperty().bind(buildingsTableView.getSelectionModel().selectedItemProperty().isNotNull());
 
-            buildingsTableView.getSelectionModel().getSelectedItems().addListener((ListChangeListener<BuildingEnum>) c -> {
-                button.setText("Buy " + c.getList().get(0).getName());
-                button.setDisable(c.getList().get(0).getPrice().getAmount() > tileViewModel.getPlayerMoney().getAmount());
-                button.setOnAction(e -> {
-                    if (!tileViewModel.buyBuilding(c.getList().get(0).instantiate(tileViewModel.getTile()))) {
-                        feedback.setVisible(true);
-                        feedback.setText("Failed to buy building");
-                    } else {
-                        this.getChildren().remove(button);
-                        this.getChildren().remove(buildingsTableView);
-                        //Insert description in front of the feedback label
-                        this.getChildren().add(1, tileViewModel.getBuilding().getDescription());
-                    }
-                });
-            });
 
-            this.getChildren().addAll(buildingsTableView, button);
+            this.getChildren().addAll(buildingsTableView, buyButton);
         }
 
-
-        feedback.setVisible(false);
+        Label feedback = new Label();
+        feedback.textProperty().bind(tileViewModel.feedbackTextProperty());
+        feedback.visibleProperty().bind(tileViewModel.feedbackTextProperty().isNotEmpty());
 
         this.getChildren().add(feedback);
     }
 
     /**
-     * @param type       The type of the current tile
-     * @param neighbours The neighbour types of the current tile
-     * @param farmer     Of the farmer who opened the TileView
-     * @return A table of all possible buildings on this tile
+     * Implements the handling of the changes occurred by an update of the TileViewModel
      */
-    private TableView<BuildingEnum> generateBuildingsTable(TileType type, Set<TileType> neighbours, Farmer farmer) {
-        TableView<BuildingEnum> result = new TableView<>();
-        result.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+    @Override
+    public void update() {
+        if (buyButton == null) {
+            System.out.println("Button is null, can not be updated. Initialize has to be called first");
+            return;
+        }
 
-        TableColumn<BuildingEnum, String> colName = new TableColumn<>("Name");
-        TableColumn<BuildingEnum, Money> colPrice = new TableColumn<>("Price");
-        TableColumn<BuildingEnum, Integer> colBuildDuration = new TableColumn<>("Duration");
-        TableColumn<BuildingEnum, Money> colMaintenance = new TableColumn<>("Maintenance");
+        if (isShowingBuyMenu && tileViewModel.hasBuilding()) {
+            isShowingBuyMenu = false;
+            this.getChildren().remove(buyButton);
+            this.getChildren().remove(buildingsTableView);
+            this.getChildren().add(1, tileViewModel.getBuilding().getDescription());
+        }
 
-        result.getColumns().add(colName);
-        result.getColumns().add(colPrice);
-        result.getColumns().add(colBuildDuration);
-        result.getColumns().add(colMaintenance);
-
-        result.getItems().addAll(BuildingEnum.values());
-        result.getItems().removeIf(buildingEnum -> !buildingEnum.canBeBuild(type, neighbours, farmer));
-
-        colName.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getName()));
-        colPrice.setCellValueFactory(param -> new ObservableValueBase<>() {
-            @Override
-            public Money getValue() {
-                return param.getValue().getPrice();
-            }
-        });
-        colBuildDuration.setCellValueFactory(new PropertyValueFactory<>("buildTime"));
-        colMaintenance.setCellValueFactory(param -> new ObservableValueBase<>() {
-            @Override
-            public Money getValue() {
-                return param.getValue().getMaintenance();
-            }
-        });
-
-        return result;
+        buyButton.setOnAction(tileViewModel.getOnBuyButtonPress());
     }
+
+
 }
