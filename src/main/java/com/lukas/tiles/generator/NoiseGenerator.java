@@ -1,4 +1,4 @@
-package com.lukas.tiles;
+package com.lukas.tiles.generator;
 
 import java.util.Random;
 

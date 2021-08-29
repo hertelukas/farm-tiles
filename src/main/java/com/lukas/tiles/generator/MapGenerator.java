@@ -1,6 +1,5 @@
 package com.lukas.tiles.generator;
 
-import com.lukas.tiles.NoiseGenerator;
 import com.lukas.tiles.model.Tile;
 import com.lukas.tiles.model.TileType;
 import com.lukas.tiles.model.WorldMap;
