@@ -12,8 +12,10 @@ import org.springframework.context.ConfigurableApplicationContext;
 import java.io.IOException;
 
 /**
+ * The SceneLoader is realised as a singleton.
+ * <p>
  * Responsible for loading different scenes.
- * Can load fxml files, stages and layouts
+ * Can load fxml files, stages and layouts.
  */
 public class SceneLoader {
 
@@ -28,6 +30,9 @@ public class SceneLoader {
         private static final SceneLoader INSTANCE = new SceneLoader();
     }
 
+    /**
+     * @return The Singleton instance of the SceneLoader
+     */
     public static SceneLoader getInstance() {
         return SceneLoaderHolder.INSTANCE;
     }

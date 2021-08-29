@@ -26,6 +26,9 @@ public class Scheduler implements Serializable {
 
     private final Map<Long, List<ScheduledObject>> finishObserver;
 
+    /**
+     * Instantiates a new Scheduler.
+     */
     public Scheduler() {
         finishObserver = new HashMap<>();
         counterProperty = new SimpleLongProperty(counter);
@@ -34,7 +37,9 @@ public class Scheduler implements Serializable {
 
     /**
      * Creates a new TimerTask that gets updated every second.
-     * Every ScheduledObject gets notified that a new build step occurred
+     * <p>
+     * Every ScheduledObject gets notified that a new build step occurred.
+     * Furthermore, the counter gets increased by one.
      */
     private void start() {
         TimerTask timerTask = new TimerTask() {
@@ -68,7 +73,7 @@ public class Scheduler implements Serializable {
     }
 
     /**
-     * @param object that should get build
+     * @param object Add an object which has to keep track of a build progress.
      */
     public void addObject(ScheduledObject object) {
         //Update the new latest object

@@ -34,14 +34,14 @@ public class Tile implements Serializable {
     }
 
     /**
-     * @return the type of the tile
+     * @return Get the type of the tile.
      */
     public TileType getTileType() {
         return tileType;
     }
 
     /**
-     * @param tileType that the tile now should be
+     * @param tileType Specify the type of the tile.
      */
     public void setTileType(TileType tileType) {
         this.tileType = tileType;
@@ -49,19 +49,22 @@ public class Tile implements Serializable {
     }
 
     /**
-     * @param selected specify whether this tile is selected
+     * @param selected Specify whether this tile is selected.
      */
     public void setSelected(boolean selected) {
         this.selected = selected;
     }
 
     /**
-     * @return whether the tile is selected
+     * @return Whether the tile is selected.
      */
     public boolean isSelected() {
         return selected;
     }
 
+    /**
+     * @return The name of a tile.
+     */
     public StringProperty nameProperty() {
         if (name == null) {
             name = new SimpleStringProperty(getName());
@@ -69,12 +72,15 @@ public class Tile implements Serializable {
         return name;
     }
 
+    /**
+     * @return The name of a tile.
+     */
     public String getName() {
         return tileType.name() + " " + id;
     }
 
     /**
-     * @return the visual representation of the tile based on the buildings, the owner and the tile type
+     * @return The visual representation of the tile based on the buildings, the owner and the tile type.
      */
     public Paint getPaint() {
         if (isSelected()) {
@@ -92,27 +98,36 @@ public class Tile implements Serializable {
     }
 
     /**
-     * @param farmer set an owner of this tile
+     * @param farmer Set an owner for this tile.
      */
     public void setOwner(Farmer farmer) {
         this.owner = farmer;
     }
 
+    /**
+     * @return Gets the farmer who owns this farm.
+     */
     public Farmer getOwner() {
         return owner;
     }
 
+    /**
+     * @return Get the unique id of the tile.
+     */
     public int getId() {
         return id;
     }
 
     /**
-     * @param building that is placed on this tile, can only be one
+     * @param building Specify a building placed on this tile, can only be one.
      */
     public void setBuilding(Building building) {
         this.building = building;
     }
 
+    /**
+     * @return The building placed on this tile.
+     */
     public Building getBuilding() {
         return building;
     }

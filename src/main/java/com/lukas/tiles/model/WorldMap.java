@@ -34,6 +34,9 @@ public class WorldMap implements Serializable {
         tiles = MapGenerator.generate(mapSize, mapType);
     }
 
+    /**
+     * @param tiles Creates a WorldMap based on a predefined array instead of generating a new map.
+     */
     @TestOnly
     public WorldMap(Tile[][] tiles) {
         mapObservers = new ArrayList<>();
@@ -54,18 +57,30 @@ public class WorldMap implements Serializable {
         mapObservers.add(mapObserver);
     }
 
+    /**
+     * @return The total size in tiles of the map.
+     */
     public int getSize() {
         return width * height;
     }
 
+    /**
+     * @return The 2D array representing the map in tiles.
+     */
     public Tile[][] getTiles() {
         return tiles;
     }
 
+    /**
+     * @return The height of the map (x-direction) in tiles.
+     */
     public int getHeight() {
         return height;
     }
 
+    /**
+     * @return The width of the map (y-direction) in tiles.
+     */
     public int getWidth() {
         return width;
     }
@@ -76,6 +91,10 @@ public class WorldMap implements Serializable {
         }
     }
 
+    /**
+     * @param tile The tile that is getting searched for.
+     * @return The (x,y)-coordinate of the tile.
+     */
     public Coordinate getCoordinate(Tile tile) {
         for (int i = 0; i < tiles.length; i++) {
             for (int j = 0; j < tiles[i].length; j++) {
@@ -87,6 +106,10 @@ public class WorldMap implements Serializable {
         return null;
     }
 
+    /**
+     * @return A Set of islands, an island is represented as set.
+     */
+    @Unmodifiable
     public Set<Set<Tile>> getIslands() {
         Set<Set<Tile>> result = new HashSet<>();
 
@@ -109,9 +132,13 @@ public class WorldMap implements Serializable {
             }
         }
 
-        return result;
+        return Collections.unmodifiableSet(result);
     }
 
+    /**
+     * @param tile A tile which should be searched for.
+     * @return All tiles connected via land to a given tile.
+     */
     @Unmodifiable
     public Set<Tile> getIsland(Tile tile) {
         //If not an island, return empty
@@ -137,10 +164,18 @@ public class WorldMap implements Serializable {
         return Collections.unmodifiableSet(result);
     }
 
+    /**
+     * @param from The tile where it should be searched from.
+     * @return An optional that contains the left tile of the given one, if there is one.
+     */
     public Optional<Tile> getLeft(Tile from) {
         return getLeft(getCoordinate(from));
     }
 
+    /**
+     * @param coordinate The coordinate where it should be searched from.
+     * @return An optional that contains the left tile of the given location, if there is one.
+     */
     public Optional<Tile> getLeft(Coordinate coordinate) {
         if (coordinate.y() > 0) {
             return Optional.of(tiles[coordinate.x()][coordinate.y() - 1]);
@@ -148,10 +183,18 @@ public class WorldMap implements Serializable {
         return Optional.empty();
     }
 
+    /**
+     * @param from The tile where it should be searched from.
+     * @return An optional that contains the right tile of the given one, if there is one.
+     */
     public Optional<Tile> getRight(Tile from) {
         return getRight(getCoordinate(from));
     }
 
+    /**
+     * @param coordinate The coordinate where it should be searched from.
+     * @return An optional that contains the right tile of the given location, if there is one.
+     */
     public Optional<Tile> getRight(Coordinate coordinate) {
         if (coordinate.y() + 1 < width) {
             return Optional.of(tiles[coordinate.x()][coordinate.y() + 1]);
@@ -159,10 +202,18 @@ public class WorldMap implements Serializable {
         return Optional.empty();
     }
 
+    /**
+     * @param from The tile where it should be searched from.
+     * @return An optional that contains the top left tile of the given one, if there is one.
+     */
     public Optional<Tile> getTopLeft(Tile from) {
         return getTopLeft(getCoordinate(from));
     }
 
+    /**
+     * @param coordinate The coordinate where it should be searched from.
+     * @return An optional that contains the top left tile of the given location, if there is one.
+     */
     public Optional<Tile> getTopLeft(Coordinate coordinate) {
         if (coordinate.isEven()) {
             if (coordinate.y() > 0 && coordinate.x() > 0) {
@@ -174,10 +225,18 @@ public class WorldMap implements Serializable {
         return Optional.empty();
     }
 
+    /**
+     * @param from The coordinate where it should be searched from.
+     * @return An optional that contains the top right tile of the given one, if there is one.
+     */
     public Optional<Tile> getTopRight(Tile from) {
         return getTopRight(getCoordinate(from));
     }
 
+    /**
+     * @param coordinate The coordinate where it should be searched from.
+     * @return An optional that contains the top right tile of the given location, if there is one.
+     */
     public Optional<Tile> getTopRight(Coordinate coordinate) {
         if (coordinate.isEven()) {
             if (coordinate.y() < width && coordinate.x() > 0) {
@@ -191,10 +250,18 @@ public class WorldMap implements Serializable {
         return Optional.empty();
     }
 
+    /**
+     * @param from The tile where it should be searched from.
+     * @return An optional that contains the bottom left tile of the given one, if there is one.
+     */
     public Optional<Tile> getBottomLeft(Tile from) {
         return getBottomLeft(getCoordinate(from));
     }
 
+    /**
+     * @param coordinate The coordinate where it should be searched from.
+     * @return An optional that contains the bottom left tile of the given location, if there is one.
+     */
     public Optional<Tile> getBottomLeft(Coordinate coordinate) {
         if (coordinate.isEven()) {
             if (coordinate.y() > 0 && coordinate.x() + 1 < height) {
@@ -208,10 +275,18 @@ public class WorldMap implements Serializable {
         return Optional.empty();
     }
 
+    /**
+     * @param from The coordinate where it should be searched from.
+     * @return An optional that contains the bottom right tile of the given one, if there is one.
+     */
     public Optional<Tile> getBottomRight(Tile from) {
         return getBottomRight(getCoordinate(from));
     }
 
+    /**
+     * @param coordinate The coordinate where it should be searched from.
+     * @return An optional that contains the bottom right tile of the given location, if there is one.
+     */
     public Optional<Tile> getBottomRight(Coordinate coordinate) {
         if (coordinate.isEven()) {
             if (coordinate.y() < width && coordinate.x() + 1 < height) {
@@ -226,6 +301,10 @@ public class WorldMap implements Serializable {
         return Optional.empty();
     }
 
+    /**
+     * @param tiles A collection of tiles.
+     * @return A set of all directly adjacent tiles to the given collection of tiles.
+     */
     public Set<Tile> getAdjacent(Collection<Tile> tiles) {
         Set<Tile> result = new HashSet<>();
 
@@ -240,6 +319,9 @@ public class WorldMap implements Serializable {
         return Collections.unmodifiableSet(result);
     }
 
+    /**
+     * @return A set of adjacent tiles to a given tile.
+     */
     @Unmodifiable
     public Set<Tile> getAdjacent(Tile tile) {
         Coordinate coordinate = getCoordinate(tile);
@@ -249,6 +331,9 @@ public class WorldMap implements Serializable {
         return Collections.emptySet();
     }
 
+    /**
+     * @return A set of adjacent tiles to a given location.
+     */
     @Unmodifiable
     public Set<Tile> getAdjacent(Coordinate coordinate) {
         Set<Tile> result = new HashSet<>();

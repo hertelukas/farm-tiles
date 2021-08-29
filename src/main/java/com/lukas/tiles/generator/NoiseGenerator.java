@@ -76,6 +76,13 @@ public class NoiseGenerator {
         return this.seed;
     }
 
+    /**
+     * Get the noise value at a specific location
+     *
+     * @param x X coordinate for the perlin noise generation
+     * @param y Y coordinate for the perlin noise generation
+     * @return The perlin noise value at this point
+     */
     public double noise(double x, double y) {
         double value = 0.0;
         double size = default_size;

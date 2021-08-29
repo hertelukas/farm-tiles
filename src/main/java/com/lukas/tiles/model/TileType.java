@@ -19,6 +19,9 @@ public enum TileType implements Serializable {
         this.color = color;
     }
 
+    /**
+     * @return The Color of a tile type.
+     */
     public Color getColor() {
         return color;
     }
