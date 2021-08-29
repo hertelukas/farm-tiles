@@ -7,6 +7,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 
+/**
+ * The main springboot application, starts a JavaFX application
+ */
 @SpringBootApplication
 public class FarmTilesApplication extends Application {
 
@@ -18,6 +21,9 @@ public class FarmTilesApplication extends Application {
         launch(FarmTilesApplication.class, args);
     }
 
+    /**
+     * Initializes the application and loads all fonts
+     */
     @Override
     public void init() {
         springContext = SpringApplication.run(FarmTilesApplication.class);
@@ -26,6 +32,11 @@ public class FarmTilesApplication extends Application {
         Font.loadFont(getClass().getResourceAsStream("/fxml/fonts/static/Raleway-Bold.ttf"), 16);
     }
 
+    /**
+     * Initial startup of the application
+     *
+     * @param primaryStage the stage that will be displayed
+     */
     @Override
     public void start(Stage primaryStage) throws Exception {
         primaryStage.setTitle("Farm Tiles");
@@ -33,11 +44,17 @@ public class FarmTilesApplication extends Application {
         SceneLoader.getInstance().loadScene(START_PAGE);
     }
 
+    /**
+     * Handles the stopping of the application
+     */
     @Override
     public void stop() {
         springContext.stop();
     }
 
+    /**
+     * @return the location of the fxml file for the main men
+     */
     public static String getStartPage() {
         return START_PAGE;
     }

@@ -2,18 +2,29 @@ package com.lukas.tiles;
 
 import java.util.Random;
 
-//Source: https://gist.github.com/alksily/7a85a1898e65c936f861ee93516e397d
+/**
+ * Generates perlin noise
+ * <p>
+ * Source: https://gist.github.com/alksily/7a85a1898e65c936f861ee93516e397d
+ */
 public class NoiseGenerator {
     private double seed;
     private long default_size;
     private int[] p;
-    private int[] permutation;
 
+    /**
+     * New NoiseGenerator based on a given seed
+     *
+     * @param seed used for all new Randoms
+     */
     public NoiseGenerator(double seed) {
         this.seed = seed;
         init();
     }
 
+    /**
+     * Generates a NoiseGenerator based on a random seed
+     */
     public NoiseGenerator() {
         this.seed = new Random().nextGaussian() * 255;
         init();
@@ -22,7 +33,7 @@ public class NoiseGenerator {
     private void init() {
         // Initialize the permutation array.
         this.p = new int[512];
-        this.permutation = new int[]{151, 160, 137, 91, 90, 15, 131, 13, 201,
+        int[] permutation = new int[]{151, 160, 137, 91, 90, 15, 131, 13, 201,
                 95, 96, 53, 194, 233, 7, 225, 140, 36, 103, 30, 69, 142, 8, 99,
                 37, 240, 21, 10, 23, 190, 6, 148, 247, 120, 234, 75, 0, 26,
                 197, 62, 94, 252, 219, 203, 117, 35, 11, 32, 57, 177, 33, 88,
@@ -51,37 +62,18 @@ public class NoiseGenerator {
 
     }
 
+    /**
+     * @param seed set a custom seed
+     */
     public void setSeed(double seed) {
         this.seed = seed;
     }
 
+    /**
+     * @return get the currently used seed
+     */
     public double getSeed() {
         return this.seed;
-    }
-
-    public double noise(double x, double y, double z, int size) {
-        double value = 0.0;
-        double initialSize = size;
-
-        while (size >= 1) {
-            value += smoothNoise((x / size), (y / size), (z / size)) * size;
-            size /= 2.0;
-        }
-
-        return value / initialSize;
-    }
-
-    public double noise(double x, double y, double z) {
-        double value = 0.0;
-        double size = default_size;
-        double initialSize = size;
-
-        while (size >= 1) {
-            value += smoothNoise((x / size), (y / size), (z / size)) * size;
-            size /= 2.0;
-        }
-
-        return value / initialSize;
     }
 
     public double noise(double x, double y) {
@@ -97,20 +89,7 @@ public class NoiseGenerator {
         return value / initialSize;
     }
 
-    public double noise(double x) {
-        double value = 0.0;
-        double size = default_size;
-        double initialSize = size;
-
-        while (size >= 1) {
-            value += smoothNoise((x / size), (0f / size), (0f / size)) * size;
-            size /= 2.0;
-        }
-
-        return value / initialSize;
-    }
-
-    public double smoothNoise(double x, double y, double z) {
+    private double smoothNoise(double x, double y, double z) {
         // Offset each coordinate by the seed value
         x += this.seed;
         y += this.seed;
@@ -136,11 +115,11 @@ public class NoiseGenerator {
         int BB = p[B + 1] + Z; // THE 8 CUBE CORNERS,
 
         return lerp(w, lerp(v, lerp(u, grad(p[AA], x, y, z),    // AND ADD
-                grad(p[BA], x - 1, y, z)), // BLENDED
-                lerp(u, grad(p[AB], x, y - 1, z),    // RESULTS
-                        grad(p[BB], x - 1, y - 1, z))),// FROM 8
+                                grad(p[BA], x - 1, y, z)), // BLENDED
+                        lerp(u, grad(p[AB], x, y - 1, z),    // RESULTS
+                                grad(p[BB], x - 1, y - 1, z))),// FROM 8
                 lerp(v, lerp(u, grad(p[AA + 1], x, y, z - 1),    // CORNERS
-                        grad(p[BA + 1], x - 1, y, z - 1)), // OF CUBE
+                                grad(p[BA + 1], x - 1, y, z - 1)), // OF CUBE
                         lerp(u, grad(p[AB + 1], x, y - 1, z - 1),
                                 grad(p[BB + 1], x - 1, y - 1, z - 1))));
     }

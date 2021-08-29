@@ -11,6 +11,10 @@ import org.springframework.context.ConfigurableApplicationContext;
 
 import java.io.IOException;
 
+/**
+ * Responsible for loading different scenes.
+ * Can load fxml files, stages and layouts
+ */
 public class SceneLoader {
 
     Scene mainScene;
@@ -31,6 +35,10 @@ public class SceneLoader {
     private Stage stage;
     private ConfigurableApplicationContext context;
 
+    /**
+     * @param stage   the main stage
+     * @param context the springboot context
+     */
     public void init(Stage stage, ConfigurableApplicationContext context) {
 
         if (this.stage != null) {
@@ -49,6 +57,10 @@ public class SceneLoader {
         stage.show();
     }
 
+    /**
+     * @param fxmlFile the fxml file to be loaded in the center, old children get removed
+     * @throws IOException whether the loading fails
+     */
     public void loadScene(String fxmlFile) throws IOException {
         if (stage == null) {
             throw new RuntimeException("Stage is not set. Set a stage first");
@@ -62,11 +74,17 @@ public class SceneLoader {
         root.setCenter(item);
     }
 
+    /**
+     * @param item that should be displayed in the center, old children get removed
+     */
     public void loadScene(Parent item) {
         root.getChildren().removeIf(node -> true);
         root.setCenter(item);
     }
 
+    /**
+     * @param stage that should be shown as a child
+     */
     public void loadStage(Stage stage) {
         stage.show();
     }
