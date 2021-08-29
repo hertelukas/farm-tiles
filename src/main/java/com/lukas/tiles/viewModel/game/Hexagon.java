@@ -7,14 +7,19 @@ import javafx.beans.property.SimpleDoubleProperty;
 import java.util.Arrays;
 
 /**
- * The mathematical representation of a tile
+ * The mathematical representation of a tile.
  * Holds all information about the size and layout of a tile
- * +------------------> y
+ * <p>
+ * + - - - - - - - - > y
+ * <p>
  * |
+ * <p>
  * |
+ * <p>
  * |
- * |
+ * <p>
  * v
+ * <p>
  * x
  */
 public class Hexagon {
