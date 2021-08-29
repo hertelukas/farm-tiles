@@ -11,8 +11,17 @@ import java.util.Set;
  * A list of all buildings and there requirements
  */
 public enum BuildingEnum {
+    /**
+     * Entry representing a farm
+     */
     FarmEnum(Farm::new, "Farm", Farm.price(), Farm.buildTime(), Farm.getMaintenance(), (standingOn, neighbours, farmer) -> standingOn == TileType.Grass && farmer.isHasHeadquarter()),
+    /**
+     * Entry representing a port
+     */
     PortEnum(Port::new, "Port", Port.price(), Port.buildTime(), Port.getMaintenance(), (standingOn, neighbours, farmer) -> standingOn == TileType.Coastal && neighbours.contains(TileType.Water) && farmer.isHasHeadquarter()),
+    /**
+     * Entry representing a HQ
+     */
     HeadquarterEnum(Headquarter::new, "Headquarter", Headquarter.price(), Headquarter.buildTime(), Headquarter.getMaintenance(), (standingOn, neighbours, farmer) -> standingOn == TileType.Grass && !farmer.isHasHeadquarter());
 
     private final BuildingFactory factory;

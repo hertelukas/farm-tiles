@@ -19,7 +19,9 @@ public class Farm extends Building {
     private final static int BUILD_TIME = 60;
     private final static long MAINTENANCE_COST = 10000; //$100.00
 
-
+    /**
+     * @param tile where the farm should stand on
+     */
     public Farm(Tile tile) {
         super(new Money(PRICE), BUILD_TIME, tile);
     }

@@ -7,5 +7,8 @@ import com.lukas.tiles.model.Farmer;
  * Implements the push notification variant of the observer pattern
  */
 public interface FarmerObserver {
+    /**
+     * @param player that got updated
+     */
     void update(Farmer player);
 }

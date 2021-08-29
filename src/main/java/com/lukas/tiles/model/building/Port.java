@@ -16,6 +16,9 @@ public class Port extends Building {
     private final static int BUILD_TIME = 20;
     private final static int MAINTENANCE_COST = 10000; //$100.00
 
+    /**
+     * @param tile where the port should stand on
+     */
     public Port(Tile tile) {
         super(new Money(PRICE), BUILD_TIME, tile);
     }

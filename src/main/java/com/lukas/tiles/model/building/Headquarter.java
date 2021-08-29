@@ -17,6 +17,9 @@ public class Headquarter extends Building {
     private final static int BUILD_TIME = 5;
     private final static long MAINTENANCE_COST = 10000; //$100.00
 
+    /**
+     * @param tile where the HQ should stand on
+     */
     public Headquarter(Tile tile) {
         super(new Money(PRICE), BUILD_TIME, tile);
     }

@@ -29,6 +29,9 @@ public abstract class ScheduledObject implements Serializable {
         finished = false;
     }
 
+    /**
+     * @return get the time needed to build this object
+     */
     public int getBuildTime() {
         return buildTime;
     }

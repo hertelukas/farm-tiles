@@ -14,10 +14,16 @@ public class Money implements Serializable, Comparable<Money> {
     private static final long serialVersionUID = -5226220695056180322L;
     private long amount;
 
+    /**
+     * A new money instance with $0
+     */
     public Money() {
 
     }
 
+    /**
+     * @param cents the amount of money in cents that the object holds in the beginning
+     */
     public Money(long cents) {
         amount = cents;
     }
@@ -29,6 +35,11 @@ public class Money implements Serializable, Comparable<Money> {
         return amount;
     }
 
+    /**
+     * Adds a given amount to the current balance
+     *
+     * @param amount that should be added in cents
+     */
     public void addAmount(long amount) {
         this.amount += amount;
     }
@@ -91,6 +102,10 @@ public class Money implements Serializable, Comparable<Money> {
         return start + Math.abs(full) + "." + centsString;
     }
 
+    /**
+     * @param number a number in cents that should be displayed as money
+     * @return a correctly formatted money string
+     */
     public static String format(Number number) {
         return new Money(number.longValue()).toString();
     }

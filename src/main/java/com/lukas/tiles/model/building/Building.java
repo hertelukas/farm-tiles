@@ -44,6 +44,9 @@ public abstract class Building extends ScheduledObject {
      */
     public abstract long getCost();
 
+    /**
+     * @return the tile where the building is standing on
+     */
     public Tile getTile() {
         return tile;
     }
