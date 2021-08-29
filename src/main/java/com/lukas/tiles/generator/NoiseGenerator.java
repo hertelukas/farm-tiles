@@ -5,22 +5,20 @@ import java.util.Random;
 /**
  * Generates perlin noise
  * <p>
- * Source:
- *
- * @see <a href="https://gist.github.com/alksily/7a85a1898e65c936f861ee93516e397d>Github</a>
+ * Source: <a href="https://gist.github.com/alksily/7a85a1898e65c936f861ee93516e397d>Github</a>
  */
 public class NoiseGenerator {
-    private double seed;
+    private final double seed;
     private long default_size;
     private int[] p;
 
     /**
      * New NoiseGenerator based on a given seed
      *
-     * @param seed used for all new Randoms
+     * @param seed Seed for the creation of random values.
      */
-    public NoiseGenerator(double seed) {
-        this.seed = seed;
+    public NoiseGenerator(long seed) {
+        this.seed = new Random(seed).nextGaussian() * 255;
         init();
     }
 
@@ -62,13 +60,6 @@ public class NoiseGenerator {
             p[256 + i] = p[i] = permutation[i];
         }
 
-    }
-
-    /**
-     * @param seed set a custom seed
-     */
-    public void setSeed(double seed) {
-        this.seed = seed;
     }
 
     /**

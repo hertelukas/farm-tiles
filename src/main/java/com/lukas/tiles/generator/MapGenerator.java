@@ -16,14 +16,17 @@ import java.util.*;
  */
 public class MapGenerator {
 
+    private static long seed;
+
     /**
      * Generates a map
      *
      * @param mapSize the size of the map
      * @param mapType the type of the map
-     * @return the generated map
+     * @return Returns a random generated map
      */
     public static Tile[][] generate(MapSize mapSize, MapType mapType) {
+        seed = new Random().nextLong();
         Tile[][] result;
         switch (mapType) {
             case Random -> result = generateRandom(mapSize.getWidth(), mapSize.getHeight());
@@ -31,8 +34,20 @@ public class MapGenerator {
             case Pangea -> result = generatePangea(mapSize.getWidth(), mapSize.getHeight(), 0);
             default -> result = generateContinents(mapSize.getWidth(), mapSize.getHeight());
         }
-
         return result;
+    }
+
+    /**
+     * Generates a map
+     *
+     * @param mapSize The size of the map
+     * @param mapType The type of the map
+     * @param seed    Seed for the creation of random values.
+     * @return Returns a random generated map
+     */
+    public static Tile[][] generate(MapSize mapSize, MapType mapType, long seed) {
+        MapGenerator.seed = seed;
+        return generate(mapSize, mapType);
     }
 
     /**
@@ -44,7 +59,7 @@ public class MapGenerator {
      */
     private static Tile[][] generateRandom(int width, int height) {
         Tile[][] result = new Tile[height][width];
-        Random r = new Random();
+        Random r = new Random(seed);
 
         int counter = 0;
         for (int i = 0; i < height; i++) {
@@ -67,7 +82,7 @@ public class MapGenerator {
     private static Tile[][] generateContinents(int width, int height) {
         WorldMap map = new WorldMap(generateWater(width, height));
 
-        Random r = new Random();
+        Random r = new Random(seed);
 
         int count = r.nextInt(2) + 2;
         int maxRadius = (int) (Math.sqrt(width * height) / 1.5);
@@ -100,8 +115,6 @@ public class MapGenerator {
     private static Tile[][] generateIslands(int width, int height) {
         WorldMap map = new WorldMap(generateWater(width, height));
 
-        Random r = new Random();
-
         //One island per 300 tiles
         int count = Math.max(2, width * height / 300);
 
@@ -122,7 +135,7 @@ public class MapGenerator {
      * @param map       the map object that gets modified
      */
     private static void genericDistanceGenerator(int maxRadius, int amount, WorldMap map) {
-        Random r = new Random();
+        Random r = new Random(seed);
         for (int i = 0; i < amount; i++) {
             //Get coordinates for next random island
             int x = r.nextInt(map.getHeight());
@@ -174,7 +187,7 @@ public class MapGenerator {
     private static Tile[][] generatePangea(int width, int height, int depth) {
         Tile[][] result = new Tile[height][width];
 
-        NoiseGenerator noiseGenerator = new NoiseGenerator();
+        NoiseGenerator noiseGenerator = new NoiseGenerator(seed);
 
         int counter = 0;
         int grassCounter = 0;
