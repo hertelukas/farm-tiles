@@ -7,6 +7,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 
+import java.util.logging.Logger;
+
 /**
  * The main springboot application, starts a JavaFX application
  */
@@ -14,6 +16,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 public class FarmTilesApplication extends Application {
 
     private final static String START_PAGE = "/fxml/startPage.fxml";
+    private static Logger logger = Logger.getLogger("FarmTilesApplication");
 
     ConfigurableApplicationContext springContext;
 
@@ -30,6 +33,8 @@ public class FarmTilesApplication extends Application {
         Font.loadFont(getClass().getResourceAsStream("/fxml/fonts/static/Raleway-Regular.ttf"), 16);
         Font.loadFont(getClass().getResourceAsStream("/fxml/fonts/static/Raleway-Medium.ttf"), 16);
         Font.loadFont(getClass().getResourceAsStream("/fxml/fonts/static/Raleway-Bold.ttf"), 16);
+
+        logger.info("Loaded all fonts.");
     }
 
     /**
