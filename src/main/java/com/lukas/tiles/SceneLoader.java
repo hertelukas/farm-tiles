@@ -88,9 +88,16 @@ public class SceneLoader {
     }
 
     /**
-     * @param stage that should be shown as a child
+     * @param stage The stage that should be shown as a child
      */
     public void loadStage(Stage stage) {
         stage.show();
+    }
+
+    /**
+     * @return Returns the main stage of the application
+     */
+    public Stage getStage() {
+        return stage;
     }
 }

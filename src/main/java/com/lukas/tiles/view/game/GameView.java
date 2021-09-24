@@ -1,15 +1,27 @@
 package com.lukas.tiles.view.game;
 
+import com.lukas.tiles.SceneLoader;
 import com.lukas.tiles.model.Game;
 import com.lukas.tiles.model.Tile;
 import com.lukas.tiles.model.setup.Setup;
 import com.lukas.tiles.view.BasicObserver;
+import com.lukas.tiles.view.Style;
 import com.lukas.tiles.view.game.tab.TabView;
 import com.lukas.tiles.viewModel.game.GameViewModel;
 import com.lukas.tiles.viewModel.game.Hexagon;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import javafx.util.Duration;
 
 /**
  * This class is the main holder for the game. It holds every component.
@@ -61,7 +73,7 @@ public class GameView extends BorderPane implements BasicObserver {
      * Displays a given tile with their representation in a TileView on the right side.
      * If null is passed, no tile will be shown.
      *
-     * @param tile that should be displayed
+     * @param tile The title that should be displayed
      */
     public void showTile(Tile tile) {
         if (tile == null) {
@@ -69,6 +81,43 @@ public class GameView extends BorderPane implements BasicObserver {
         } else {
             this.setRight(new TileView(tile, gameViewModel.getGame()));
         }
+    }
+
+    /**
+     * Shows a flash message, disappears after 3 seconds
+     *
+     * @param message     The message to be shown
+     * @param messageType The type of the message. The color is set based on the type
+     */
+    public void showFlashMessage(String message, FlashMessageType messageType) {
+        Stage window = new Stage();
+        window.initStyle(StageStyle.TRANSPARENT);
+        window.setHeight(20);
+        window.setMinWidth(800);
+        window.initOwner(SceneLoader.getInstance().getStage());
+
+        VBox layout = new VBox(10, new Text(message));
+        layout.setPadding(new Insets(3));
+        layout.setAlignment(Pos.CENTER);
+        layout.setBackground(new Background(new BackgroundFill(messageType.getColor(), new CornerRadii(3), Insets.EMPTY)));
+
+        Scene scene = new Scene(layout, Color.TRANSPARENT);
+        scene.getStylesheets().add(Style.getMainStyle());
+
+        window.setScene(scene);
+        window.setAlwaysOnTop(true);
+
+        Timeline timeline = new Timeline(
+                new KeyFrame(Duration.ZERO, evt -> {
+                    window.show();
+                    window.setY(50);
+                    // TODO: 9/24/21 window isn't centered
+                }, new KeyValue(layout.opacityProperty(), 0)),
+                new KeyFrame(Duration.millis(200), new KeyValue(layout.opacityProperty(), 1.0)),
+                new KeyFrame(Duration.millis(2600), new KeyValue(layout.opacityProperty(), 1.0)),
+                new KeyFrame(Duration.millis(3000), new KeyValue(layout.opacityProperty(), 0.2)));
+        timeline.setOnFinished(evt -> window.close());
+        timeline.play();
     }
 
     private void toggleTab(boolean show) {
